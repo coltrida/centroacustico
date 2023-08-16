@@ -19,9 +19,21 @@ class ClienteService
 
     public function ricercaPaziente($request)
     {
-        return Client::where([
-            ['filiale_id', $request->input('idFiliale')],
-            ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
-        ])->paginate(5);
+        return Client::
+            where([
+                ['filiale_id', $request->input('idFiliale')],
+                ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
+            ])
+            ->orWhere([
+                ['filiale_id', $request->input('idFiliale')],
+                ['cognome', 'like', '%' . $request->input('testoRicerca') . '%' ]
+            ])->orWhere([
+                ['filiale_id', $request->input('idFiliale')],
+                ['fullName', 'like', '%' . $request->input('testoRicerca') . '%' ]
+            ])->orWhere([
+                ['filiale_id', $request->input('idFiliale')],
+                ['fullNameReverse', 'like', '%' . $request->input('testoRicerca') . '%' ]
+            ])
+            ->paginate(5);
     }
 }

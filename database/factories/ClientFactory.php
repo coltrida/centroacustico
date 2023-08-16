@@ -17,9 +17,11 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
+        $nome = fake()->firstName();
+        $cognome = fake()->lastName();
         return [
-            'nome' => fake()->name(),
-            'cognome' => fake()->name,
+            'nome' => $nome,
+            'cognome' => $cognome,
             'telefono1' => fake()->phoneNumber,
             'telefono2' => fake()->phoneNumber,
             'indirizzo' => fake()->address,
@@ -29,6 +31,8 @@ class ClientFactory extends Factory
             'email' => fake()->email,
             'dataNascita' => fake()->date,
             'filiale_id' => rand(1,4),
+            'fullName' => $nome.' '.$cognome,
+            'fullNameReverse' => $cognome.' '.$nome,
         ];
     }
 }
