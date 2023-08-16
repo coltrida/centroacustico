@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ruolo;
+use App\Services\RuoloService;
 use Livewire\Component;
 
 class LiveRuoli extends Component
@@ -10,19 +11,16 @@ class LiveRuoli extends Component
 
     public $nomeRuolo;
 
-    public function aggiungiRuolo()
+    public function aggiungiRuolo(RuoloService $ruoloService)
     {
-        Ruolo::create([
-            'nome' => $this->nomeRuolo
-        ]);
-
+       $ruoloService->aggiungiRuolo($this->nomeRuolo);
         $this->nomeRuolo = '';
     }
 
-    public function render()
+    public function render(RuoloService $ruoloService)
     {
         return view('livewire.live-ruoli', [
-            'ruoli' => Ruolo::latest()->get()
+            'ruoli' => $ruoloService->listaRuoli()
         ]);
     }
 }

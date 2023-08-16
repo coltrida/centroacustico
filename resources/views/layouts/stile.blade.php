@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+    @yield('headSection')
+
 </head>
 
 <body id="page-top">
@@ -126,11 +128,18 @@
             </div>
         </li>
 
-        <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePersonale"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Personale</span>
+            </a>
+            <div id="collapsePersonale" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route('admin.personale')}}">Lista</a>
+                    <a class="collapse-item" href="register.html">Associa</a>
+                </div>
+            </div>
         </li>
 
         <!-- Nav Item - Tables -->
@@ -423,12 +432,9 @@
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
-<!-- Page level plugins -->
-<script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
-<script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
+
+@yield('footerSection')
 
 </body>
 

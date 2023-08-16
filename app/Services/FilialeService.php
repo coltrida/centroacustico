@@ -10,4 +10,9 @@ class FilialeService
     {
         return Filiale::orderBy('nome')->get();
     }
+
+    public function aggiungiFiliale($request)
+    {
+        Filiale::create($request->all());
+    }
 }

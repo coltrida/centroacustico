@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('ruolo_id')->references('id')->on('ruolos');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default('123456');
             $table->rememberToken();
             $table->timestamps();
         });
