@@ -17,13 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('cognome');
-            $table->string('telefono');
+            $table->string('telefono1');
+            $table->string('telefono2');
             $table->string('indirizzo')->nullable();
             $table->string('citta')->nullable();
             $table->string('provincia')->nullable();
             $table->string('cap')->nullable();
             $table->string('email')->nullable();
             $table->date('dataNascita')->nullable();
+            $table->unsignedBigInteger('filiale_id');
+            $table->foreign('filiale_id')->references('id')->on('filiales');
             $table->timestamps();
         });
     }

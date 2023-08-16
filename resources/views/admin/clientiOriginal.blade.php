@@ -6,32 +6,14 @@
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Personale</h1>
-        <form action="{{route('admin.aggiungiPersonale')}}" method="post">
-            @csrf
-            <div class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Nome e Cognome" aria-label="First name"
-                           name="nome">
-                </div>
-                <div class="col">
-                    <input type="email" class="form-control" placeholder="email" aria-label="Last name"
-                           name="email">
-                </div>
-                <div class="col">
-                    <select class="form-control" aria-label="Default select example" name="ruolo_id">
-                        <option selected></option>
-                        @foreach($ruoli as $item)
-                            <option value="{{$item->id}}">{{$item->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
+        <h1 class="h3 mb-0 text-gray-800">Pazienti di {{$filialeSelezionata->nome}}</h1>
 
+            <div class="row">
                 <div class="col-2">
                     <button type="submit" class="btn btn-primary"> Aggiungi</button>
                 </div>
             </div>
-        </form>
+
     </div>
 
     <!-- DataTales Example -->
@@ -39,30 +21,62 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>email</th>
-                        <th>Ruolo</th>
                         <th class="text-center">Action</th>
-
+                        <th>Cognome</th>
+                        <th>Nome</th>
+                        <th>Telefono1</th>
+                        <th>Telefono2</th>
+                        <th>Indirizzo</th>
+                        <th>Città</th>
+                        <th>PR</th>
+                        <th>email</th>
+                        <th>Nascita</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($personale as $item)
+                        @foreach($filialeSelezionata->clienti as $item)
                             <tr id="tr{{$item->id}}">
-                                <td>{{$item->nome}}</td>
-                                <td>{{$item->email}}</td>
-                                <td>{{$item->ruolo->nome}}</td>
                                 <td class="text-center">
-                                        {{--<button type="submit" class="bnt btn-danger" title="elimina">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </button>--}}
-                                        <a id="{{$item}}" class="btn btn-danger eliminaBtn" href="#" data-toggle="modal" data-target="#confermaElimina">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </a>
+                                    <a id="{{$item}}" title="elimina" class="btn btn-sm btn-danger eliminaBtn" href="#" data-toggle="modal" data-target="#confermaElimina">
+                                        <i class="fas fa-fw fa-trash"></i>
+                                    </a>
+
+                                    <a class="btn btn-primary btn-sm" title="modifica" href="#">
+                                        <i class="fas fa-fw fa-pencil-alt"></i>
+                                    </a>
+
+                                    <a class="btn btn-success btn-sm" title="prova" href="#">
+                                        <i class="fas fa-fw fa-money-bill"></i>
+                                    </a>
+
+                                    <a class="btn btn-warning btn-sm" title="appuntamento" href="#">
+                                        <i class="fas fa-fw fa-calendar"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm" style="background: purple" title="audiometria" href="#">
+                                        <i class="fas fa-fw fa-barcode"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm" style="background: #96dbe4" title="pagamenti" href="#">
+                                        <i class="fas fa-fw fa-dumbbell"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm" style="background: #1c606a" title="riepilogo" href="#">
+                                        <i class="fas fa-fw fa-info-circle"></i>
+                                    </a>
                                 </td>
+                                <td>{{$item->cognome}}</td>
+                                <td>{{$item->nome}}</td>
+                                <td>{{$item->telefono1}}</td>
+                                <td>{{$item->telefono2}}</td>
+                                <td>{{$item->indirizzo}}</td>
+                                <td>{{$item->citta}}</td>
+                                <td>{{$item->provincia}}</td>
+                                <td>{{$item->email}}</td>
+                                <td>{{$item->dataNascita}}</td>
                             </tr>
                         @endforeach
                     </tbody>

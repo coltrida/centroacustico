@@ -20,8 +20,8 @@ class PersonaleService
         ]);
     }
 
-    public function deletePersonale($user)
+    public function deletePersonale($userId)
     {
-        $user->delete();
+        User::find($userId)->delete();
     }
 }

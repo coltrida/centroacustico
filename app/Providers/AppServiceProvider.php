@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Configuration;
+use App\Models\Filiale;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,9 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrapFive();
+
         view()->composer('*', function (View $view){
             $nomeAzienda = Configuration::all()->count() > 0 ? Configuration::first()->nomeAzienda : 'Nome Azienda';
-            $view->with('nomeAzienda', $nomeAzienda);
+            $filiali = Filiale::orderBy('nome')->get();
+            $view->with('nomeAzienda', $nomeAzienda)->with('filiali', $filiali);
         });
     }
 }

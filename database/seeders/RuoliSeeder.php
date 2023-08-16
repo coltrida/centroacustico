@@ -25,6 +25,9 @@ class RuoliSeeder extends Seeder
             [
                 'nome' => 'Amminist'
             ],
+            [
+                'nome' => 'Manager'
+            ],
         ]);
     }
 }

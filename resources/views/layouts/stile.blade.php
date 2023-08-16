@@ -71,9 +71,12 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
+{{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
+                    @foreach($filiali as $item)
+                        <a class="collapse-item" href="{{route('admin.clienti', $item->id)}}">{{$item->nome}}</a>
+                    @endforeach
+
+                    <a class="collapse-item font-weight-bold" href="cards.html">TUTTI</a>
                 </div>
             </div>
         </li>
@@ -141,7 +144,7 @@
             <div id="collapsePersonale" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{route('admin.personale')}}">Lista</a>
-                    <a class="collapse-item" href="register.html">Associa</a>
+                    <a class="collapse-item" href="{{route('admin.associa')}}">Associa</a>
                 </div>
             </div>
         </li>
@@ -179,7 +182,7 @@
                 </button>
 
                 <!-- Topbar Search -->
-                <form
+                {{--<form
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -190,7 +193,7 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                </form>--}}
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -298,7 +301,7 @@
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                    <img class="rounded-circle" src="{{asset('img/undraw_profile_2.svg')}}"
                                          alt="...">
                                     <div class="status-indicator"></div>
                                 </div>
@@ -310,7 +313,7 @@
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                    <img class="rounded-circle" src="{{asset('img/undraw_profile_3.svg')}}"
                                          alt="...">
                                     <div class="status-indicator bg-warning"></div>
                                 </div>

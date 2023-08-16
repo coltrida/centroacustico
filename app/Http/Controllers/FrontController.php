@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Configuration;
+use App\Services\ClienteService;
 use App\Services\ConfigurationService;
 use App\Services\FilialeService;
 use App\Services\PersonaleService;
 use App\Services\RuoloService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use PHPUnit\Util\Json;
 
 class FrontController extends Controller
 {
@@ -28,9 +30,7 @@ class FrontController extends Controller
 
     public function filiali(FilialeService $filialeService)
     {
-        return view('admin.filiali', [
-           'filiali' => $filialeService->listaFiliali()
-        ]);
+        return view('admin.filiali');
     }
 
     public function aggiungiFiliale(Request $request, FilialeService $filialeService)
@@ -53,11 +53,35 @@ class FrontController extends Controller
 
     public function personale(PersonaleService $personaleService, RuoloService $ruoloService)
     {
-        /*return view('admin.personale', [
+        return view('admin.personale', [
             'personale' => $personaleService->listaPersonale(),
             'ruoli' => $ruoloService->listaRuoli()
-        ]);*/
+        ]);
 
-        return view('admin.personale');
+      //  return view('admin.personale');
+    }
+
+    public function clienti($idFiliale, ClienteService $clienteService, FilialeService $filialeService)
+    {
+        return view('admin.clienti', [
+            'pazienti' => $clienteService->clientiPagination($idFiliale),
+            'filialeSelezionata' => $filialeService->filialeById($idFiliale)
+        ]);
+    }
+
+    public function associa(PersonaleService $personaleService)
+    {
+        return view('admin.associa', [
+            'personale' => $personaleService->listaPersonale(),
+        ]);
+    }
+
+    public function ricercaPaziente(Request $request, ClienteService $clienteService, FilialeService $filialeService)
+    {
+        return view('admin.clienti', [
+            'pazienti' => $clienteService->ricercaPaziente($request),
+            'filialeSelezionata' => $filialeService->filialeById($request->idFiliale),
+            'testo' => $request->input('testoRicerca')
+        ]);
     }
 }

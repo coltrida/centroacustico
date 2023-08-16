@@ -15,4 +15,9 @@ class FilialeService
     {
         Filiale::create($request->all());
     }
+
+    public function filialeById($idFiliale)
+    {
+        return Filiale::find($idFiliale);
+    }
 }

@@ -10,4 +10,9 @@ class Filiale extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'filiales';
+
+    public function clienti()
+    {
+        return $this->hasMany(Client::class, 'filiale_id', 'id');
+    }
 }

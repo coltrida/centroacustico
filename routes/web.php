@@ -10,7 +10,10 @@ Route::get('/personale', [FrontController::class, 'personale'])->name('admin.per
 Route::post('/setConfigurazione', [FrontController::class, 'setConfigurazione'])->name('setConfigurazione');
 Route::post('/aggiungiFiliale', [FrontController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
 Route::post('/aggiungiPersonale', [FrontController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
-Route::delete('/deletePersonale/{idUser}', [FrontController::class, 'deletePersonale'])->name('admin.deletePersonale');
+Route::get('/deletePersonale/{idUser?}', [FrontController::class, 'deletePersonale'])->name('admin.deletePersonale');
+Route::get('/clienti/{idFiliale?}', [FrontController::class, 'clienti'])->name('admin.clienti');
+Route::get('/associa', [FrontController::class, 'associa'])->name('admin.associa');
+Route::post('/ricercaPaziente', [FrontController::class, 'ricercaPaziente'])->name('admin.ricercaPaziente');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
