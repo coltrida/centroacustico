@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,5 +23,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RuoliSeeder::class);
+        $this->call(ConfigurationSeeder::class);
+        $this->call(FilialiSeeder::class);
+
+        Storage::disk('public')->deleteDirectory('/logo/');
+        Storage::disk('public')->makeDirectory('/logo');
+
+        Storage::copy('logo.png', 'public/logo/logoAzienda.jpg');
+
     }
 }

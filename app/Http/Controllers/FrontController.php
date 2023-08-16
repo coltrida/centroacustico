@@ -17,12 +17,12 @@ class FrontController extends Controller
         if (Configuration::all()->count() > 0){
             return view('admin.home');
         }
-        return view('configura.confMagazzini');
+        return view('configura.confAzienda');
     }
 
-    public function setMagazzini(Request $request, ConfigurationService $configurationService)
+    public function setConfigurazione(Request $request, ConfigurationService $configurationService)
     {
-        $configurationService->setMagazzini($request);
+        $configurationService->setConfigurazione($request);
         return view('configura.confRuoli');
     }
 
@@ -53,9 +53,11 @@ class FrontController extends Controller
 
     public function personale(PersonaleService $personaleService, RuoloService $ruoloService)
     {
-        return view('admin.personale', [
+        /*return view('admin.personale', [
             'personale' => $personaleService->listaPersonale(),
             'ruoli' => $ruoloService->listaRuoli()
-        ]);
+        ]);*/
+
+        return view('admin.personale');
     }
 }

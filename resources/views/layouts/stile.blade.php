@@ -21,7 +21,7 @@
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
     @yield('headSection')
-
+    @livewireStyles
 </head>
 
 <body id="page-top">
@@ -33,12 +33,16 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.home')}}">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">LOGO</div>
+        <a class="" href="{{route('admin.home')}}">
+            @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('/logo/logoAzienda.jpg'))
+                <img class="text-center" src="{{asset('/storage/logo/logoAzienda.jpg')}}" alt="logo Azienda" width="auto">
+            @else
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+            @endif
         </a>
+        <div class="text-center text-white">{{$nomeAzienda}}</div>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -435,7 +439,7 @@
 
 
 @yield('footerSection')
-
+@livewireScripts
 </body>
 
 </html>

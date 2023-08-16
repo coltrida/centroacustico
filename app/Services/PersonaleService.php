@@ -11,13 +11,17 @@ class PersonaleService
         return User::whereNot('ruolo_id', 1)->get();
     }
 
-    public function aggiungiPersonale($request)
+    public function aggiungiPersonale($userAggiungi)
     {
-        User::create($request->all());
+        User::create([
+            'nome' => $userAggiungi->nome,
+            'email' => $userAggiungi->email,
+            'ruolo_id' => $userAggiungi->ruolo_id,
+        ]);
     }
 
-    public function deletePersonale($idUser)
+    public function deletePersonale($user)
     {
-        User::find($idUser)->delete();
+        $user->delete();
     }
 }

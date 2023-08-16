@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontController::class, 'index'])->name('admin.home');
 Route::get('/filiali', [FrontController::class, 'filiali'])->name('admin.filiali');
 Route::get('/personale', [FrontController::class, 'personale'])->name('admin.personale');
-Route::post('/setMagazzini', [FrontController::class, 'setMagazzini'])->name('setMagazzini');
+Route::post('/setConfigurazione', [FrontController::class, 'setConfigurazione'])->name('setConfigurazione');
 Route::post('/aggiungiFiliale', [FrontController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
 Route::post('/aggiungiPersonale', [FrontController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
 Route::delete('/deletePersonale/{idUser}', [FrontController::class, 'deletePersonale'])->name('admin.deletePersonale');

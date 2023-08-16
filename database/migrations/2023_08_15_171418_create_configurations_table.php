@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('configurations', function (Blueprint $table) {
             $table->id();
-            $table->boolean('eseguita')->nullable();
+            $table->string('nomeAzienda')->nullable();
+            $table->string('indirizzoAzienda')->nullable();
+            $table->string('cittaAzienda')->nullable();
+            $table->string('provinciaAzienda')->nullable();
+            $table->string('pivaAzienda')->nullable();
+            $table->string('emailAzienda')->nullable();
+            $table->string('pecAzienda')->nullable();
+            $table->string('telefonoAzienda')->nullable();
+            $table->boolean('eseguitaConfigurazione')->nullable();
             $table->boolean('magazzinoCentralizzato')->nullable();
             $table->timestamps();
         });

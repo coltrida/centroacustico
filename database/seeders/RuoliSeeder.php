@@ -15,8 +15,16 @@ class RuoliSeeder extends Seeder
      */
     public function run()
     {
-        Ruolo::create([
-            'nome' => 'Admin'
+        Ruolo::insert([
+            [
+                'nome' => 'Admin'
+            ],
+            [
+                'nome' => 'Audio'
+            ],
+            [
+                'nome' => 'Amminist'
+            ],
         ]);
     }
 }
