@@ -28,7 +28,7 @@
                     <h1>Configura Azienda</h1>
                 </div>
 
-                <form action="{{route('setConfigurazione')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('setAnagraficaAzienda')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">

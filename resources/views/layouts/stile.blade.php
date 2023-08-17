@@ -73,10 +73,10 @@
                 <div class="bg-white py-2 collapse-inner rounded">
 {{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
                     @foreach($filiali as $item)
-                        <a class="collapse-item" href="{{route('admin.clienti', $item->id)}}">{{$item->nome}}</a>
+                        <a class="collapse-item" href="{{route('clienti', $item->id)}}">{{$item->nome}}</a>
                     @endforeach
 
-                    <a class="collapse-item font-weight-bold" href="{{route('admin.clienti')}}">TUTTI</a>
+                    <a class="collapse-item font-weight-bold" href="{{route('clienti')}}">TUTTI</a>
                 </div>
             </div>
         </li>

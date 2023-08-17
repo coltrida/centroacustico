@@ -8,7 +8,7 @@ class RuoloService
 {
     public function listaRuoli()
     {
-        return Ruolo::whereNot('id', 1)->orderBy('nome')->get();
+        return Ruolo::whereNot('nome', 'Admin')->orderBy('nome')->get();
     }
 
     public function aggiungiRuolo($nomeRuolo)

@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pazienti di {{$filialeSelezionata->nome}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pazienti di {{isset($filialeSelezionata->nome) ? $filialeSelezionata->nome : $filialeSelezionata}}</h1>
 
             <div class="row">
                 <div class="col-2">
-                    <button type="submit" class="btn btn-primary"> Aggiungi</button>
+                    <a href="{{route('aggiungiCliente', $filialeSelezionata->id)}}" class="btn btn-primary"> Aggiungi</a>
                 </div>
             </div>
 
@@ -21,10 +21,24 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
+                    <form action="{{route('ricercaPaziente')}}" method="get">
+                        <input type="hidden" name="idFiliale" value="{{isset($filialeSelezionata->id) ? $filialeSelezionata->id : null}}">
+                        <div class="row mb-3">
+                            <div class="col-9 col-md-3">
+                                <input type="text" value="{{isset($testo) ? $testo : ''}}" name="testoRicerca" class="form-control"
+                                       placeholder="Ricerca Nome / Cognome" aria-label="First name">
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search fa-sm"></i></button>
+                                <a class="btn btn-warning" href="{{route('clienti', isset($filialeSelezionata->id) ? $filialeSelezionata->id : null)}}">Reset</a>
+                            </div>
+                        </div>
+                    </form>
                     <thead>
                     <tr>
                         <th class="text-center">Action</th>
+                        <th>Tipo</th>
                         <th>Cognome</th>
                         <th>Nome</th>
                         <th>Telefono1</th>
@@ -37,48 +51,52 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($filialeSelezionata->clienti as $item)
+                        @foreach($pazienti as $item)
                             <tr id="tr{{$item->id}}">
-                                <td class="text-center">
-                                    <a id="{{$item}}" title="elimina" class="btn btn-sm btn-danger eliminaBtn" href="#" data-toggle="modal" data-target="#confermaElimina">
+                                <td class="text-center d-flex">
+                                    <a id="{{$item}}" title="elimina" class="btn btn-sm btn-danger eliminaBtn mx-1" href="#" data-toggle="modal" data-target="#confermaElimina">
                                         <i class="fas fa-fw fa-trash"></i>
                                     </a>
 
-                                    <a class="btn btn-primary btn-sm" title="modifica" href="#">
+                                    <a class="btn btn-primary btn-sm mx-1" title="modifica" href="#">
                                         <i class="fas fa-fw fa-pencil-alt"></i>
                                     </a>
 
-                                    <a class="btn btn-success btn-sm" title="prova" href="#">
+                                    <a class="btn btn-success btn-sm mx-1" title="prova" href="#">
                                         <i class="fas fa-fw fa-money-bill"></i>
                                     </a>
 
-                                    <a class="btn btn-warning btn-sm" title="appuntamento" href="#">
+                                    <a class="btn btn-warning btn-sm mx-1" title="appuntamento" href="#">
                                         <i class="fas fa-fw fa-calendar"></i>
                                     </a>
 
-                                    <a class="btn btn-sm" style="background: purple" title="audiometria" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: purple" title="audiometria" href="#">
                                         <i class="fas fa-fw fa-barcode"></i>
                                     </a>
 
-                                    <a class="btn btn-sm" style="background: #96dbe4" title="pagamenti" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: #96dbe4" title="pagamenti" href="#">
                                         <i class="fas fa-fw fa-dumbbell"></i>
                                     </a>
 
-                                    <a class="btn btn-sm" style="background: #1c606a" title="riepilogo" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: #1c606a" title="riepilogo" href="#">
                                         <i class="fas fa-fw fa-info-circle"></i>
                                     </a>
                                 </td>
-                                <td>{{$item->cognome}}</td>
-                                <td>{{$item->nome}}</td>
-                                <td>{{$item->telefono1}}</td>
-                                <td>{{$item->telefono2}}</td>
-                                <td>{{$item->indirizzo}}</td>
-                                <td>{{$item->citta}}</td>
-                                <td>{{$item->provincia}}</td>
-                                <td>{{$item->email}}</td>
-                                <td>{{$item->dataNascita}}</td>
+                                <td class="text-nowrap">{{$item->tipo->nome}}</td>
+                                <td class="text-nowrap">{{$item->cognome}}</td>
+                                <td class="text-nowrap">{{$item->nome}}</td>
+                                <td class="text-nowrap">{{$item->telefono1}}</td>
+                                <td class="text-nowrap">{{$item->telefono2}}</td>
+                                <td class="text-nowrap">{{$item->indirizzo}}</td>
+                                <td class="text-nowrap">{{$item->citta}}</td>
+                                <td class="text-nowrap">{{$item->provincia}}</td>
+                                <td class="text-nowrap">{{$item->email}}</td>
+                                <td class="text-nowrap">{{$item->dataNascita}}</td>
                             </tr>
                         @endforeach
+
+                    <td colspan="10">{{$pazienti->links()}}</td>
+
                     </tbody>
                 </table>
             </div>
@@ -110,8 +128,6 @@
 
 @section('footerSection')
     <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
     <script>
         $('document').ready(function () {

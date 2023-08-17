@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cognome');
             $table->string('telefono1');
-            $table->string('telefono2');
+            $table->string('telefono2')->nullable();
             $table->string('indirizzo')->nullable();
             $table->string('citta')->nullable();
             $table->string('provincia')->nullable();

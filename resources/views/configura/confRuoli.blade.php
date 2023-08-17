@@ -20,7 +20,6 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-        @livewireStyles
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -38,7 +37,22 @@
                                 <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">Ruoli</a></div>
                             </div>
 
-                            <livewire:live-ruoli />
+                            <form action="{{route('eseguiSetRuoli')}}" method="post">
+                                @csrf
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <input class="form-control" name="nome" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary" type="submit">Aggiungi Ruolo</button>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            @foreach($ruoli as $ruolo)
+                                <h4><span class="badge text-bg-success mt-2">{{ $ruolo->nome }}</span></h4>
+                            @endforeach
 
                         </div>
                     </div>
@@ -59,6 +73,5 @@
                 </div>
             </div>
         </div>
-        @livewireScripts
     </body>
 </html>
