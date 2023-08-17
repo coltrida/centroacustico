@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tipo;
+use App\Services\CanaleService;
 use App\Services\ConfigurationService;
 use App\Services\RuoloService;
 use App\Services\TipoService;
@@ -40,6 +41,19 @@ class ConfigController extends Controller
     public function eseguiSetTipologie(Request $request, TipoService $tipoService)
     {
         $tipoService->aggiungiTipo($request);
+        return Redirect::back();
+    }
+
+    public function setCanali(CanaleService $canaleService)
+    {
+        return view('configura.confCanali', [
+            'canali' => $canaleService->listaCanali()
+        ]);
+    }
+
+    public function eseguiSetCanali(Request $request, CanaleService $canaleService)
+    {
+        $canaleService->aggiungiCanale($request);
         return Redirect::back();
     }
 }

@@ -40,45 +40,58 @@
             </div>
             <div class="col">
                 <input type="text" wire:model="nome" class="form-control" placeholder="Nome" aria-label="First name">
-                @error('nome') <span class="error">{{ $message }}</span> @enderror
+                @error('nome') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col">
                 <input type="text" wire:model="cognome" class="form-control" placeholder="Cognome"
                        aria-label="First name">
-                @error('cognome') <span class="error">{{ $message }}</span> @enderror
+                @error('cognome') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col">
                 <input type="text" wire:model="telefono1" class="form-control" placeholder="telefono1"
                        aria-label="First name">
-                @error('telefono1') <span class="error">{{ $message }}</span> @enderror
+                @error('telefono1') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col">
                 <input type="text" wire:model="telefono2" class="form-control" placeholder="telefono2"
                        aria-label="First name">
-                @error('telefono2') <span class="error">{{ $message }}</span> @enderror
+                @error('telefono2') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col">
                 <input type="text" wire:model="indirizzo" class="form-control" placeholder="indirizzo" aria-label="First name">
-                @error('indirizzo') <span class="error">{{ $message }}</span> @enderror
+                @error('indirizzo') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col">
                 <input type="text" wire:model="citta" class="form-control" placeholder="citta" aria-label="First name">
-                @error('citta') <span class="error">{{ $message }}</span> @enderror
+                @error('citta') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col-1">
                 <input type="text" wire:model="provincia" class="form-control" placeholder="PR" aria-label="First name">
-                @error('provincia') <span class="error">{{ $message }}</span> @enderror
+                @error('provincia') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col-2">
                 <input type="text" wire:model="cap" class="form-control" placeholder="cap" aria-label="First name">
-                @error('cap') <span class="error">{{ $message }}</span> @enderror
+                @error('cap') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col">
                 <input type="text" wire:model="email" class="form-control" placeholder="email" aria-label="First name">
-                @error('email') <span class="error">{{ $message }}</span> @enderror
+                @error('email') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-4">
+                <select class="form-select" wire:model="canale_id">
+                    <option selected>canale Mkt...</option>
+                    @foreach($canali as $canale)
+                        <option value="{{$canale->id}}">{{$canale->nome}}</option>
+                    @endforeach
+                </select>
+                @error('canale_id') <span style="font-size: 12px; color: red"
+                                        class="error">{{ $message }}</span> @enderror
             </div>
         </div>
 

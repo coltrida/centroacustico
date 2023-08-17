@@ -47,6 +47,7 @@
                         <th>Città</th>
                         <th>PR</th>
                         <th>email</th>
+                        <th>Canale Mkt</th>
                         <th>Nascita</th>
                     </tr>
                     </thead>
@@ -91,11 +92,12 @@
                                 <td class="text-nowrap">{{$item->citta}}</td>
                                 <td class="text-nowrap">{{$item->provincia}}</td>
                                 <td class="text-nowrap">{{$item->email}}</td>
+                                <td class="text-nowrap">{{$item->canale->nome}}</td>
                                 <td class="text-nowrap">{{$item->dataNascita}}</td>
                             </tr>
                         @endforeach
 
-                    <td colspan="10">{{$pazienti->links()}}</td>
+                    <td colspan="12">{{$pazienti->links()}}</td>
 
                     </tbody>
                 </table>

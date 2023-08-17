@@ -29,6 +29,8 @@ return new class extends Migration
             $table->date('dataNascita')->nullable();
             $table->unsignedBigInteger('filiale_id');
             $table->foreign('filiale_id')->references('id')->on('filiales');
+            $table->unsignedBigInteger('canale_id');
+            $table->foreign('canale_id')->references('id')->on('canalis');
             $table->string('fullName')->nullable();
             $table->string('fullNameReverse')->nullable();
             $table->timestamps();

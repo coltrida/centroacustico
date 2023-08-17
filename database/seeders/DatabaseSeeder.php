@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RuoliSeeder::class);
         $this->call(TipologieSeeder::class);
+        $this->call(CanaliSeeder::class);
         $this->call(ConfigurationSeeder::class);
         $this->call(FilialiSeeder::class);
         $this->call(UserSeeder::class);

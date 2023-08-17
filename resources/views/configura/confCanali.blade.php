@@ -26,7 +26,7 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h1>Configura Tipologie paziente</h1>
+                    <h1>Configura Canali Mkt</h1>
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
@@ -34,31 +34,31 @@
                         <div class="p-6">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">Tipologie</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">Canale Mkt</a></div>
                             </div>
 
-                            <form action="{{route('eseguiSetTipologie')}}" method="post">
+                            <form action="{{route('eseguiSetCanali')}}" method="post">
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="col">
                                         <input class="form-control" name="nome" type="text">
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-primary" type="submit">Aggiungi Tipo Paziente</button>
+                                        <button class="btn btn-primary" type="submit">Aggiungi Canale Mkt</button>
                                     </div>
                                 </div>
                             </form>
 
 
-                            @foreach($tipologie as $tipo)
-                                <h4><span class="badge text-bg-success mt-2">{{ $tipo->nome }}</span></h4>
+                            @foreach($canali as $canale)
+                                <h4><span class="badge text-bg-success mt-2">{{ $canale->nome }}</span></h4>
                             @endforeach
 
                         </div>
                     </div>
                 </div>
 
-                <a href="{{route('setCanali')}}" class="btn btn-primary mt-3"> AVANTI </a>
+                <a href="{{route('admin.home')}}" class="btn btn-primary mt-3"> AVANTI </a>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">

@@ -15,6 +15,8 @@ Route::get('/setTipologie', [ConfigController::class, 'setTipologie'])->name('se
 Route::post('/setTipologie', [ConfigController::class, 'eseguiSetTipologie'])->name('eseguiSetTipologie');
 Route::get('/setRuoli', [ConfigController::class, 'setRuoli'])->name('setRuoli');
 Route::post('/eseguiSetRuoli', [ConfigController::class, 'eseguiSetRuoli'])->name('eseguiSetRuoli');
+Route::get('/setCanali', [ConfigController::class, 'setCanali'])->name('setCanali');
+Route::post('/eseguiSetCanali', [ConfigController::class, 'eseguiSetCanali'])->name('eseguiSetCanali');
 
 //----------------------- Admin ----------------------------
 Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');

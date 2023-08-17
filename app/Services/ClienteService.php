@@ -7,16 +7,16 @@ use App\Models\Filiale;
 
 class ClienteService
 {
-    public function filialeConClienti($idFiliale)
+/*    public function filialeConClienti($idFiliale)
     {
         return Filiale::with('clienti')->find($idFiliale);
-    }
+    }*/
 
     public function clientiPagination($idFiliale)
     {
         if ($idFiliale){
             return Filiale::with(['clienti' => function($c){
-                $c->with('tipo');
+                $c->with('tipo', 'canale');
             }])->find($idFiliale)->clienti()->paginate(5);
         }
         return Client::paginate(5);
@@ -25,8 +25,8 @@ class ClienteService
     public function ricercaPaziente($request)
     {
         if ($request->input('idFiliale')){
-            return Client::
-            where([
+            return Client::with('tipo', 'canale')
+            ->where([
                 ['filiale_id', $request->input('idFiliale')],
                 ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
             ])
@@ -42,8 +42,8 @@ class ClienteService
                 ])
                 ->paginate(50);
         }
-        return Client::
-            where([
+        return Client::with('tipo', 'canale')
+            ->where([
                 ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
             ])
             ->orWhere([

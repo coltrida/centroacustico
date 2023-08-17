@@ -32,6 +32,7 @@ class ClientFactory extends Factory
             'email' => fake()->email,
             'dataNascita' => fake()->date,
             'filiale_id' => rand(1,4),
+            'canale_id' => rand(1,7),
             'fullName' => $nome.' '.$cognome,
             'fullNameReverse' => $cognome.' '.$nome,
         ];
