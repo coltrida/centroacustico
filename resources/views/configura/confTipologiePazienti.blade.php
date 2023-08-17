@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Ruoli Aziendali</title>
+        <title>Tipologie Pazienti</title>
 
         <!-- Fonts -->
         <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
@@ -20,14 +20,13 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-        @livewireStyles
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h1>Configura Ruoli Aziendali</h1>
+                    <h1>Configura Ruoli</h1>
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
@@ -38,13 +37,28 @@
                                 <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">Ruoli</a></div>
                             </div>
 
-                            <livewire:live-ruoli />
+                            <form action="{{route('eseguiSetTipologie')}}" method="post">
+                                @csrf
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <input class="form-control" name="nome" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary" type="submit">Aggiungi Tipo Paziente</button>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            @foreach($tipologie as $tipo)
+                                <h4><span class="badge text-bg-success mt-2">{{ $tipo->nome }}</span></h4>
+                            @endforeach
 
                         </div>
                     </div>
                 </div>
 
-                <a href="{{route('setTipologie')}}" class="btn btn-primary mt-3"> AVANTI </a>
+                <a href="{{route('admin.home')}}" class="btn btn-primary mt-3"> AVANTI </a>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
@@ -59,6 +73,5 @@
                 </div>
             </div>
         </div>
-        @livewireScripts
     </body>
 </html>

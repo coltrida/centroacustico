@@ -17,6 +17,11 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
+                'nome' => 'Admin',
+                'email' => 'admin@admin.it',
+                'ruolo_id' => 1,
+            ],
+            [
                 'nome' => 'Andrea Mazzarella',
                 'email' => 'andrea_mazzarella@askoltaora.it',
                 'ruolo_id' => 2,

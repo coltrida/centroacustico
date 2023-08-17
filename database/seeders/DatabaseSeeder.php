@@ -23,10 +23,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RuoliSeeder::class);
+        $this->call(TipologieSeeder::class);
         $this->call(ConfigurationSeeder::class);
         $this->call(FilialiSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ClientSeeder::class);
+        $this->call(AssociaFilialeUserSeeder::class);
 
         Storage::disk('public')->deleteDirectory('/logo/');
         Storage::disk('public')->makeDirectory('/logo');

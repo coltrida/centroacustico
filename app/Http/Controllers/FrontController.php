@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Configuration;
+use App\Models\Tipo;
 use App\Services\ClienteService;
 use App\Services\ConfigurationService;
 use App\Services\FilialeService;
@@ -26,6 +27,19 @@ class FrontController extends Controller
     {
         $configurationService->setConfigurazione($request);
         return view('configura.confRuoli');
+    }
+
+    public function setTipologie()
+    {
+        return view('configura.confTipologiePazienti', [
+            'tipologie' => Tipo::latest()->get()
+        ]);
+    }
+
+    public function eseguiSetTipologie(Request $request, ConfigurationService $configurationService)
+    {
+        $configurationService->setTipologie($request);
+        return Redirect::back();
     }
 
     public function filiali(FilialeService $filialeService)
@@ -61,7 +75,7 @@ class FrontController extends Controller
       //  return view('admin.personale');
     }
 
-    public function clienti($idFiliale, ClienteService $clienteService, FilialeService $filialeService)
+    public function clienti(ClienteService $clienteService, FilialeService $filialeService, $idFiliale=null)
     {
         return view('admin.clienti', [
             'pazienti' => $clienteService->clientiPagination($idFiliale),
@@ -83,5 +97,17 @@ class FrontController extends Controller
             'filialeSelezionata' => $filialeService->filialeById($request->idFiliale),
             'testo' => $request->input('testoRicerca')
         ]);
+    }
+
+    public function eseguiAssocia(Request $request, PersonaleService $personaleService)
+    {
+        $personaleService->associaFiliale($request);
+        return Redirect::back();
+    }
+
+    public function eliminaAssociazione($idAssociazione, PersonaleService $personaleService)
+    {
+        $personaleService->eliminaAssociazione($idAssociazione);
+        return Redirect::back();
     }
 }

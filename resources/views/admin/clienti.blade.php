@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pazienti di {{$filialeSelezionata->nome}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pazienti di {{isset($filialeSelezionata->nome) ? $filialeSelezionata->nome : $filialeSelezionata}}</h1>
 
             <div class="row">
                 <div class="col-2">
@@ -22,22 +22,22 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
-                    <form action="{{route('admin.ricercaPaziente')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="idFiliale" value="{{$filialeSelezionata->id}}">
+                    <form action="{{route('admin.ricercaPaziente')}}" method="get">
+                        <input type="hidden" name="idFiliale" value="{{isset($filialeSelezionata->id) ? $filialeSelezionata->id : null}}">
                         <div class="row mb-3">
                             <div class="col-9 col-md-3">
                                 <input type="text" value="{{isset($testo) ? $testo : ''}}" name="testoRicerca" class="form-control" placeholder="Ricerca" aria-label="First name">
                             </div>
                             <div class="col-2">
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search fa-sm"></i></button>
-                                <a class="btn btn-warning" href="{{route('admin.clienti', $filialeSelezionata->id)}}">Reset</a>
+                                <a class="btn btn-warning" href="{{route('admin.clienti', isset($filialeSelezionata->id) ? $filialeSelezionata->id : null)}}">Reset</a>
                             </div>
                         </div>
                     </form>
                     <thead>
                     <tr>
                         <th class="text-center">Action</th>
+                        <th>Tipo</th>
                         <th>Cognome</th>
                         <th>Nome</th>
                         <th>Telefono1</th>
@@ -81,6 +81,7 @@
                                         <i class="fas fa-fw fa-info-circle"></i>
                                     </a>
                                 </td>
+                                <td class="text-nowrap">{{$item->tipo->nome}}</td>
                                 <td class="text-nowrap">{{$item->cognome}}</td>
                                 <td class="text-nowrap">{{$item->nome}}</td>
                                 <td class="text-nowrap">{{$item->telefono1}}</td>

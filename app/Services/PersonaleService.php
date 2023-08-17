@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Filiale;
+use App\Models\FilialeUser;
 use App\Models\User;
 
 class PersonaleService
 {
     public function listaPersonale()
     {
-        return User::whereNot('ruolo_id', 1)->get();
+        return User::with('ruolo')->whereNot('ruolo_id', 1)->get();
     }
 
     public function aggiungiPersonale($userAggiungi)
@@ -23,5 +25,16 @@ class PersonaleService
     public function deletePersonale($userId)
     {
         User::find($userId)->delete();
+    }
+
+    public function associaFiliale($request)
+    {
+        $filiale = Filiale::find($request->filiale_id);
+        $filiale->users()->attach($request->users);
+    }
+
+    public function eliminaAssociazione($idAssociazione)
+    {
+        FilialeUser::find($idAssociazione)->delete();
     }
 }

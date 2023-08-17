@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Configuration;
+use App\Models\Tipo;
 
 class ConfigurationService
 {
@@ -27,5 +28,10 @@ class ConfigurationService
             $path = 'logo/';
             \Storage::disk('public')->putFileAs($path, $file, $filename);
         }
+    }
+
+    public function setTipologie($request)
+    {
+        Tipo::create($request->all());
     }
 }

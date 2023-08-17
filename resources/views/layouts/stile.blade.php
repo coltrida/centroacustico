@@ -76,7 +76,7 @@
                         <a class="collapse-item" href="{{route('admin.clienti', $item->id)}}">{{$item->nome}}</a>
                     @endforeach
 
-                    <a class="collapse-item font-weight-bold" href="cards.html">TUTTI</a>
+                    <a class="collapse-item font-weight-bold" href="{{route('admin.clienti')}}">TUTTI</a>
                 </div>
             </div>
         </li>

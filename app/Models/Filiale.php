@@ -15,4 +15,10 @@ class Filiale extends Model
     {
         return $this->hasMany(Client::class, 'filiale_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')
+            ->withPivot(['id']);
+    }
 }

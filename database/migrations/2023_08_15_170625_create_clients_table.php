@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tipo_id');
+            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->string('nome');
             $table->string('cognome');
             $table->string('telefono1');

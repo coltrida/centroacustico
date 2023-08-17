@@ -31,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('*', function (View $view){
             $nomeAzienda = Configuration::all()->count() > 0 ? Configuration::first()->nomeAzienda : 'Nome Azienda';
-            $filiali = Filiale::orderBy('nome')->get();
+            $filiali = Filiale::with(['users' => function($u){
+                $u->with('ruolo');
+            }])->orderBy('nome')->get();
             $view->with('nomeAzienda', $nomeAzienda)->with('filiali', $filiali);
         });
     }

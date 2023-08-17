@@ -42,4 +42,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ruolo::class);
     }
+
+    public function filiali()
+    {
+        return $this->belongsToMany(Filiale::class, 'filiale_user', 'user_id', 'filiale_id')
+            ->withPivot(['id']);
+    }
 }

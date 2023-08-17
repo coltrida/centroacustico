@@ -20,6 +20,7 @@ class ClientFactory extends Factory
         $nome = fake()->firstName();
         $cognome = fake()->lastName();
         return [
+            'tipo_id' => rand(1,8),
             'nome' => $nome,
             'cognome' => $cognome,
             'telefono1' => fake()->phoneNumber,
