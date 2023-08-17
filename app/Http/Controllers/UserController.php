@@ -25,10 +25,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function aggiungiCliente($idFiliale)
+    public function aggiungiModificaCliente($idFiliale=null, $idClient=null)
     {
-        return view('user.aggiungiCliente', [
-            'idFiliale' => $idFiliale
+        return view('user.aggiungiModificaCliente', [
+            'idFiliale' => $idFiliale,
+            'idClient' => $idClient,
         ]);
     }
 }

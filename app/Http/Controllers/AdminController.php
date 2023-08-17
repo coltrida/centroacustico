@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\FilialeService;
 use App\Services\PersonaleService;
+use App\Services\RecapitoService;
 use App\Services\RuoloService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -19,6 +20,19 @@ class AdminController extends Controller
     {
         $filialeService->aggiungiFiliale($request);
         return Redirect::route('admin.filiali');
+    }
+
+    public function recapiti(RecapitoService $recapitoService)
+    {
+        return view('admin.recapiti', [
+            'recapiti' => $recapitoService->listaRecapiti()
+        ]);
+    }
+
+    public function aggiungiRecapito(Request $request, RecapitoService $recapitoService)
+    {
+        $recapitoService->aggiungiRecapito($request);
+        return Redirect::back();
     }
 
     public function aggiungiPersonale(Request $request, PersonaleService $personaleService)

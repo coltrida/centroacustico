@@ -106,6 +106,12 @@
                 <span>Filiali</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.recapiti')}}">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Recapiti</span></a>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider">
 

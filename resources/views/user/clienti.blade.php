@@ -5,12 +5,27 @@
 @endsection
 
 @section('content')
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info</h4>
+                </div>
+                <div class="modal-body">
+                    {{ session('message') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Pazienti di {{isset($filialeSelezionata->nome) ? $filialeSelezionata->nome : $filialeSelezionata}}</h1>
 
             <div class="row">
                 <div class="col-2">
-                    <a href="{{route('aggiungiCliente', $filialeSelezionata->id)}}" class="btn btn-primary"> Aggiungi</a>
+                    <a href="{{route('aggiungiModificaCliente', ['idFiliale' => isset($filialeSelezionata->id) ? $filialeSelezionata->id : null, 'idClient' => null])}}" class="btn btn-primary"> Aggiungi</a>
                 </div>
             </div>
 
@@ -48,18 +63,22 @@
                         <th>PR</th>
                         <th>email</th>
                         <th>Canale Mkt</th>
-                        <th>Nascita</th>
+                        <th>Recapito</th>
+                        <th class="text-nowrap">Data Nascita</th>
+                        <th class="text-nowrap">Data Creazione</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($pazienti as $item)
                             <tr id="tr{{$item->id}}">
                                 <td class="text-center d-flex">
-                                    <a id="{{$item}}" title="elimina" class="btn btn-sm btn-danger eliminaBtn mx-1" href="#" data-toggle="modal" data-target="#confermaElimina">
+                                    {{--<a id="{{$item}}" title="elimina" class="btn btn-sm btn-danger eliminaBtn mx-1" href="#" data-toggle="modal" data-target="#confermaElimina">
                                         <i class="fas fa-fw fa-trash"></i>
-                                    </a>
+                                    </a>--}}
 
-                                    <a class="btn btn-primary btn-sm mx-1" title="modifica" href="#">
+                                    <a class="btn btn-primary btn-sm mx-1" title="modifica"
+                                       href="{{route('aggiungiModificaCliente',
+                                            ['idFiliale' => $item->filiale_id, 'idClient' => $item])}}">
                                         <i class="fas fa-fw fa-pencil-alt"></i>
                                     </a>
 
@@ -69,6 +88,10 @@
 
                                     <a class="btn btn-warning btn-sm mx-1" title="appuntamento" href="#">
                                         <i class="fas fa-fw fa-calendar"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm mx-1" style="background: #c0c9e7" title="telefonata" href="#">
+                                        <i class="fas fa-fw fa-phone"></i>
                                     </a>
 
                                     <a class="btn btn-sm mx-1" style="background: purple" title="audiometria" href="#">
@@ -93,7 +116,9 @@
                                 <td class="text-nowrap">{{$item->provincia}}</td>
                                 <td class="text-nowrap">{{$item->email}}</td>
                                 <td class="text-nowrap">{{$item->canale->nome}}</td>
-                                <td class="text-nowrap">{{$item->dataNascita}}</td>
+                                <td class="text-nowrap">{{$item->recapito_id ? $item->recapito->nome : ''}}</td>
+                                <td class="text-nowrap">{{$item->dataNascitaFormattata}}</td>
+                                <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
                             </tr>
                         @endforeach
 
@@ -133,8 +158,15 @@
 
     <script>
         $('document').ready(function () {
+            let mess = "{{Session::has('message')}}"
+            if(mess){
+                $('#exampleModal').modal();
+                setTimeout(function () {
+                    $('#exampleModal').modal('hide');
+                }, 3000);
+            }
 
-            $('tbody').on('click', '.eliminaBtn', function (evt) {
+/*            $('tbody').on('click', '.eliminaBtn', function (evt) {
                 evt.preventDefault();
                 let UserElimina = JSON.parse(evt.currentTarget.id);
                 $('#UserDaEliminare').val(UserElimina.id);
@@ -155,7 +187,7 @@
                         }
                     }
                 )
-            });
+            });*/
         });
     </script>
 @endsection

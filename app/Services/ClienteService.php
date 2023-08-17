@@ -16,8 +16,8 @@ class ClienteService
     {
         if ($idFiliale){
             return Filiale::with(['clienti' => function($c){
-                $c->with('tipo', 'canale');
-            }])->find($idFiliale)->clienti()->paginate(5);
+                $c->with('tipo', 'canale', 'recapito');
+            }])->find($idFiliale)->clienti()->latest()->paginate(5);
         }
         return Client::paginate(5);
     }
@@ -25,7 +25,7 @@ class ClienteService
     public function ricercaPaziente($request)
     {
         if ($request->input('idFiliale')){
-            return Client::with('tipo', 'canale')
+            return Client::with('tipo', 'canale', 'recapito')
             ->where([
                 ['filiale_id', $request->input('idFiliale')],
                 ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
@@ -39,10 +39,10 @@ class ClienteService
                 ])->orWhere([
                     ['filiale_id', $request->input('idFiliale')],
                     ['fullNameReverse', 'like', '%' . $request->input('testoRicerca') . '%' ]
-                ])
+                ])->latest()
                 ->paginate(50);
         }
-        return Client::with('tipo', 'canale')
+        return Client::with('tipo', 'canale', 'recapito')
             ->where([
                 ['nome', 'like', '%' . $request->input('testoRicerca') . '%' ]
             ])
@@ -52,7 +52,22 @@ class ClienteService
                 ['fullName', 'like', '%' . $request->input('testoRicerca') . '%' ]
             ])->orWhere([
                 ['fullNameReverse', 'like', '%' . $request->input('testoRicerca') . '%' ]
-            ])
+            ])->latest()
             ->paginate(50);
+    }
+
+    public function clientById($idClient)
+    {
+        return Client::with('tipo', 'canale')->find($idClient);
+    }
+
+    public function inserisciCliente($request)
+    {
+        Client::create($request->request->all());
+    }
+
+    public function modificaCliente($idClient, $request)
+    {
+        Client::find($idClient)->update($request->request->all());
     }
 }

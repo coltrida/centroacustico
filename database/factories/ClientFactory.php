@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -25,7 +26,7 @@ class ClientFactory extends Factory
             'cognome' => $cognome,
             'telefono1' => fake()->phoneNumber,
             'telefono2' => fake()->phoneNumber,
-            'indirizzo' => fake()->address,
+            'indirizzo' => fake()->streetAddress,
             'citta' => fake()->city,
             'provincia' => 'ad',
             'cap' => '564654',
@@ -33,6 +34,7 @@ class ClientFactory extends Factory
             'dataNascita' => fake()->date,
             'filiale_id' => rand(1,4),
             'canale_id' => rand(1,7),
+            'recapito_id' => Arr::random([null, rand(1,100)]),
             'fullName' => $nome.' '.$cognome,
             'fullNameReverse' => $cognome.' '.$nome,
         ];

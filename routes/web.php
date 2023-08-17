@@ -21,6 +21,8 @@ Route::post('/eseguiSetCanali', [ConfigController::class, 'eseguiSetCanali'])->n
 //----------------------- Admin ----------------------------
 Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');
 Route::post('/aggiungiFiliale', [AdminController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
+Route::get('/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');
+Route::post('/aggiungiRecapito', [AdminController::class, 'aggiungiRecapito'])->name('admin.aggiungiRecapito');
 Route::get('/personale', [AdminController::class, 'personale'])->name('admin.personale');
 Route::post('/aggiungiPersonale', [AdminController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
 Route::get('/deletePersonale/{idUser?}', [AdminController::class, 'deletePersonale'])->name('admin.deletePersonale');
@@ -30,7 +32,7 @@ Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'el
 
 //------------------------ User -------------------------------
 Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
-Route::get('/aggiungiCliente/{idFiliale}', [UserController::class, 'aggiungiCliente'])->name('aggiungiCliente');
+Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
 Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
 
 

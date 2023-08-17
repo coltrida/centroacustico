@@ -3,7 +3,7 @@
 
     <form wire:submit.prevent="submit">
 
-        @if( Session::has('message'))
+        {{--@if( Session::has('message'))
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('#exampleModal').modal();
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
 
         <div class="row mb-4">
             <div class="col-2">
@@ -83,6 +83,10 @@
         </div>
 
         <div class="row mb-4">
+            <div class="col-2">
+                <input type="date" wire:model="dataNascita" class="form-control" placeholder="email" aria-label="First name">
+                @error('dataNascita') <span style="font-size: 12px; color: red" class="error">{{ $message }}</span> @enderror
+            </div>
             <div class="col-4">
                 <select class="form-select" wire:model="canale_id">
                     <option selected>canale Mkt...</option>
@@ -95,6 +99,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Aggiungi</button>
+        <button class="btn btn-primary" type="submit">{{$idClient ? 'Modifica' : 'Aggiungi'}}</button>
+        <a class="btn btn-warning" href="{{route('clienti', $idFiliale)}}">Annulla</a>
     </form>
 </div>

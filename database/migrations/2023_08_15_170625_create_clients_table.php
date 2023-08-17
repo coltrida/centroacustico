@@ -26,11 +26,14 @@ return new class extends Migration
             $table->string('provincia')->nullable();
             $table->string('cap')->nullable();
             $table->string('email')->nullable();
-            $table->date('dataNascita')->nullable();
+            $table->dateTime('dataNascita')->nullable();
             $table->unsignedBigInteger('filiale_id');
             $table->foreign('filiale_id')->references('id')->on('filiales');
             $table->unsignedBigInteger('canale_id');
             $table->foreign('canale_id')->references('id')->on('canalis');
+            $table->unsignedBigInteger('recapito_id')->nullable();
+            $table->unsignedBigInteger('medico_id')->nullable();
+            $table->string('codfisc')->unique()->nullable();
             $table->string('fullName')->nullable();
             $table->string('fullNameReverse')->nullable();
             $table->timestamps();
