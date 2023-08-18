@@ -10,4 +10,9 @@ class Categoria extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'categorias';
+
+    public function listino()
+    {
+        return $this->hasMany(Listino::class);
+    }
 }

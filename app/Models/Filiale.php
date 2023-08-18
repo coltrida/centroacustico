@@ -21,4 +21,9 @@ class Filiale extends Model
         return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')
             ->withPivot(['id']);
     }
+
+    public function prodotti()
+    {
+        return $this->hasMany(Prodotto::class);
+    }
 }

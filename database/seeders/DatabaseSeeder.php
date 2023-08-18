@@ -23,16 +23,18 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RuoliSeeder::class);
+        $this->call(StatoApaSeeder::class);
         $this->call(FornitoriSeeder::class);
         $this->call(CategorieSeeder::class);
         $this->call(TipologieSeeder::class);
         $this->call(CanaliSeeder::class);
         $this->call(ConfigurationSeeder::class);
+        $this->call(ListinoSeeder::class);
         $this->call(FilialiSeeder::class);
         $this->call(RecapitiSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ClientSeeder::class);
-        $this->call(ListinoSeeder::class);
+        $this->call(ProdottiSeeder::class);
         $this->call(AssociaFilialeUserSeeder::class);
 
         Storage::disk('public')->deleteDirectory('/logo/');

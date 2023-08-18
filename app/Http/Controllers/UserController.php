@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ClienteService;
 use App\Services\FilialeService;
+use App\Services\ProdottiService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -33,8 +34,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function magazzino()
+    public function magazzino($idFiliale=null)
     {
-        
+        return view('user.magazzino', [
+            'idFiliale' =>$idFiliale
+        ]);
     }
 }
