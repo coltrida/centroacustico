@@ -11,22 +11,31 @@
             @csrf
             <div class="row ml-4">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Nome Filiale" aria-label="First name"
+                    <input type="text" class="form-control" placeholder="Nome" aria-label="First name"
                            name="nome">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Indirizzo" aria-label="Last name"
-                           name="indirizzo">
+                    <select class="form-control" aria-label="Default select example" name="fornitore_id">
+                        <option selected>fornitore...</option>
+                        @foreach($fornitori as $item)
+                            <option value="{{$item->id}}">{{$item->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Città" aria-label="Last name" name="citta">
-                </div>
-                <div class="col-1">
-                    <input type="text" class="form-control" placeholder="PR" aria-label="Last name" name="provincia">
+                    <select class="form-control" aria-label="Default select example" name="categoria_id">
+                        <option selected>categoria...</option>
+                        @foreach($categorie as $item)
+                            <option value="{{$item->id}}">{{$item->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-2">
-                    <input type="text" class="form-control" placeholder="Telefono" aria-label="Last name"
-                           name="telefono">
+                    <input type="text" class="form-control" placeholder="prezzo" aria-label="Last name" name="prezzolistino">
+                </div>
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="Tempi Reso" aria-label="Last name"
+                           name="giorniTempoDiReso">
                 </div>
                 <div class="col-2">
                     <button type="submit" class="btn btn-primary"> Aggiungi</button>
@@ -46,20 +55,29 @@
                         <th>Nome</th>
                         <th>Fornitore</th>
                         <th>Categoria</th>
-                        <th>Costo</th>
                         <th>Prezzo Listino</th>
                         <th>Tempo di Reso</th>
+                        <th class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($listino as $item)
                             <tr>
                                 <td class="text-nowrap">{{$item->nome}}</td>
-                                <td class="text-nowrap">{{$item->fornitore_id}}</td>
-                                <td class="text-nowrap">{{$item->categoria_id}}</td>
-                                <td class="text-nowrap">{{$item->costo}}</td>
+                                <td class="text-nowrap">{{$item->fornitore->nome}}</td>
+                                <td class="text-nowrap">{{$item->categoria->nome}}</td>
                                 <td class="text-nowrap">{{$item->prezzolistino}}</td>
                                 <td class="text-nowrap">{{$item->giorniTempoDiReso}}</td>
+                                <td class="text-nowrap text-center">
+                                    <a class="btn btn-danger btn-sm mx-1" title="elimina"
+                                       href="#">
+                                        <i class="fas fa-fw fa-trash"></i>
+                                    </a>
+                                    <a class="btn btn-primary btn-sm mx-1" title="modifica"
+                                       href="#">
+                                        <i class="fas fa-fw fa-pencil-alt"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

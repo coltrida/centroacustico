@@ -92,10 +92,14 @@ class AdminController extends Controller
         return Redirect::back();
     }
 
-    public function listino(ListinoService $listinoService)
+    public function listino(ListinoService $listinoService,
+                            FornitoreService $fornitoreService,
+                            CategoriaService $categoriaService)
     {
         return view('admin.listino', [
-            'listino' => $listinoService->elencoListino()
+            'listino' => $listinoService->elencoListino(),
+            'fornitori' => $fornitoreService->listaFornitori(),
+            'categorie' => $categoriaService->listaCategorie(),
         ]);
     }
 

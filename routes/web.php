@@ -44,6 +44,7 @@ Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'el
 
 //------------------------ User -------------------------------
 Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
+Route::get('/magazzino/{idFiliale?}', [UserController::class, 'magazzino'])->name('magazzino');
 Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
 Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
 

@@ -32,4 +32,9 @@ class UserController extends Controller
             'idClient' => $idClient,
         ]);
     }
+
+    public function magazzino()
+    {
+        
+    }
 }
