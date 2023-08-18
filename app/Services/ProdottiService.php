@@ -18,6 +18,46 @@ class ProdottiService
             ->find($idFiliale)->prodotti()->latest()->paginate(5);
     }
 
+    public function listaProdottiInMagazzinoByidFiliale($idFiliale)
+    {
+        $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
+
+        return Prodotto::where([
+            ['filiale_id', $idFiliale],
+            ['stato_id', $idStatoProdottiInMagazzino],
+        ])->latest()->paginate(5, ['*'], 'magazzino');
+    }
+
+    public function listaProdottiInProvaByidFiliale($idFiliale)
+    {
+        $idStatoProdottiInProva = Statoapa::where('nome', 'IN PROVA')->first()->id;
+
+        return Prodotto::where([
+            ['filiale_id', $idFiliale],
+            ['stato_id', $idStatoProdottiInProva],
+        ])->latest()->paginate(5, ['*'], 'prova');
+    }
+
+    public function listaProdottiRichiestiByidFiliale($idFiliale)
+    {
+        $idStatoProdottiRichiesti = Statoapa::where('nome', 'RICHIESTO')->first()->id;
+
+        return Prodotto::where([
+            ['filiale_id', $idFiliale],
+            ['stato_id', $idStatoProdottiRichiesti],
+        ])->latest()->paginate(5, ['*'], 'richiesti');
+    }
+
+    public function listaProdottiInArrivoByidFiliale($idFiliale)
+    {
+        $idStatoProdottiInArrivo = Statoapa::where('nome', 'SPEDITO')->first()->id;
+
+        return Prodotto::where([
+            ['filiale_id', $idFiliale],
+            ['stato_id', $idStatoProdottiInArrivo],
+        ])->latest()->paginate(5, ['*'], 'arrivo');
+    }
+
     public function richiediProdottoFromFiliale($request)
     {
         $idStatoProdottoRichiesto = Statoapa::where('nome', 'RICHIESTO')->first()->id;
@@ -30,12 +70,5 @@ class ProdottiService
         }
     }
 
-    public function listaProdottiInMagazzinoByidFiliale($idFiliale)
-    {
-        $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
-        return Filiale::with(['prodotti' => function($p) use($idStatoProdottiInMagazzino){
-            $p->where('stato_id', $idStatoProdottiInMagazzino);
-        }])
-            ->find($idFiliale)->prodotti;
-    }
+
 }

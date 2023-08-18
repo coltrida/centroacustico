@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\ClienteService;
 use App\Services\FilialeService;
-use App\Services\ProdottiService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -31,13 +30,6 @@ class UserController extends Controller
         return view('user.aggiungiModificaCliente', [
             'idFiliale' => $idFiliale,
             'idClient' => $idClient,
-        ]);
-    }
-
-    public function magazzino($idFiliale=null)
-    {
-        return view('user.magazzino', [
-            'idFiliale' =>$idFiliale
         ]);
     }
 }

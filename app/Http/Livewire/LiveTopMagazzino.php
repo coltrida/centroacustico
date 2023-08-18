@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
-class LiveMagazzino extends Component
+class LiveTopMagazzino extends Component
 {
     public $idFiliale;
 
@@ -18,6 +18,7 @@ class LiveMagazzino extends Component
     public $categoria_id;
     public $listino_id;
     public $quantita;
+
     public $listino = [];
 
     public function selezionaFornitore(ListinoService $listinoService)
@@ -54,15 +55,13 @@ class LiveMagazzino extends Component
         $this->listino_id = '';
         $this->quantita = '';
 
-        return Redirect::route('magazzino', $this->idFiliale);
+        return Redirect::route('prodottiRichiesti', $this->idFiliale);
     }
 
-    public function render(ProdottiService $prodottiService,
-                           FornitoreService $fornitoreService,
+    public function render(FornitoreService $fornitoreService,
                            CategoriaService $categoriaService)
     {
-        return view('livewire.live-magazzino', [
-            'prodotti' => $prodottiService->prodottiFiliale($this->idFiliale),
+        return view('livewire.live-top-magazzino', [
             'fornitori' => $fornitoreService->listaFornitori(),
             'categorie' => $categoriaService->listaCategorie(),
             'listino' => $this->listino,

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProdottiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,11 +43,17 @@ Route::get('/associa', [AdminController::class, 'associa'])->name('admin.associa
 Route::post('/associa', [AdminController::class, 'eseguiAssocia'])->name('admin.eseguiAssocia');
 Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'eliminaAssociazione'])->name('admin.eliminaAssociazione');
 
-//------------------------ User -------------------------------
+//------------------------ Clienti -------------------------------
 Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
 Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
-Route::get('/magazzino/{idFiliale?}', [UserController::class, 'magazzino'])->name('magazzino');
 Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
+
+//------------------------ Magazzino -------------------------------
+Route::get('/prodottiInMagazzino/{idFiliale?}', [ProdottiController::class, 'prodottiInMagazzino'])->name('magazzino');
+Route::get('/prodottiInProva/{idFiliale?}', [ProdottiController::class, 'prodottiInProva'])->name('prodottiInProva');
+Route::get('/prodottiRichiesti/{idFiliale?}', [ProdottiController::class, 'prodottiRichiesti'])->name('prodottiRichiesti');
+Route::get('/prodottiInArrivo/{idFiliale?}', [ProdottiController::class, 'prodottiInArrivo'])->name('prodottiInArrivo');
+
 
 
 Route::get('/dashboard', function () {
