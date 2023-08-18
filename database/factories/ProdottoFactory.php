@@ -19,10 +19,10 @@ class ProdottoFactory extends Factory
     {
         return [
             'matricola' => Arr::random(['sdfad', 'dsafsadfsda', '3434543', 'ffg3434', 'dsf454365545', 'dsfd5555']),
-            'stato_id' => rand(1, 4),
+            'stato_id' => Arr::random([1,3,4]),
             'filiale_id' => rand(3,4),
             'listino_id' => rand(1,30),
-            'client_id' => Arr::random([null, null, rand(1,200)]),
+            'prova_id' => null,
         ];
     }
 }

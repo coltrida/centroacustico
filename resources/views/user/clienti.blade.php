@@ -82,7 +82,8 @@
                                         <i class="fas fa-fw fa-pencil-alt"></i>
                                     </a>
 
-                                    <a class="btn btn-success btn-sm mx-1" title="prova" href="#">
+                                    <a class="btn btn-success btn-sm mx-1" title="prova"
+                                       href="{{route('prova', $item->id)}}">
                                         <i class="fas fa-fw fa-money-bill"></i>
                                     </a>
 

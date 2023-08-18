@@ -30,4 +30,9 @@ class Client extends Model
     {
         return $this->belongsTo(Recapito::class, 'recapito_id', 'id');
     }
+
+    public function prove()
+    {
+        return $this->hasMany(Prova::class);
+    }
 }

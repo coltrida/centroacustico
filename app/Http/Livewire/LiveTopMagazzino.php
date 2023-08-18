@@ -55,6 +55,8 @@ class LiveTopMagazzino extends Component
         $this->listino_id = '';
         $this->quantita = '';
 
+        session()->flash('message', "Richiesta Prodotti Effettuata");
+
         return Redirect::route('prodottiRichiesti', $this->idFiliale);
     }
 

@@ -21,8 +21,8 @@ class Prodotto extends Model
         return $this->belongsTo(Listino::class);
     }
 
-    public function cliente()
+    public function prova()
     {
-        return $this->belongsTo(Client::class, 'client_id', 'id');
+        return $this->belongsTo(Prova::class, 'prova_id', 'id');
     }
 }
