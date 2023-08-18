@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RuoliSeeder::class);
+        $this->call(FornitoriSeeder::class);
+        $this->call(CategorieSeeder::class);
         $this->call(TipologieSeeder::class);
         $this->call(CanaliSeeder::class);
         $this->call(ConfigurationSeeder::class);

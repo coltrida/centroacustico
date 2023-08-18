@@ -48,10 +48,27 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
+        {{--<li class="nav-item">
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Impostazioni</span></a>
+        </li>--}}
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImpostazione"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Impostazioni</span>
+            </a>
+            <div id="collapseImpostazione" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="#">Anagrafica Azienda</a>
+                    <a class="collapse-item" href="{{route('admin.tipologie')}}">Tipologie pazienti</a>
+                    <a class="collapse-item" href="{{route('admin.ruoli')}}">Ruoli Utenti</a>
+                    <a class="collapse-item" href="{{route('admin.canali')}}">Canali Mkt</a>
+                    <a class="collapse-item" href="{{route('admin.categorie')}}">Categorie listino</a>
+                </div>
+            </div>
         </li>
 
         <!-- Divider -->
@@ -120,6 +137,20 @@
             Addons
         </div>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFornitori"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Fornitori</span>
+            </a>
+            <div id="collapseFornitori" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route('admin.fornitori')}}">Elenco</a>
+                    <a class="collapse-item" href="{{route('admin.listino')}}">listino</a>
+                </div>
+            </div>
+        </li>
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -149,7 +180,7 @@
             </a>
             <div id="collapsePersonale" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{route('admin.personale')}}">Lista</a>
+                    <a class="collapse-item" href="{{route('admin.personale')}}">Elenco</a>
                     <a class="collapse-item" href="{{route('admin.associa')}}">Associa</a>
                 </div>
             </div>
