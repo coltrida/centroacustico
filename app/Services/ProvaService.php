@@ -61,4 +61,11 @@ class ProvaService
         $prova->fine_prova = Carbon::now();
         $prova->save();
     }
+
+    public function dettagliProva($idProva)
+    {
+        return Prova::with(['prodotti' => function($p){
+            $p->with('listino');
+        }])->find($idProva);
+    }
 }

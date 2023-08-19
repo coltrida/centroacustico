@@ -25,6 +25,7 @@ class LiveProva extends Component
     public $listino = [];
     public $matricole = [];
     public $totProva = 0;
+    public $provaId;
 
     public function mount(ProvaService $provaService, ProdottiService $prodottiService, StatoApaService $statoApaService)
     {
@@ -110,6 +111,11 @@ class LiveProva extends Component
         $prodottiService->cambioStatoProdotti($prova->prodotti, $idStatoReso);
     }
 
+    public function vediDettagliProva($provaId)
+    {
+        $this->provaId = $provaId;
+    }
+
     public function render(FornitoreService $fornitoreService,
                            CategoriaService $categoriaService,
                            ProdottiService $prodottiService,
@@ -121,6 +127,7 @@ class LiveProva extends Component
             'fornitori' => $fornitoreService->listaFornitori(),
             'categorie' => $categoriaService->listaCategorie(),
             'listino' => $this->listino,
+            'provaDettagli' => $this->provaId ? $provaService->dettagliProva($this->provaId) : '',
         ]);
     }
 }

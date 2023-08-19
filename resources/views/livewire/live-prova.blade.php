@@ -23,6 +23,34 @@
         </div>
     </div>
 
+    <div class="modal fade" id="infoProva" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info Prova</h4>
+                </div>
+                <h5 class="ml-3">Prodotti</h5>
+                <div class="modal-body">
+                    @if($provaId)
+                        @foreach($provaDettagli->prodotti as $item)
+                            <div class="row">
+                                <div class="col-4">{{$item->matricola}}</div>
+                                <div class="col-4">{{$item->listino->nome}}</div>
+                                <div class="col-4">{{$item->listino->prezzolistino}}</div>
+                            </div>
+                        @endforeach
+                        <div class="mt-2">
+                            <h5>Note: {{$provaDettagli->note}}</h5>
+                        </div>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="$('#infoProva').modal('hide');">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-sm-flex mb-4">
         <h4 class="mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h4>
 
@@ -145,8 +173,8 @@
                                     <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
                                     <td class="text-nowrap">{{$item->tot}}</td>
                                     <td class="text-nowrap">
-                                        <a class="btn btn-primary btn-sm mx-1" title="vedi"
-                                           href="#">
+                                        <a wire:click="vediDettagliProva({{$item->id}})" class="btn btn-primary btn-sm mx-1" title="vedi"
+                                           href="#" onclick="$('#infoProva').modal();">
                                             <i class="fas fa-fw fa-eye"></i>
                                         </a>
                                         @if($item->stato_id != 6 && $item->stato_id != 7)
