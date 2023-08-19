@@ -87,7 +87,8 @@
                                         <i class="fas fa-fw fa-money-bill"></i>
                                     </a>
 
-                                    <a class="btn btn-warning btn-sm mx-1" title="appuntamento" href="#">
+                                    <a class="btn btn-warning btn-sm mx-1" title="appuntamento"
+                                       href="{{route('appuntamenti', $item->id)}}">
                                         <i class="fas fa-fw fa-calendar"></i>
                                     </a>
 

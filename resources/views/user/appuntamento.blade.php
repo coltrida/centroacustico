@@ -14,20 +14,24 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Telefonate {{$userConTelefonate->fullName}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Appuntamenti {{$userConAppuntamenti->fullName}}</h1>
     </div>
 
     <form action="{{route('telefonataEffettuata')}}" method="post">
         @csrf
-        <input type="hidden" name="client_id" value="{{$userConTelefonate->id}}">
+        <input type="hidden" name="client_id" value="{{$userConAppuntamenti->id}}">
     <div class="d-flex mb-4">
         <div class="col">
-            <label class="form-label">Esito</label>
+            <label class="form-label">Data Appuntamento</label>
+            <input type="date" class="form-control" aria-label="First name" name="">
+        </div>
+        <div class="col">
+            <label class="form-label">Tipo Appuntamento</label>
             <select class="form-control" aria-label="Default select example" name="esito">
                 <option selected></option>
-                <option>Preso Appuntamento</option>
-                <option>Non interessato</option>
-                <option>Non Risponde</option>
+                <option>Assistenza</option>
+                <option>Prima Visita</option>
+                <option>Consegna Apa</option>
             </select>
         </div>
         <div class="col">
@@ -45,28 +49,33 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Data Telefonata</th>
-                        <th>Esito</th>
-                        <th>Note</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($userConTelefonate->telefonate as $item)
-                        <tr>
-                            <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
-                            <td class="text-nowrap">{{$item->esito}}</td>
-                            <td class="text-nowrap">{{$item->note}}</td>
-                        </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="7">{{$userConTelefonate->telefonate->links()}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="d-flex flex-row-reverse">
+                <div class="btn-group" role="group" aria-label="Default button group">
+                    <button type="button" class="btn btn-outline-primary">Indietro</button>
+                    <button type="button" class="btn btn-outline-primary">Avanti</button>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="list-group col-1">
+                    <br>
+                    @for($ora=9; $ora < 19; $ora++)
+                        <div class="list-group-item list-group-item-dark"
+                           style="font-size: 14px; padding: 0.4rem 0.2rem">
+                            {{$ora == 9 ? '0'.$ora.':00-'.($ora+1).':00' : $ora.':00-'.($ora+1).':00'}}
+                        </div>
+                    @endfor
+                </div>
+                @for($giorno=0; $giorno < 6; $giorno++)
+
+                    <div class="list-group col">
+                        <span class="text-center">{{$nomeGiorno[$giorno]}}</span>
+                        @for($ora=9; $ora < 19; $ora++)
+                        <a href="#" class="list-group-item list-group-item-action text-center list-group-item-secondary"
+                           style="font-size: 14px; padding: 0.4rem 0.2rem">A simple default list</a>
+                        @endfor
+                    </div>
+                @endfor
             </div>
         </div>
     </div>

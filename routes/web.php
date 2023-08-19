@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppuntamentoController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProdottiController;
@@ -62,6 +63,10 @@ Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova'
 //------------------------ Telefono -------------------------------
 Route::get('/telefonata/{idClient}', [TelefonataController::class, 'telefonata'])->name('telefonata');
 Route::post('/telefonataEffettuata', [TelefonataController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
+
+//------------------------ Appuntamento -------------------------------
+Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
+Route::post('/telefonataEffettuata', [AppuntamentoController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
 
 
 Route::get('/dashboard', function () {
