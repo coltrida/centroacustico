@@ -25,4 +25,9 @@ class Prodotto extends Model
     {
         return $this->belongsTo(Prova::class, 'prova_id', 'id');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
 }

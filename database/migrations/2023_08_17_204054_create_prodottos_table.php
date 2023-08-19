@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('filiale_id')->nullable();
             $table->unsignedBigInteger('listino_id')->nullable();
             $table->unsignedBigInteger('prova_id')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->date('datacarico')->nullable();
             $table->timestamps();
         });

@@ -19,40 +19,91 @@
         </div>
     </div>
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h1>
-        <div class="row ml-4">
+    <div class="d-sm-flex mb-4">
+        <h4 class="mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h4>
 
-        </div>
+            <livewire:live-top-prova
+                :idClient="$idClient"
+                :idFiliale="$clientConProvePassate->filiale->id"/>
+
     </div>
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h3>Nuova Prova</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Matricola</th>
+                                <th>Nome</th>
+                                <th>Cat</th>
+                                <th>Prezzo</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($proveInCorso as $item)
+                                <tr>
+                                    <td class="text-nowrap">{{$item->matricola}}</td>
+                                    <td class="text-nowrap">{{$item->listino->nome}}</td>
+                                    <td class="text-nowrap">{{$item->listino->categoria->nome}}</td>
+                                    <td class="text-nowrap">{{$item->listino->prezzolistino}}</td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-danger btn-sm mx-1" title="elimina"
+                                           href="#">
+                                            <i class="fas fa-fw fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
 
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Fornitore</th>
-                        <th>Categoria</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($clientConProvePassate->prove as $item)
-                        <tr>
-                            <td class="text-nowrap">{{$item}}</td>
-                            <td class="text-nowrap">{{$item}}</td>
-                            <td class="text-nowrap">{{$item}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h3>Prove Passate</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Matricola</th>
+                                <th>Nome</th>
+                                <th>Cat</th>
+                                <th>Prezzo</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($clientConProvePassate->prove as $item)
+                                <tr>
+                                    <td class="text-nowrap">{{$item->matricola}}</td>
+                                    <td class="text-nowrap">{{$item->listino->nome}}</td>
+                                    <td class="text-nowrap">{{$item->listino->categoria->nome}}</td>
+                                    <td class="text-nowrap">{{$item->listino->prezzolistino}}</td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-danger btn-sm mx-1" title="elimina"
+                                           href="#">
+                                            <i class="fas fa-fw fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </div>
 @endsection
 
 @section('footerSection')

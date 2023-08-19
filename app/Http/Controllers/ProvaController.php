@@ -10,7 +10,9 @@ class ProvaController extends Controller
     public function prova($idClient, ProvaService $provaService)
     {
         return view('user.prova', [
-            'clientConProvePassate' => $provaService->clientConProvePassate($idClient)
+            'idClient' => $idClient,
+            'clientConProvePassate' => $provaService->clientConProvePassate($idClient),
+            'proveInCorso' => $provaService->proveInCorsoByIdClient($idClient),
         ]);
     }
 }

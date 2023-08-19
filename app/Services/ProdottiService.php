@@ -70,5 +70,13 @@ class ProdottiService
         }
     }
 
-
+    public function prodottiInMagazzinoFromIdListino($idListino, $idFiliale)
+    {
+        $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
+        return Prodotto::where([
+            ['stato_id', $idStatoProdottiInMagazzino],
+            ['filiale_id', $idFiliale],
+            ['listino_id', $idListino],
+        ])->get();
+    }
 }

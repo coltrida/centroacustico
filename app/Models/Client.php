@@ -26,6 +26,11 @@ class Client extends Model
         return $this->belongsTo(Canale::class, 'canale_id', 'id');
     }
 
+    public function filiale()
+    {
+        return $this->belongsTo(Filiale::class, 'filiale_id', 'id');
+    }
+
     public function recapito()
     {
         return $this->belongsTo(Recapito::class, 'recapito_id', 'id');
@@ -34,5 +39,10 @@ class Client extends Model
     public function prove()
     {
         return $this->hasMany(Prova::class);
+    }
+
+    public function prodotti()
+    {
+        return $this->hasMany(Prodotto::class);
     }
 }
