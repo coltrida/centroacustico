@@ -35,4 +35,14 @@ class ProvaService
         $prodotto->client_id = $idClient;
         $prodotto->save();
     }
+
+    public function eliminaProductInProvaById($idProduct)
+    {
+        $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
+
+        $prodotto = Prodotto::find($idProduct);
+        $prodotto->stato_id = $idStatoProdottiInMagazzino;
+        $prodotto->client_id = null;
+        $prodotto->save();
+    }
 }
