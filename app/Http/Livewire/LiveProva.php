@@ -7,6 +7,8 @@ use App\Services\FornitoreService;
 use App\Services\ListinoService;
 use App\Services\ProdottiService;
 use App\Services\ProvaService;
+use App\Services\StatoApaService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
@@ -14,19 +16,18 @@ class LiveProva extends Component
 {
     public $idClient;
 
-    public $clientConProvePassate;
     public $idFiliale;
     public $fornitore_id;
     public $categoria_id;
     public $listino_id;
     public $product_id;
+    public $nota;
     public $listino = [];
     public $matricole = [];
 
     public function mount(ProvaService $provaService)
     {
-        $this->clientConProvePassate = $provaService->clientConProvePassate($this->idClient);
-        $this->idFiliale = $this->clientConProvePassate->filiale_id;
+        $this->idFiliale = $provaService->clientConProvePassate($this->idClient)->filiale_id;
     }
 
     public function selezionaFornitore(ListinoService $listinoService)
@@ -64,19 +65,31 @@ class LiveProva extends Component
         $this->matricole = $prodottiService->prodottiInMagazzinoFromIdListino($this->listino_id, $this->idFiliale);
     }
 
-    public function creaProva()
+    public function creaProva(ProvaService $provaService,
+                              ProdottiService $prodottiService,
+                              StatoApaService $statoApaService)
     {
-
+        $request = new Request();
+        $request->replace([
+            'client_id' => $this->idClient,
+            'filiale_id' => $this->idFiliale,
+            'nota' => $this->nota,
+        ]);
+        $provaService->creaProva($request);
+        $prodottiInCorsoDiProva = $prodottiService->prodottiInCorsoDiProvaByIdClient($this->idClient);
+        $idStatoProvaInCorso = $statoApaService->idStatoFromNome('PROVA IN CORSO');
+        $prodottiService->cambioStatoProdotti($prodottiInCorsoDiProva, $idStatoProvaInCorso);
         session()->flash('message', "Prova Crata con Successo");
     }
 
     public function render(FornitoreService $fornitoreService,
                            CategoriaService $categoriaService,
+                           ProdottiService $prodottiService,
                            ProvaService $provaService)
     {
         return view('livewire.live-prova', [
+            'prodottiInCorsoDiProva' => $prodottiService->prodottiInCorsoDiProvaByIdClient($this->idClient),
             'clientConProvePassate' => $provaService->clientConProvePassate($this->idClient),
-            'proveInCorso' => $provaService->proveInCorsoByIdClient($this->idClient),
             'fornitori' => $fornitoreService->listaFornitori(),
             'categorie' => $categoriaService->listaCategorie(),
             'listino' => $this->listino,

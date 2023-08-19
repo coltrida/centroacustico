@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('mese_inizio')->nullable();
             $table->integer('anno_inizio')->nullable();
             $table->integer('giorni_prova')->nullable();
+            $table->string('nota')->nullable();
             $table->timestamps();
         });
     }

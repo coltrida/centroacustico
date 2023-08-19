@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Client;
 use App\Models\Filiale;
 use App\Models\Prodotto;
 use App\Models\Statoapa;
@@ -30,7 +31,7 @@ class ProdottiService
 
     public function listaProdottiInProvaByidFiliale($idFiliale)
     {
-        $idStatoProdottiInProva = Statoapa::where('nome', 'IN PROVA')->first()->id;
+        $idStatoProdottiInProva = Statoapa::where('nome', 'PROVA IN CORSO')->first()->id;
 
         return Prodotto::where([
             ['filiale_id', $idFiliale],
@@ -78,5 +79,22 @@ class ProdottiService
             ['filiale_id', $idFiliale],
             ['listino_id', $idListino],
         ])->get();
+    }
+
+    public function prodottiInCorsoDiProvaByIdClient($idClient)
+    {
+        $idStatoProdottiInProva = Statoapa::where('nome', 'IN PROVA')->first()->id;
+
+        return Client::with(['prodotti' => function($p) use($idStatoProdottiInProva){
+            $p->where('stato_id', $idStatoProdottiInProva)->with('listino');
+        }])->find($idClient)->prodotti;
+    }
+
+    public function cambioStatoProdotti($prodotti, $id)
+    {
+        foreach ($prodotti as $prodotto){
+            $prodotto->stato_id = $id;
+            $prodotto->save();
+        }
     }
 }

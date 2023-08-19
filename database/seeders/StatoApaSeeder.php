@@ -28,6 +28,15 @@ class StatoApaSeeder extends Seeder
             [
                 'nome' => 'RICHIESTO'
             ],
+            [
+                'nome' => 'PROVA IN CORSO'
+            ],
+            [
+                'nome' => 'FATTURATO'
+            ],
+            [
+                'nome' => 'RESO'
+            ],
         ]);
     }
 }

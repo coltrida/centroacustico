@@ -21,6 +21,11 @@ class Prova extends Model
         return $this->belongsTo(Canale::class, 'canale_id', 'id');
     }
 
+    public function stato()
+    {
+        return $this->belongsTo(Statoapa::class, 'stato_id', 'id');
+    }
+
     public function prodotti()
     {
         return $this->hasMany(Prodotto::class, 'prova_id', 'id');

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Client;
 use App\Models\Prodotto;
+use App\Models\Prova;
 use App\Models\Statoapa;
 
 class ProvaService
@@ -15,15 +16,6 @@ class ProvaService
                 $p->with('listino');
             }]);
         }])->find($idClient);
-    }
-
-    public function proveInCorsoByIdClient($idClient)
-    {
-        $idStatoProdottiInProva = Statoapa::where('nome', 'IN PROVA')->first()->id;
-
-        return Client::with(['prodotti' => function($p) use($idStatoProdottiInProva){
-            $p->where('stato_id', $idStatoProdottiInProva)->with('listino');
-        }])->find($idClient)->prodotti;
     }
 
     public function inserisciProductInProvaById($idProduct, $idClient)
@@ -44,5 +36,18 @@ class ProvaService
         $prodotto->stato_id = $idStatoProdottiInMagazzino;
         $prodotto->client_id = null;
         $prodotto->save();
+    }
+
+    public function creaProva($request)
+    {
+        $idStatoProvaInCorso = Statoapa::where('nome', 'PROVA IN CORSO')->first()->id;
+
+        Prova::create([
+           'user_id' => 1,
+           'client_id' => $request->client_id,
+           'filiale_id' => $request->filiale_id,
+           'stato_id' => $idStatoProvaInCorso,
+           'nota' => $request->nota,
+        ]);
     }
 }

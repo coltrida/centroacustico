@@ -91,7 +91,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($proveInCorso as $item)
+                            @foreach($prodottiInCorsoDiProva as $item)
                                 <tr>
                                     <td class="text-nowrap">{{$item->matricola}}</td>
                                     <td class="text-nowrap">{{$item->listino->nome}}</td>
@@ -107,6 +107,12 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Nota</label>
+                            <textarea wire:model="nota" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        </div>
+
                         <button type="submit" class="btn btn-primary" wire:click="creaProva"> Crea Prova</button>
                     </div>
                 </div>
@@ -120,22 +126,28 @@
                         <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Matricola</th>
-                                <th>Nome</th>
-                                <th>Cat</th>
-                                <th>Prezzo</th>
+                                <th>Stato</th>
+                                <th>Data</th>
+                                <th>Tot</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($clientConProvePassate->prove as $item)
                                 <tr>
-                                    <td class="text-nowrap">{{$item->matricola}}</td>
-                                    <td class="text-nowrap">{{$item->listino->nome}}</td>
-                                    <td class="text-nowrap">{{$item->listino->categoria->nome}}</td>
-                                    <td class="text-nowrap">{{$item->listino->prezzolistino}}</td>
+                                    <td class="text-nowrap">{{$item->stato->nome}}</td>
+                                    <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
+                                    <td class="text-nowrap">{{$item->tot}}</td>
                                     <td class="text-nowrap">
-                                        <a class="btn btn-danger btn-sm mx-1" title="elimina"
+                                        <a class="btn btn-primary btn-sm mx-1" title="vedi"
+                                           href="#">
+                                            <i class="fas fa-fw fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-success btn-sm mx-1" title="fattura"
+                                           href="#">
+                                            <i class="fas fa-fw fa-cash-register"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm mx-1" title="reso"
                                            href="#">
                                             <i class="fas fa-fw fa-trash"></i>
                                         </a>
