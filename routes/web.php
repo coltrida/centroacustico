@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProdottiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvaController;
+use App\Http\Controllers\TelefonataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,9 @@ Route::get('/prodottiInArrivo/{idFiliale?}', [ProdottiController::class, 'prodot
 //------------------------ Prova -------------------------------
 Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');
 
+//------------------------ Telefono -------------------------------
+Route::get('/telefonata/{idClient}', [TelefonataController::class, 'telefonata'])->name('telefonata');
+Route::post('/telefonataEffettuata', [TelefonataController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
 
 
 Route::get('/dashboard', function () {

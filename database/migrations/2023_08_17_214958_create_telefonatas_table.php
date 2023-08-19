@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('telefonatas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('eseguita_id');
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('eseguita_id')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->string('esito')->nullable();
             $table->string('note')->nullable();
             $table->boolean('effettuata')->nullable();

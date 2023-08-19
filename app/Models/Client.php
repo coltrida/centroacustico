@@ -45,4 +45,9 @@ class Client extends Model
     {
         return $this->hasMany(Prodotto::class);
     }
+
+    public function telefonate()
+    {
+        return $this->hasMany(Telefonata::class);
+    }
 }

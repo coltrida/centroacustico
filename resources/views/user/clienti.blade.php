@@ -91,7 +91,8 @@
                                         <i class="fas fa-fw fa-calendar"></i>
                                     </a>
 
-                                    <a class="btn btn-sm mx-1" style="background: #c0c9e7" title="telefonata" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: #c0c9e7" title="telefonata"
+                                       href="{{route('telefonata', $item->id)}}">
                                         <i class="fas fa-fw fa-phone"></i>
                                     </a>
 

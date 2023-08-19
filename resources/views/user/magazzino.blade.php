@@ -28,7 +28,6 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-
         <div class="card-body">
             <ul class="nav nav-tabs">
                 <li class="nav-item">

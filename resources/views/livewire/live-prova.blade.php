@@ -51,6 +51,19 @@
         </div>
     </div>
 
+    <div class="modal fade" id="infoFattura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info Fattura</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-sm-flex mb-4">
         <h4 class="mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h4>
 
@@ -65,12 +78,12 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <select class="form-control" aria-label="Default select example"
                         wire:model="categoria_id"
                         wire:change="selezionaCategoria"
                 >
-                    <option selected>categoria...</option>
+                    <option selected>cat...</option>
                     @foreach($categorie as $categoria)
                         <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                     @endforeach
@@ -95,11 +108,12 @@
                     @endforeach
                 </select>
             </div>
-            <div >
+            <div>
                 <button type="submit" class="btn btn-primary" wire:click="inserisciInProva"> Inserisci</button>
             </div>
-
-
+        <div class="ml-1">
+            <a type="submit" class="btn btn-warning" href="{{ URL::previous() }}"> Indietro</a>
+        </div>
     </div>
 
     <div class="row mb-4">
@@ -169,7 +183,15 @@
                             <tbody>
                             @foreach($clientConProvePassate->prove as $item)
                                 <tr>
-                                    <td class="text-nowrap">{{$item->stato->nome}}</td>
+
+                                    <td class="text-nowrap">
+                                        <span class="badge"
+                                              style="{{$item->stato->nome == 'RESO' ?
+                                                'background: red; color: white; padding: 10px' :
+                                                    'background: green; color: white; padding: 10px'}}">
+                                            {{$item->stato->nome}}
+                                        </span>
+                                    </td>
                                     <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
                                     <td class="text-nowrap">{{$item->tot}}</td>
                                     <td class="text-nowrap">
@@ -179,8 +201,8 @@
                                         </a>
                                         @if($item->stato_id != 6 && $item->stato_id != 7)
                                         <a class="btn btn-success btn-sm mx-1" title="fattura"
-                                           href="#">
-                                            <i class="fas fa-fw fa-cash-register"></i>
+                                           href="#" onclick="$('#infoFattura').modal();">
+                                            <i class="fas fa-fw fa-dollar-sign"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm mx-1" title="reso"
                                            href="#" wire:click="resoProva({{$item}})">
