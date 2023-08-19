@@ -74,7 +74,7 @@ class ProdottiService
     public function prodottiInMagazzinoFromIdListino($idListino, $idFiliale)
     {
         $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
-        return Prodotto::where([
+        return Prodotto::with('listino')->where([
             ['stato_id', $idStatoProdottiInMagazzino],
             ['filiale_id', $idFiliale],
             ['listino_id', $idListino],
@@ -96,5 +96,20 @@ class ProdottiService
             $prodotto->stato_id = $id;
             $prodotto->save();
         }
+    }
+
+    public function assegnaIdProvaAlProdotto($prodotti, $idProva)
+    {
+        foreach ($prodotti as $prodotto){
+            $prodotto->prova_id = $idProva;
+            $prodotto->save();
+        }
+    }
+
+    public function importoTotaleProdottiInCorsoDiProva($idClient, $idInCorsoDiProva)
+    {
+        return Client::with(['prodotti' => function($p) use($idInCorsoDiProva){
+            $p->where('stato_id', $idInCorsoDiProva)->with('listino');
+        }])->find($idClient)->prodotti->sum('listino.prezzolistino');
     }
 }

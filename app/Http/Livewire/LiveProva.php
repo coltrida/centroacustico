@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Prova;
 use App\Services\CategoriaService;
 use App\Services\FornitoreService;
 use App\Services\ListinoService;
@@ -9,7 +10,6 @@ use App\Services\ProdottiService;
 use App\Services\ProvaService;
 use App\Services\StatoApaService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
 class LiveProva extends Component
@@ -24,10 +24,12 @@ class LiveProva extends Component
     public $nota;
     public $listino = [];
     public $matricole = [];
+    public $totProva = 0;
 
-    public function mount(ProvaService $provaService)
+    public function mount(ProvaService $provaService, ProdottiService $prodottiService, StatoApaService $statoApaService)
     {
         $this->idFiliale = $provaService->clientConProvePassate($this->idClient)->filiale_id;
+        $this->calcoloTotaleProdottiInCorsoDiProva($prodottiService, $statoApaService);
     }
 
     public function selezionaFornitore(ListinoService $listinoService)
@@ -53,16 +55,29 @@ class LiveProva extends Component
         $this->matricole = $prodottiService->prodottiInMagazzinoFromIdListino($this->listino_id, $this->idFiliale);
     }
 
-    public function inserisciInProva(ProvaService $provaService, ProdottiService $prodottiService)
+    public function inserisciInProva(ProvaService $provaService,
+                                     ProdottiService $prodottiService,
+                                     StatoApaService $statoApaService)
     {
         $provaService->inserisciProductInProvaById($this->product_id, $this->idClient);
         $this->matricole = $prodottiService->prodottiInMagazzinoFromIdListino($this->listino_id, $this->idFiliale);
+        $this->calcoloTotaleProdottiInCorsoDiProva($prodottiService, $statoApaService);
     }
 
-    public function eliminaDaProva(ProvaService $provaService, ProdottiService $prodottiService, $idproductSelezionato)
+    public function eliminaDaProva(ProvaService $provaService,
+                                   ProdottiService $prodottiService,
+                                   StatoApaService $statoApaService,
+                                   $idproductSelezionato)
     {
         $provaService->eliminaProductInProvaById($idproductSelezionato);
         $this->matricole = $prodottiService->prodottiInMagazzinoFromIdListino($this->listino_id, $this->idFiliale);
+        $this->calcoloTotaleProdottiInCorsoDiProva($prodottiService, $statoApaService);
+    }
+
+    public function calcoloTotaleProdottiInCorsoDiProva(ProdottiService $prodottiService, StatoApaService $statoApaService)
+    {
+        $idStatoInCorsoDiProva = $statoApaService->idStatoFromNome('IN PROVA');
+        $this->totProva = $prodottiService->importoTotaleProdottiInCorsoDiProva($this->idClient, $idStatoInCorsoDiProva);
     }
 
     public function creaProva(ProvaService $provaService,
@@ -73,13 +88,26 @@ class LiveProva extends Component
         $request->replace([
             'client_id' => $this->idClient,
             'filiale_id' => $this->idFiliale,
+            'tot' => $this->totProva,
             'nota' => $this->nota,
         ]);
-        $provaService->creaProva($request);
+        $idProva = $provaService->creaProva($request);
         $prodottiInCorsoDiProva = $prodottiService->prodottiInCorsoDiProvaByIdClient($this->idClient);
         $idStatoProvaInCorso = $statoApaService->idStatoFromNome('PROVA IN CORSO');
         $prodottiService->cambioStatoProdotti($prodottiInCorsoDiProva, $idStatoProvaInCorso);
+        $prodottiService->assegnaIdProvaAlProdotto($prodottiInCorsoDiProva, $idProva);
+        $this->totProva = 0;
         session()->flash('message', "Prova Crata con Successo");
+    }
+
+    public function resoProva(ProvaService $provaService,
+                              StatoApaService $statoApaService,
+                              ProdottiService $prodottiService,
+                              Prova $prova)
+    {
+        $idStatoReso = $statoApaService->idStatoFromNome('RESO');
+        $provaService->resoProva($prova->id, $idStatoReso);
+        $prodottiService->cambioStatoProdotti($prova->prodotti, $idStatoReso);
     }
 
     public function render(FornitoreService $fornitoreService,

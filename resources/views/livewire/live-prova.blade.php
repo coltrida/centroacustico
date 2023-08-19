@@ -113,7 +113,13 @@
                             <textarea wire:model="nota" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" wire:click="creaProva"> Crea Prova</button>
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <div>
+                                Tot. Prova: € {{$totProva}}
+                            </div>
+                            <button type="submit" class="btn btn-primary" wire:click="creaProva"> Crea Prova</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -143,14 +149,16 @@
                                            href="#">
                                             <i class="fas fa-fw fa-eye"></i>
                                         </a>
+                                        @if($item->stato_id != 6 && $item->stato_id != 7)
                                         <a class="btn btn-success btn-sm mx-1" title="fattura"
                                            href="#">
                                             <i class="fas fa-fw fa-cash-register"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm mx-1" title="reso"
-                                           href="#">
+                                           href="#" wire:click="resoProva({{$item}})">
                                             <i class="fas fa-fw fa-trash"></i>
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
