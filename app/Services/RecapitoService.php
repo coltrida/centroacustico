@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Filiale;
 use App\Models\Recapito;
 
 class RecapitoService
@@ -14,5 +15,10 @@ class RecapitoService
     public function aggiungiRecapito($request)
     {
         Recapito::create($request->all());
+    }
+
+    public function listaRecapitiByIdFiliale($idFiliale)
+    {
+        return Filiale::with('recapiti')->find($idFiliale)->recapiti;
     }
 }

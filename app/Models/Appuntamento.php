@@ -10,4 +10,9 @@ class Appuntamento extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'appuntamentos';
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Filiale::class, 'filiale_user', 'user_id', 'filiale_id')
             ->withPivot(['id']);
     }
+
+    public function appuntamenti()
+    {
+        return $this->hasMany(Appuntamento::class);
+    }
 }

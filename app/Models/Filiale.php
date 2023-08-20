@@ -26,4 +26,9 @@ class Filiale extends Model
     {
         return $this->hasMany(Prodotto::class);
     }
+
+    public function recapiti()
+    {
+        return $this->hasMany(Recapito::class);
+    }
 }

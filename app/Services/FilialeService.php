@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Client;
 use App\Models\Configuration;
 use App\Models\Filiale;
 
@@ -23,5 +24,10 @@ class FilialeService
             return Filiale::find($idFiliale);
         }
         return Configuration::first()->nomeAzienda;
+    }
+
+    public function filialeByIdClient($idClient)
+    {
+        return Client::with('filiale')->find($idClient)->filiale;
     }
 }

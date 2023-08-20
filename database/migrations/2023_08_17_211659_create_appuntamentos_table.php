@@ -16,17 +16,19 @@ return new class extends Migration
         Schema::create('appuntamentos', function (Blueprint $table) {
             $table->id();
             $table->date('giorno');
-            $table->time('orario');
+            $table->string('giornoFormattato');
+            $table->integer('orario');
             $table->string('nota')->nullable();
             $table->string('tipo');
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('filiale_id')->nullable();
             $table->unsignedBigInteger('recapito_id')->nullable();
             $table->boolean('intervenuto')->nullable();
             $table->timestamps();
             $table->integer('mese')->nullable();
             $table->integer('anno')->nullable();
+            $table->integer('settimana')->nullable();
         });
     }
 
