@@ -22,51 +22,55 @@ Route::post('/eseguiSetRuoli', [ConfigController::class, 'eseguiSetRuoli'])->nam
 Route::get('/setCanali', [ConfigController::class, 'setCanali'])->name('setCanali');
 Route::post('/eseguiSetCanali', [ConfigController::class, 'eseguiSetCanali'])->name('eseguiSetCanali');
 
+Route::group(['middleware' => ['auth']], function () {
 //----------------------- Admin ----------------------------
-Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');
-Route::post('/aggiungiFiliale', [AdminController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
-Route::get('/fornitori', [AdminController::class, 'fornitori'])->name('admin.fornitori');
-Route::post('/aggiungiFornitore', [AdminController::class, 'aggiungiFornitore'])->name('admin.aggiungiFornitore');
-Route::get('/listino', [AdminController::class, 'listino'])->name('admin.listino');
-Route::post('/aggiungiListino', [AdminController::class, 'aggiungiListino'])->name('admin.aggiungiListino');
-Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie');
-Route::post('/aggiungiCategoria', [AdminController::class, 'aggiungiCategoria'])->name('admin.aggiungiCategoria');
-Route::get('/canali', [AdminController::class, 'canali'])->name('admin.canali');
-Route::post('/aggiungiCanale', [AdminController::class, 'aggiungiCanale'])->name('admin.aggiungiCanale');
-Route::get('/ruoli', [AdminController::class, 'ruoli'])->name('admin.ruoli');
-Route::post('/aggiungiRuolo', [AdminController::class, 'aggiungiRuolo'])->name('admin.aggiungiRuolo');
-Route::get('/tipologie', [AdminController::class, 'tipologie'])->name('admin.tipologie');
-Route::post('/aggiungiTipologia', [AdminController::class, 'aggiungiTipologia'])->name('admin.aggiungiTipologia');
-Route::get('/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');
-Route::post('/aggiungiRecapito', [AdminController::class, 'aggiungiRecapito'])->name('admin.aggiungiRecapito');
-Route::get('/personale', [AdminController::class, 'personale'])->name('admin.personale');
-Route::post('/aggiungiPersonale', [AdminController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
-Route::get('/deletePersonale/{idUser?}', [AdminController::class, 'deletePersonale'])->name('admin.deletePersonale');
-Route::get('/associa', [AdminController::class, 'associa'])->name('admin.associa');
-Route::post('/associa', [AdminController::class, 'eseguiAssocia'])->name('admin.eseguiAssocia');
-Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'eliminaAssociazione'])->name('admin.eliminaAssociazione');
+    Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');
+    Route::post('/aggiungiFiliale', [AdminController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
+    Route::get('/fornitori', [AdminController::class, 'fornitori'])->name('admin.fornitori');
+    Route::post('/aggiungiFornitore', [AdminController::class, 'aggiungiFornitore'])->name('admin.aggiungiFornitore');
+    Route::get('/listino', [AdminController::class, 'listino'])->name('admin.listino');
+    Route::post('/aggiungiListino', [AdminController::class, 'aggiungiListino'])->name('admin.aggiungiListino');
+    Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie');
+    Route::post('/aggiungiCategoria', [AdminController::class, 'aggiungiCategoria'])->name('admin.aggiungiCategoria');
+    Route::get('/canali', [AdminController::class, 'canali'])->name('admin.canali');
+    Route::post('/aggiungiCanale', [AdminController::class, 'aggiungiCanale'])->name('admin.aggiungiCanale');
+    Route::get('/ruoli', [AdminController::class, 'ruoli'])->name('admin.ruoli');
+    Route::post('/aggiungiRuolo', [AdminController::class, 'aggiungiRuolo'])->name('admin.aggiungiRuolo');
+    Route::get('/tipologie', [AdminController::class, 'tipologie'])->name('admin.tipologie');
+    Route::post('/aggiungiTipologia', [AdminController::class, 'aggiungiTipologia'])->name('admin.aggiungiTipologia');
+    Route::get('/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');
+    Route::post('/aggiungiRecapito', [AdminController::class, 'aggiungiRecapito'])->name('admin.aggiungiRecapito');
+    Route::get('/personale', [AdminController::class, 'personale'])->name('admin.personale');
+    Route::post('/aggiungiPersonale', [AdminController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
+    Route::get('/deletePersonale/{idUser?}', [AdminController::class, 'deletePersonale'])->name('admin.deletePersonale');
+    Route::get('/associa', [AdminController::class, 'associa'])->name('admin.associa');
+    Route::post('/associa', [AdminController::class, 'eseguiAssocia'])->name('admin.eseguiAssocia');
+    Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'eliminaAssociazione'])->name('admin.eliminaAssociazione');
 
 //------------------------ Clienti -------------------------------
-Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
-Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
-Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
+    Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
+    Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
+    Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
 
 //------------------------ Magazzino -------------------------------
-Route::get('/prodottiInMagazzino/{idFiliale?}', [ProdottiController::class, 'prodottiInMagazzino'])->name('magazzino');
-Route::get('/prodottiInProva/{idFiliale?}', [ProdottiController::class, 'prodottiInProva'])->name('prodottiInProva');
-Route::get('/prodottiRichiesti/{idFiliale?}', [ProdottiController::class, 'prodottiRichiesti'])->name('prodottiRichiesti');
-Route::get('/prodottiInArrivo/{idFiliale?}', [ProdottiController::class, 'prodottiInArrivo'])->name('prodottiInArrivo');
+    Route::get('/prodottiInMagazzino/{idFiliale?}', [ProdottiController::class, 'prodottiInMagazzino'])->name('magazzino');
+    Route::get('/prodottiInProva/{idFiliale?}', [ProdottiController::class, 'prodottiInProva'])->name('prodottiInProva');
+    Route::get('/prodottiRichiesti/{idFiliale?}', [ProdottiController::class, 'prodottiRichiesti'])->name('prodottiRichiesti');
+    Route::get('/prodottiInArrivo/{idFiliale?}', [ProdottiController::class, 'prodottiInArrivo'])->name('prodottiInArrivo');
 
 //------------------------ Prova -------------------------------
-Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');
+    Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');
 
 //------------------------ Telefono -------------------------------
-Route::get('/telefonata/{idClient}', [TelefonataController::class, 'telefonata'])->name('telefonata');
-Route::post('/telefonataEffettuata', [TelefonataController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
+    Route::get('/telefonata/{idClient}', [TelefonataController::class, 'telefonata'])->name('telefonata');
+    Route::post('/telefonataEffettuata', [TelefonataController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
 
 //------------------------ Appuntamento -------------------------------
-Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
-Route::post('/telefonataEffettuata', [AppuntamentoController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
+    Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
+    Route::post('/telefonataEffettuata', [AppuntamentoController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
+});
+
+
 
 
 Route::get('/dashboard', function () {
@@ -79,4 +83,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
