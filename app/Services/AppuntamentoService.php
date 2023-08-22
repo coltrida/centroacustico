@@ -22,4 +22,11 @@ class AppuntamentoService
     {
         Appuntamento::create($request->all());
     }
+
+    public function aggiornaEsitoAppuntamento($idAppuntamento, $valoreEsito)
+    {
+        Appuntamento::find($idAppuntamento)->update([
+           'intervenuto' => $valoreEsito
+        ]);
+    }
 }

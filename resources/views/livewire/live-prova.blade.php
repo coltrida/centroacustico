@@ -112,7 +112,7 @@
                 <button type="submit" class="btn btn-primary" wire:click="inserisciInProva"> Inserisci</button>
             </div>
         <div class="ml-1">
-            <a type="submit" class="btn btn-warning" href="{{ URL::previous() }}"> Indietro</a>
+            <a type="submit" class="btn btn-warning" href="{{ route('clienti', $idFiliale) }}"> Indietro</a>
         </div>
     </div>
 

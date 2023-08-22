@@ -55,15 +55,29 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @if(!$appuntamentoPrenotato)
                     <button type="button" wire:click="inserisciAppuntamento" class="btn btn-success" data-bs-dismiss="modal">Inserisci</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @else
+                        @if($intervenuto !== null)
+                            @if($intervenuto === 1)
+                                <h3><span class="badge bg-success text-white">Intervenuto</span></h3>
+                            @else
+                                <h3><span class="badge bg-danger text-white">Non Intervenuto</span></h3>
+                            @endif
+                        @else
+                            <button type="button" wire:click="esita(1)" class="btn btn-success" data-bs-dismiss="modal">Positivo</button>
+                            <a href="#" wire:click="esita(0)" class="btn btn-danger" data-bs-dismiss="modal">Negativo</a>
+                        @endif
+
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Appuntamenti {{$userConAppuntamenti->fullName}} - settimana {{$settimana}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Appuntamenti {{$cliente->fullName}} - settimana {{$settimana}}</h1>
     </div>
 
         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -109,17 +123,24 @@
 
                     <div class="list-group col">
                         <span class="text-center" style="font-size: 14px;
-                                {{$giorno == $numeroSettimanaDiOggi ? 'background:blue; color:white' : ''}}">
+                                {{$giorno == $numeroSettimanaDiOggi && $settimanaDiOggi == $settimana ? 'background:blue; color:white' : ''}}">
                             {{$nomeGiorno[$giorno]}} - {{$dateSettimana[$giorno]}}
                         </span>
                         @for($ora=9; $ora < 19; $ora++)
-                            <button wire:click="DataOraSelezionata('{{$dateSettimana[$giorno]}}', '{{$ora}}')"
+
+                            <button wire:click="DataOraSelezionata('{{$dateSettimana[$giorno]}}', '{{$ora}}', '{{$user->appuntamenti->where('orario', $ora)->where('giornoFormattato', $dateSettimana[$giorno])->first()}}')"
                                     data-bs-toggle="modal" data-bs-target="#appuntamentoModal"
                                class="list-group-item list-group-item-action text-center list-group-item-secondary"
                                style="font-size: 14px; padding: 0.4rem 0.2rem;
                                @if($appunta = $userConAppuntamenti->appuntamenti
                                                 ->where('orario', $ora)->where('giornoFormattato', $dateSettimana[$giorno])->first())
-                                    {{'background:red; color:white'}}
+                                    @if($appunta->intervenuto === 1)
+                                        {{'background:green; color:white'}}
+                                    @elseif($appunta->intervenuto === 0)
+                                        {{'background:red; color:white'}}
+                                        @else
+                                        {{'background:gray; color:white'}}
+                                    @endif
                                 @else
                                     {{''}}
                                 @endif">
@@ -131,7 +152,7 @@
                                 @if($appunta)
                                     {{$appunta->client->fullName}}
                                 @else
-                                    {{$dateSettimana[$giorno]}}
+                                    &ensp;
                                 @endif
                             </button>
                         @endfor
