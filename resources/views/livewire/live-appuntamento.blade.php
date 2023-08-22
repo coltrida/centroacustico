@@ -22,6 +22,10 @@
                     <h5 class="modal-title fs-5" id="exampleModalLabel">
                         Appuntamento per il {{$dataSelezionata}} ore {{$orarioSelezionato}}:00
                     </h5>
+
+                    <a href="#" data-dismiss="modal" title="exit">
+                        <i class="fas fa-fw fa-caret-square-right"></i>
+                    </a>
                 </div>
                 <div class="modal-body">
                     <select class="form-control" aria-label="Default select example" wire:model.defer="tipo">
@@ -56,8 +60,8 @@
                 </div>
                 <div class="modal-footer">
                     @if(!$appuntamentoPrenotato)
-                    <button type="button" wire:click="inserisciAppuntamento" class="btn btn-success" data-bs-dismiss="modal">Inserisci</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" wire:click="inserisciAppuntamento" class="btn btn-success" data-dismiss="modal">Inserisci</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     @else
                         @if($intervenuto !== null)
                             @if($intervenuto === 1)
@@ -66,8 +70,11 @@
                                 <h3><span class="badge bg-danger text-white">Non Intervenuto</span></h3>
                             @endif
                         @else
-                            <button type="button" wire:click="esita(1)" class="btn btn-success" data-bs-dismiss="modal">Positivo</button>
-                            <a href="#" wire:click="esita(0)" class="btn btn-danger" data-bs-dismiss="modal">Negativo</a>
+                            <button type="button" wire:click="esita(1)" class="btn btn-success" data-dismiss="modal">Positivo</button>
+                            <a href="#" wire:click="esita(0)" class="btn btn-danger" data-dismiss="modal">Negativo</a>
+                            <a href="#" wire:click="eliminaAppuntamento" class="btn btn-danger" data-dismiss="modal" title="Elimina">
+                                <i class="fas fa-fw fa-trash"></i>
+                            </a>
                         @endif
 
                     @endif
@@ -128,8 +135,8 @@
                         </span>
                         @for($ora=9; $ora < 19; $ora++)
 
-                            <button wire:click="DataOraSelezionata('{{$dateSettimana[$giorno]}}', '{{$ora}}', '{{$user->appuntamenti->where('orario', $ora)->where('giornoFormattato', $dateSettimana[$giorno])->first()}}')"
-                                    data-bs-toggle="modal" data-bs-target="#appuntamentoModal"
+                            <button wire:click="DataOraSelezionata('{{$dateSettimana[$giorno]}}', '{{$ora}}', '{{$userConAppuntamenti->appuntamenti->where('orario', $ora)->where('giornoFormattato', $dateSettimana[$giorno])->first()}}')"
+                                    data-toggle="modal" data-target="#appuntamentoModal"
                                class="list-group-item list-group-item-action text-center list-group-item-secondary"
                                style="font-size: 14px; padding: 0.4rem 0.2rem;
                                @if($appunta = $userConAppuntamenti->appuntamenti

@@ -29,4 +29,9 @@ class AppuntamentoService
            'intervenuto' => $valoreEsito
         ]);
     }
+
+    public function eliminaAppuntamento($idAppuntamento)
+    {
+        Appuntamento::find($idAppuntamento)->delete();
+    }
 }

@@ -8,10 +8,8 @@ use App\Services\FilialeService;
 use App\Services\RecapitoService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Psy\Util\Json;
 
 class LiveAppuntamento extends Component
 {
@@ -141,6 +139,11 @@ class LiveAppuntamento extends Component
         ]);
 
         $appuntamentoService->aggiungiAppuntamento($request);
+    }
+
+    public function eliminaAppuntamento(AppuntamentoService $appuntamentoService)
+    {
+        $appuntamentoService->eliminaAppuntamento($this->appuntamento_id);
     }
 
     public function render( AppuntamentoService $appuntamentoService, RecapitoService $recapitoService, ClienteService $clienteService)
