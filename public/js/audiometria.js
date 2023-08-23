@@ -26,13 +26,14 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+let audiometria = JSON.parse(document.getElementById('audiom').innerHTML);
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["125", "250", "500", "1000", "2000", "3000", "4000", "8000"],
+    labels: ["125", "250", "500", "1000", "1500", "2000", "3000", "4000", "8000"],
     datasets: [{
       label: "Sinistro",
       lineTension: 0.1,
@@ -47,7 +48,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [10, 10, 20, 20, 20, 35, 50, 55],
+      data: [audiometria._125s, audiometria._250s, audiometria._500s, audiometria._1000s, audiometria._1500s, audiometria._2000s, audiometria._3000s, audiometria._4000s, audiometria._8000s],
     },
         {
             fill: false,
@@ -63,7 +64,7 @@ var myLineChart = new Chart(ctx, {
             pointHoverBorderColor: "rgb(241,11,11)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [10, 10, 15, 15, 20, 40, 60, 60],
+            data: [audiometria._125d, audiometria._250d, audiometria._500d, audiometria._1000d, audiometria._1500d, audiometria._2000d, audiometria._3000d, audiometria._4000d, audiometria._8000d],
         }],
   },
   options: {
@@ -72,7 +73,7 @@ var myLineChart = new Chart(ctx, {
       padding: {
         left: 10,
         right: 25,
-        top: 25,
+        top: 0,
         bottom: 0
       }
     },
@@ -85,15 +86,14 @@ var myLineChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7,
+          maxTicksLimit: 8,
         }
       }],
       yAxes: [{
-
         ticks: {
             max: 100,
             min:0,
-          maxTicksLimit: 10,
+          maxTicksLimit: 20,
           padding: 10,
             reverse: true
         },
@@ -125,7 +125,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + number_format(tooltipItem.yLabel);
+          return datasetLabel +': '+ number_format(tooltipItem.yLabel) + ' dB';
         }
       }
     }

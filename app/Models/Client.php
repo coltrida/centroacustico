@@ -55,4 +55,9 @@ class Client extends Model
     {
         return $this->hasMany(Appuntamento::class);
     }
+
+    public function audiometrie()
+    {
+        return $this->hasMany(Audiometria::class);
+    }
 }

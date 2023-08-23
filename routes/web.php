@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
 
 //------------------------ Audiometrie -------------------------------
-    Route::get('/audiometrie/{idClient}', [AudiometriaController::class, 'audiometrie'])->name('audiometrie');
+    Route::get('/audiometrie/{idClient}/{idAudiometria?}', [AudiometriaController::class, 'audiometrie'])->name('audiometrie');
 
 });
 
