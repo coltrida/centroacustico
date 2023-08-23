@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Prova;
 use App\Services\CategoriaService;
 use App\Services\FornitoreService;
+use App\Services\InformazioneService;
 use App\Services\ListinoService;
 use App\Services\ProdottiService;
 use App\Services\ProvaService;
@@ -83,7 +84,8 @@ class LiveProva extends Component
 
     public function creaProva(ProvaService $provaService,
                               ProdottiService $prodottiService,
-                              StatoApaService $statoApaService)
+                              StatoApaService $statoApaService,
+                              InformazioneService $informazioneService)
     {
         $request = new Request();
         $request->replace([
@@ -97,6 +99,13 @@ class LiveProva extends Component
         $idStatoProvaInCorso = $statoApaService->idStatoFromNome('PROVA IN CORSO');
         $prodottiService->cambioStatoProdotti($prodottiInCorsoDiProva, $idStatoProvaInCorso);
         $prodottiService->assegnaIdProvaAlProdotto($prodottiInCorsoDiProva, $idProva);
+        $request = new Request();
+        $request->replace([
+            'client_id' => $this->idClient,
+            'tipo' => 'CREAZIONE PROVA',
+            'note' => 'Aperta prova di euro '.$this->totProva,
+        ]);
+        $informazioneService->inserisciInformazione($request);
         $this->totProva = 0;
         session()->flash('message', "Prova Crata con Successo");
     }
@@ -104,11 +113,19 @@ class LiveProva extends Component
     public function resoProva(ProvaService $provaService,
                               StatoApaService $statoApaService,
                               ProdottiService $prodottiService,
+                              InformazioneService $informazioneService,
                               Prova $prova)
     {
         $idStatoReso = $statoApaService->idStatoFromNome('RESO');
         $provaService->resoProva($prova->id, $idStatoReso);
         $prodottiService->cambioStatoProdotti($prova->prodotti, $idStatoReso);
+        $request = new Request();
+        $request->replace([
+            'client_id' => $this->idClient,
+            'tipo' => 'RESO PROVA',
+            'note' => 'Reso prova di euro '.$prova->tot,
+        ]);
+        $informazioneService->inserisciInformazione($request);
     }
 
     public function vediDettagliProva($provaId)

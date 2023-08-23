@@ -28,12 +28,10 @@
                     <a href="{{route('aggiungiModificaCliente', ['idFiliale' => isset($filialeSelezionata->id) ? $filialeSelezionata->id : null, 'idClient' => null])}}" class="btn btn-primary"> Aggiungi</a>
                 </div>
             </div>
-
     </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
@@ -106,7 +104,8 @@
                                         <i class="fas fa-fw fa-dumbbell"></i>
                                     </a>
 
-                                    <a class="btn btn-sm mx-1" style="background: #1c606a" title="riepilogo" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: #1c606a" title="Informazioni"
+                                       href="{{route('informazioni', $item->id)}}">
                                         <i class="fas fa-fw fa-info-circle"></i>
                                     </a>
                                 </td>

@@ -32,6 +32,11 @@
                 <h5 class="ml-3">Prodotti</h5>
                 <div class="modal-body">
                     @if($provaId)
+                        <div class="row">
+                            <div class="col-4"><b>MATRICOLA</b></div>
+                            <div class="col-4"><b>PRODOTTO</b></div>
+                            <div class="col-4"><b>PREZZO</b></div>
+                        </div>
                         @foreach($provaDettagli->prodotti as $item)
                             <div class="row">
                                 <div class="col-4">{{$item->matricola}}</div>
@@ -39,7 +44,7 @@
                                 <div class="col-4">{{$item->listino->prezzolistino}}</div>
                             </div>
                         @endforeach
-                        <div class="mt-2">
+                        <div class="mt-4">
                             <h5>Note: {{$provaDettagli->note}}</h5>
                         </div>
                     @endif

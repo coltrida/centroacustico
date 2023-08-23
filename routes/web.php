@@ -5,6 +5,7 @@ use App\Http\Controllers\AppuntamentoController;
 use App\Http\Controllers\AudiometriaController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\InformazioniController;
 use App\Http\Controllers\ProdottiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProvaController;
@@ -71,6 +72,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 //------------------------ Audiometrie -------------------------------
     Route::get('/audiometrie/{idClient}/{idAudiometria?}', [AudiometriaController::class, 'audiometrie'])->name('audiometrie');
+
+//------------------------ Informazioni -------------------------------
+    Route::get('/informazioni/{idClient}', [InformazioniController::class, 'informazioni'])->name('informazioni');
 
 });
 

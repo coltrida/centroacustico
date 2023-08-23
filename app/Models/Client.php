@@ -60,4 +60,9 @@ class Client extends Model
     {
         return $this->hasMany(Audiometria::class);
     }
+
+    public function informazioni()
+    {
+        return $this->hasMany(Informazione::class);
+    }
 }
