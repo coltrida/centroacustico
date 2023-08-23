@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppuntamentoController;
+use App\Http\Controllers\AudiometriaController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProdottiController;
@@ -67,8 +68,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 //------------------------ Appuntamento -------------------------------
     Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
-    Route::post('/telefonataEffettuata', [AppuntamentoController::class, 'telefonataEffettuata'])->name('telefonataEffettuata');
+
+//------------------------ Audiometrie -------------------------------
+    Route::get('/audiometrie/{idClient}', [AudiometriaController::class, 'audiometrie'])->name('audiometrie');
+
 });
+
+
 
 
 

@@ -97,7 +97,8 @@
                                         <i class="fas fa-fw fa-phone"></i>
                                     </a>
 
-                                    <a class="btn btn-sm mx-1" style="background: purple" title="audiometria" href="#">
+                                    <a class="btn btn-sm mx-1" style="background: purple" title="audiometria"
+                                       href="{{route('audiometrie', $item->id)}}">
                                         <i class="fas fa-fw fa-barcode"></i>
                                     </a>
 
