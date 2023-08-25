@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Services\ClienteService;
 use App\Services\FilialeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function clienti(ClienteService $clienteService, FilialeService $filialeService, $idFiliale=null)
     {
-        if(Gate::denies('view-clients', $idFiliale)){
+        if(!Auth::user()->isAdmin() && Gate::denies('view-clients', $idFiliale)){
             abort(401, 'Non autorizzato');
         }
 

@@ -60,8 +60,11 @@
                         @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'RICHIESTO')
                             <th>Data Richiesta</th>
                         @endif
-                        @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'IN PROVA')
+                        @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'PROVA IN CORSO')
                             <th>Paziente</th>
+                        @endif
+                        @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'SPEDITO')
+                            <th>ACTION</th>
                         @endif
                     </tr>
                     </thead>
@@ -80,8 +83,16 @@
                             @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'RICHIESTO')
                                 <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
                             @endif
-                            @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'IN PROVA')
+                            @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'PROVA IN CORSO')
                                 <td class="text-nowrap">{{$item->prova_id ? $item->prova->client->fullName : ''}}</td>
+                            @endif
+                            @if(count($prodotti) > 0 && $prodotti[0]->stato->nome == 'SPEDITO')
+                                <td>
+                                    <a id="{{$item}}" title="arrivato" class="btn btn-sm btn-success mx-1"
+                                       href="{{route('switchProdottoInMagazzino', $item->id)}}">
+                                        <i class="fas fa-fw fa-store"></i>
+                                    </a>
+                                </td>
                             @endif
                         </tr>
                     @endforeach

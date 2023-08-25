@@ -27,7 +27,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('view-clients', function(User $user, $idFiliale){
+        Gate::define('view-clients', function(User $user, $idFiliale=null){
+            if ($user->isAdmin()){
+                return 1;
+            }
             return FilialeUser::where([['user_id', $user->id],['filiale_id', $idFiliale]])->firstOrFail();
         });
     }

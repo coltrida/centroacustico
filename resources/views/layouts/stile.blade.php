@@ -35,14 +35,15 @@
         <!-- Sidebar - Brand -->
         <a class="" href="{{route('admin.home')}}">
             @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('/logo/logoAzienda.jpg'))
-                <img class="text-center" src="{{asset('/storage/logo/logoAzienda.jpg')}}" alt="logo Azienda" width="auto">
+                <img class="text-center" src="{{asset('/storage/logo/logoAzienda.jpg')}}" alt="logo Azienda"
+                     width="auto">
             @else
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
             @endif
         </a>
-        <div class="text-center text-white">{{$nomeAzienda}}</div>
+        <div class="text-center text-white mb-3">{{$nomeAzienda}}</div>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -54,30 +55,28 @@
                 <span>Impostazioni</span></a>
         </li>--}}
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImpostazione"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Impostazioni</span>
-            </a>
-            <div id="collapseImpostazione" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Anagrafica Azienda</a>
-                    <a class="collapse-item" href="{{route('admin.tipologie')}}">Tipologie pazienti</a>
-                    <a class="collapse-item" href="{{route('admin.ruoli')}}">Ruoli Utenti</a>
-                    <a class="collapse-item" href="{{route('admin.canali')}}">Canali Mkt</a>
-                    <a class="collapse-item" href="{{route('admin.categorie')}}">Categorie listino</a>
+        @if(Auth::user()->isAdmin())
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImpostazione"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Impostazioni</span>
+                </a>
+                <div id="collapseImpostazione" class="collapse" aria-labelledby="headingTwo"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Anagrafica Azienda</a>
+                        <a class="collapse-item" href="{{route('admin.tipologie')}}">Tipologie pazienti</a>
+                        <a class="collapse-item" href="{{route('admin.ruoli')}}">Ruoli Utenti</a>
+                        <a class="collapse-item" href="{{route('admin.canali')}}">Canali Mkt</a>
+                        <a class="collapse-item" href="{{route('admin.categorie')}}">Categorie listino</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Interface
-        </div>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        @endif
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -91,7 +90,9 @@
                     @foreach($filiali as $item)
                         <a class="collapse-item" href="{{route('clienti', $item->id)}}">{{$item->nome}}</a>
                     @endforeach
-                    <a class="collapse-item font-weight-bold" href="{{route('clienti')}}">TUTTI</a>
+                    @if(Auth::user()->isAdmin())
+                        <a class="collapse-item font-weight-bold" href="{{route('clienti')}}">TUTTI</a>
+                    @endif
                 </div>
             </div>
         </li>
@@ -114,40 +115,42 @@
                 </div>
             </div>
         </li>--}}
+        @if(Auth::user()->isAdmin())
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.filiali')}}">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Filiali</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.filiali')}}">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Filiali</span></a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.recapiti')}}">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Recapiti</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.recapiti')}}">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Recapiti</span></a>
-        </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Addons
-        </div>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFornitori"
-               aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Fornitori</span>
-            </a>
-            <div id="collapseFornitori" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{route('admin.fornitori')}}">Elenco</a>
-                    <a class="collapse-item" href="{{route('admin.listino')}}">listino</a>
-                </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
             </div>
-        </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFornitori"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Fornitori</span>
+                </a>
+                <div id="collapseFornitori" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('admin.fornitori')}}">Elenco</a>
+                        <a class="collapse-item" href="{{route('admin.listino')}}">listino</a>
+                    </div>
+                </div>
+            </li>
+        @endif
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -161,11 +164,13 @@
                     @foreach($filiali as $item)
                         <a class="collapse-item" href="{{route('magazzino', $item->id)}}">{{$item->nome}}</a>
                     @endforeach
-                    <a class="collapse-item font-weight-bold" href="{{route('magazzino')}}">TUTTI</a>
+                    @if(Auth::user()->isAdmin())
+                        <a class="collapse-item font-weight-bold" href="{{route('magazzino')}}">TUTTI</a>
+                    @endif
                 </div>
             </div>
         </li>
-
+        @if(Auth::user()->isAdmin())
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePersonale"
                aria-expanded="true" aria-controls="collapsePages">
@@ -186,7 +191,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Statistiche</span></a>
         </li>
-
+        @endif
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -326,7 +331,8 @@
                                 </div>
                                 <div class="font-weight-bold">
                                     <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.</div>
+                                        problem I've been having.
+                                    </div>
                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                                 </div>
                             </a>
@@ -338,7 +344,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">I have the photos that you ordered last month, how
-                                        would you like them sent to you?</div>
+                                        would you like them sent to you?
+                                    </div>
                                     <div class="small text-gray-500">Jae Chun · 1d</div>
                                 </div>
                             </a>
@@ -350,7 +357,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">Last month's report looks great, I am very happy with
-                                        the progress so far, keep up the good work!</div>
+                                        the progress so far, keep up the good work!
+                                    </div>
                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                 </div>
                             </a>
@@ -362,7 +370,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                        told me that people say this to all dogs, even if they aren't good...</div>
+                                        told me that people say this to all dogs, even if they aren't good...
+                                    </div>
                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                 </div>
                             </a>
@@ -480,7 +489,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
 
 
 @yield('footerSection')

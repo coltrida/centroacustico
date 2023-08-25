@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/prodottiInProva/{idFiliale?}', [ProdottiController::class, 'prodottiInProva'])->name('prodottiInProva');
     Route::get('/prodottiRichiesti/{idFiliale?}', [ProdottiController::class, 'prodottiRichiesti'])->name('prodottiRichiesti');
     Route::get('/prodottiInArrivo/{idFiliale?}', [ProdottiController::class, 'prodottiInArrivo'])->name('prodottiInArrivo');
+    Route::get('/switchProdottoInMagazzino/{idProdotto}', [ProdottiController::class, 'switchProdottoInMagazzino'])->name('switchProdottoInMagazzino');
 
 //------------------------ Prova -------------------------------
     Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');

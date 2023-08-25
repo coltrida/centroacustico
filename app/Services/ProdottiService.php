@@ -6,10 +6,11 @@ use App\Models\Client;
 use App\Models\Filiale;
 use App\Models\Prodotto;
 use App\Models\Statoapa;
+use Carbon\Carbon;
 
 class ProdottiService
 {
-    public function prodottiFiliale($idFiliale)
+    /*public function prodottiFiliale($idFiliale)
     {
         return Filiale::with(['prodotti' => function($p){
             $p->with(['stato', 'cliente', 'listino' => function($l){
@@ -17,42 +18,34 @@ class ProdottiService
             }]);
         }])
             ->find($idFiliale)->prodotti()->latest()->paginate(5);
-    }
+    }*/
 
-    public function listaProdottiInMagazzinoByidFiliale($idFiliale)
+    public function listaProdottiInMagazzinoByidFiliale($idFiliale, $idStatoProdottiInMagazzino)
     {
-        $idStatoProdottiInMagazzino = Statoapa::where('nome', 'MAGAZZINO')->first()->id;
-
         return Prodotto::where([
             ['filiale_id', $idFiliale],
             ['stato_id', $idStatoProdottiInMagazzino],
-        ])->latest()->paginate(5, ['*'], 'magazzino');
+        ])->orderBy('datacarico')->paginate(5, ['*'], 'magazzino');
     }
 
-    public function listaProdottiInProvaByidFiliale($idFiliale)
+    public function listaProdottiInProvaByidFiliale($idFiliale, $idStatoProdottiInProva)
     {
-        $idStatoProdottiInProva = Statoapa::where('nome', 'PROVA IN CORSO')->first()->id;
-
         return Prodotto::where([
             ['filiale_id', $idFiliale],
             ['stato_id', $idStatoProdottiInProva],
         ])->latest()->paginate(5, ['*'], 'prova');
     }
 
-    public function listaProdottiRichiestiByidFiliale($idFiliale)
+    public function listaProdottiRichiestiByidFiliale($idFiliale, $idStatoProdottiRichiesti)
     {
-        $idStatoProdottiRichiesti = Statoapa::where('nome', 'RICHIESTO')->first()->id;
-
         return Prodotto::where([
             ['filiale_id', $idFiliale],
             ['stato_id', $idStatoProdottiRichiesti],
         ])->latest()->paginate(5, ['*'], 'richiesti');
     }
 
-    public function listaProdottiInArrivoByidFiliale($idFiliale)
+    public function listaProdottiInArrivoByidFiliale($idFiliale, $idStatoProdottiInArrivo)
     {
-        $idStatoProdottiInArrivo = Statoapa::where('nome', 'SPEDITO')->first()->id;
-
         return Prodotto::where([
             ['filiale_id', $idFiliale],
             ['stato_id', $idStatoProdottiInArrivo],
@@ -111,5 +104,13 @@ class ProdottiService
         return Client::with(['prodotti' => function($p) use($idInCorsoDiProva){
             $p->where('stato_id', $idInCorsoDiProva)->with('listino');
         }])->find($idClient)->prodotti->sum('listino.prezzolistino');
+    }
+
+    public function switchProdottoInMagazzino($idProdotto, $idApaInMagazzino)
+    {
+        Prodotto::where('id', $idProdotto)->update([
+            'stato_id' => $idApaInMagazzino,
+            'datacarico' => Carbon::now(),
+        ]);
     }
 }
