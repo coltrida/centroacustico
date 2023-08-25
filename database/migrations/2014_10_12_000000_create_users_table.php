@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->unsignedBigInteger('ruolo_id');
-            $table->foreign('ruolo_id')->references('id')->on('ruolos');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default('123456');

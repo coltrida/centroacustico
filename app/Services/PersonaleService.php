@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Filiale;
 use App\Models\FilialeUser;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class PersonaleService
 {
@@ -19,6 +20,7 @@ class PersonaleService
             'nome' => $userAggiungi->nome,
             'email' => $userAggiungi->email,
             'ruolo_id' => $userAggiungi->ruolo_id,
+            'password' => Hash::make('123456'),
         ]);
     }
 

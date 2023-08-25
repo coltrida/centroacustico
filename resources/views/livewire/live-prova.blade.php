@@ -28,6 +28,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title fs-5" id="exampleModalLabel">Info Prova</h4>
+                    <div>
+                        Canale: {{$provaDettagli ? $provaDettagli->canale->nome: ''}}
+                    </div>
                 </div>
                 <h5 class="ml-3">Prodotti</h5>
                 <div class="modal-body">
@@ -61,9 +64,28 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title fs-5" id="exampleModalLabel">Info Fattura</h4>
+                    <div>
+                        Canale: {{$provaFattura ? $provaFattura->canale->nome: ''}}
+                    </div>
                 </div>
                 <div class="modal-body">
-
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" wire:model.defer="acconto" class="form-control" placeholder="Acconto" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <input type="text" wire:model.defer="rate" class="form-control" placeholder="Rate" aria-label="Last name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer align-items-center justify-content-between">
+                    <div>
+                        Tot Fattura: {{$provaFattura ? $provaFattura->tot: ''}}
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="$('#infoFattura').modal('hide');">Close</button>
+                        <button type="button" wire:click="creaProforma" class="btn btn-success" onclick="$('#infoFattura').modal('hide');">Crea Proforma</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,7 +147,22 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-body">
-                    <h3>Nuova Prova</h3>
+                    <div class="d-flex mb-4 flex-row align-items-center justify-content-between">
+                        <h3>Nuova Prova</h3>
+                        <div class="d-flex align-items-center">
+                            <div class="mr-2">Canale: </div>
+                            <select class="form-control" aria-label="Default select example"
+                                    wire:model="canale_id"
+                            >
+                                @foreach($canali as $canale)
+                                    <option value="{{$canale->id}}">
+                                            {{$canale->nome}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
                             <thead>
@@ -205,8 +242,8 @@
                                             <i class="fas fa-fw fa-eye"></i>
                                         </a>
                                         @if($item->stato_id != 6 && $item->stato_id != 7)
-                                        <a class="btn btn-success btn-sm mx-1" title="fattura"
-                                           href="#" onclick="$('#infoFattura').modal();">
+                                        <a class="btn btn-success btn-sm mx-1" title="Proforma"
+                                           href="#" wire:click="infoFattura({{$item}})" onclick="$('#infoFattura').modal();">
                                             <i class="fas fa-fw fa-dollar-sign"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm mx-1" title="reso"

@@ -55,6 +55,10 @@
                             @endforeach
 
                         </div>
+                        <div class="p-6">
+                            In questa sezione inserire le Tipologie Pazienti. <br>
+                            Ad esempio: Lead, PC, CL, PREM, ecc. <br>
+                        </div>
                     </div>
                 </div>
 

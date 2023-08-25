@@ -3,13 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Models\Prova;
+use App\Services\CanaleService;
 use App\Services\CategoriaService;
+use App\Services\FatturaService;
 use App\Services\FornitoreService;
 use App\Services\InformazioneService;
 use App\Services\ListinoService;
 use App\Services\ProdottiService;
 use App\Services\ProvaService;
 use App\Services\StatoApaService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -20,6 +23,7 @@ class LiveProva extends Component
     public $idFiliale;
     public $fornitore_id;
     public $categoria_id;
+    public $canale_id;
     public $listino_id;
     public $product_id;
     public $nota;
@@ -27,11 +31,16 @@ class LiveProva extends Component
     public $matricole = [];
     public $totProva = 0;
     public $provaId;
+    public $provaFattura;
+    public $acconto;
+    public $rate;
 
     public function mount(ProvaService $provaService, ProdottiService $prodottiService, StatoApaService $statoApaService)
     {
-        $this->idFiliale = $provaService->clientConProvePassate($this->idClient)->filiale_id;
+        $cliente = $provaService->clientConProvePassate($this->idClient);
+        $this->idFiliale = $cliente->filiale_id;
         $this->calcoloTotaleProdottiInCorsoDiProva($prodottiService, $statoApaService);
+        $this->canale_id = $cliente->canale_id;
     }
 
     public function selezionaFornitore(ListinoService $listinoService)
@@ -93,6 +102,7 @@ class LiveProva extends Component
             'filiale_id' => $this->idFiliale,
             'tot' => $this->totProva,
             'nota' => $this->nota,
+            'canale_id' => $this->canale_id,
         ]);
         $idProva = $provaService->creaProva($request);
         $prodottiInCorsoDiProva = $prodottiService->prodottiInCorsoDiProvaByIdClient($this->idClient);
@@ -133,9 +143,35 @@ class LiveProva extends Component
         $this->provaId = $provaId;
     }
 
+    public function infoFattura(Prova $prova)
+    {
+        $this->provaFattura = $prova;
+    }
+
+    public function creaProforma(FatturaService $fatturaService, StatoApaService $statoApaService, ProvaService $provaService)
+    {
+        $request = new Request();
+        $request->replace([
+            'prova_id' => $this->provaFattura->id,
+            'user_id' => $this->provaFattura->user_id,
+            'nr_rate' => $this->rate,
+            'acconto' => $this->acconto,
+            'tot_fattura' => $this->provaFattura->tot,
+            'mese_fattura' => Carbon::now()->month,
+            'anno_fattura' => Carbon::now()->year,
+            'al_saldo' => (int) $this->provaFattura->tot - (int) $this->acconto,
+            'saldata' => (int) $this->provaFattura->tot == $this->acconto ? 1 : 0,
+        ]);
+        $fatturaService->creaProforma($request);
+
+        $idStatoFattura = $statoApaService->idStatoFromNome('FATTURATO');
+        $provaService->proformaProva($this->provaFattura->id, $idStatoFattura);
+    }
+
     public function render(FornitoreService $fornitoreService,
                            CategoriaService $categoriaService,
                            ProdottiService $prodottiService,
+                           CanaleService $canaleService,
                            ProvaService $provaService)
     {
         return view('livewire.live-prova', [
@@ -143,6 +179,7 @@ class LiveProva extends Component
             'clientConProvePassate' => $provaService->clientConProvePassate($this->idClient),
             'fornitori' => $fornitoreService->listaFornitori(),
             'categorie' => $categoriaService->listaCategorie(),
+            'canali' => $canaleService->listaCanali(),
             'listino' => $this->listino,
             'provaDettagli' => $this->provaId ? $provaService->dettagliProva($this->provaId) : '',
         ]);

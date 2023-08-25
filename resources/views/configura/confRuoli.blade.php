@@ -55,6 +55,11 @@
                             @endforeach
 
                         </div>
+                        <div class="p-6">
+                            In questa sezione inserire i Ruoli degli Utenti. <br>
+                            Ad esempio: Audio, Amministr, Manager <br>
+                            Il ruolo Admin è stato già creato
+                        </div>
                     </div>
                 </div>
 

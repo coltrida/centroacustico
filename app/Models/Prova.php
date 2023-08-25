@@ -16,6 +16,11 @@ class Prova extends Model
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'client_id', 'id');
+    }
+
     public function canale()
     {
         return $this->belongsTo(Canale::class, 'canale_id', 'id');

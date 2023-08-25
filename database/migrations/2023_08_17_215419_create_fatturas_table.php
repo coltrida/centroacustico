@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('fatturas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prova_id');
-            $table->unsignedBigInteger('user_id');
-            $table->date('data_fattura');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->date('data_fattura')->nullable();
             $table->integer('mese_fattura')->nullable();
             $table->integer('anno_fattura')->nullable();
             $table->integer('acconto')->nullable();

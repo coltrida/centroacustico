@@ -11,10 +11,7 @@ class FrontController extends Controller
     public function index()
     {
         if (Configuration::all()->count() > 0){
-            if (Auth::user()){
-                return view('admin.home');
-            }
-            return Redirect::route('login');
+            return view('admin.home');
         }
         return view('configura.confAzienda');
     }

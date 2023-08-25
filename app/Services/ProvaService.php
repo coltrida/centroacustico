@@ -49,6 +49,7 @@ class ProvaService
            'stato_id' => $idStatoProvaInCorso,
            'tot' => $request->tot,
            'nota' => $request->nota,
+           'canale_id' => $request->canale_id,
            'inizio_prova' => Carbon::now(),
         ]);
         return $prova->id;
@@ -62,9 +63,17 @@ class ProvaService
         $prova->save();
     }
 
+    public function proformaProva($idProva, $idStatoFattura)
+    {
+        $prova = Prova::find($idProva);
+        $prova->stato_id = $idStatoFattura;
+        $prova->fine_prova = Carbon::now();
+        $prova->save();
+    }
+
     public function dettagliProva($idProva)
     {
-        return Prova::with(['prodotti' => function($p){
+        return Prova::with(['canale', 'prodotti' => function($p){
             $p->with('listino');
         }])->find($idProva);
     }

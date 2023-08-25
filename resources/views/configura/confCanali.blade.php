@@ -55,6 +55,10 @@
                             @endforeach
 
                         </div>
+                        <div class="p-6">
+                            In questa sezione inserire i Canali Marketing. <br>
+                            Ad esempio: SCREENING, PASSAPAROLA, CALL CENTER, ecc <br>
+                        </div>
                     </div>
                 </div>
 
