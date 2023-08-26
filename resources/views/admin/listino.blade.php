@@ -31,7 +31,8 @@
                     </select>
                 </div>
                 <div class="col-2">
-                    <input type="text" class="form-control" placeholder="prezzo" aria-label="Last name" name="prezzolistino">
+                    <input type="text" class="form-control" placeholder="prezzo" aria-label="Last name"
+                           name="prezzolistino">
                 </div>
                 <div class="col-2">
                     <input type="text" class="form-control" placeholder="Tempi Reso" aria-label="Last name"
@@ -61,25 +62,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($listino as $item)
-                            <tr>
-                                <td class="text-nowrap">{{$item->nome}}</td>
-                                <td class="text-nowrap">{{$item->fornitore->nome}}</td>
-                                <td class="text-nowrap">{{$item->categoria->nome}}</td>
-                                <td class="text-nowrap">{{$item->prezzolistino}}</td>
-                                <td class="text-nowrap">{{$item->giorniTempoDiReso}}</td>
-                                <td class="text-nowrap text-center">
-                                    <a class="btn btn-danger btn-sm mx-1" title="elimina"
-                                       href="#">
-                                        <i class="fas fa-fw fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn-primary btn-sm mx-1" title="modifica"
-                                       href="#">
-                                        <i class="fas fa-fw fa-pencil-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($listino as $item)
+                        <tr>
+                            <td class="text-nowrap">{{$item->nome}}</td>
+                            <td class="text-nowrap">{{$item->fornitore->nome}}</td>
+                            <td class="text-nowrap">{{$item->categoria->nome}}</td>
+                            <td class="text-nowrap">{{$item->prezzolistino}}</td>
+                            <td class="text-nowrap">{{$item->giorniTempoDiReso}}</td>
+                            <td class="text-nowrap text-center">
+                                <a class="btn btn-danger btn-sm mx-1" title="elimina"
+                                   href="#">
+                                    <i class="fas fa-fw fa-trash"></i>
+                                </a>
+                                <a class="btn btn-primary btn-sm mx-1" title="modifica"
+                                   href="#">
+                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

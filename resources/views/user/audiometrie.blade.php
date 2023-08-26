@@ -1,9 +1,11 @@
 @extends('layouts.stile')
 @section('content')
     <div class="d-flex justify-content-between mb-4">
-        <h4 class="mb-0 text-gray-800">Audiometria di {{$clientConAudiometrieByIdClient->fullName}} del {{$audiometria->created_at->format('d-m-Y')}}</h4>
+        <h4 class="mb-0 text-gray-800">Audiometria di {{$clientConAudiometrieByIdClient->fullName}}
+            del {{$audiometria->created_at->format('d-m-Y')}}</h4>
         <div>
-            <a class="btn btn-warning" href="{{ route('clienti', $clientConAudiometrieByIdClient->filiale_id) }}"> Indietro</a>
+            <a class="btn btn-warning" href="{{ route('clienti', $clientConAudiometrieByIdClient->filiale_id) }}">
+                Indietro</a>
         </div>
     </div>
 
@@ -14,7 +16,7 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-{{--                    <h6 class="m-0 font-weight-bold text-primary">Audiometria di {{$clientConAudiometrieByIdClient->fullName}} del {{$audiometria->created_at->format('d-m-Y')}}</h6>--}}
+                    {{--                    <h6 class="m-0 font-weight-bold text-primary">Audiometria di {{$clientConAudiometrieByIdClient->fullName}} del {{$audiometria->created_at->format('d-m-Y')}}</h6>--}}
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,12 +72,12 @@
                         @foreach($clientConAudiometrieByIdClient->audiometrie as $item)
                             <a href="{{route('audiometrie',
                                 ['idClient' => $clientConAudiometrieByIdClient->id, 'idAudiometria' => $item->id])}}"
-                                    class="btn {{$item->created_at == $audiometria->created_at ? 'btn-success' : 'btn-primary'}}">
+                               class="btn {{$item->created_at == $audiometria->created_at ? 'btn-success' : 'btn-primary'}}">
                                 {{$item->created_at->format('d-m-Y')}}
                             </a>
                         @endforeach
                     </div>
-{{--                    {{$audiometria}}--}}
+                    {{--                    {{$audiometria}}--}}
                 </div>
             </div>
         </div>

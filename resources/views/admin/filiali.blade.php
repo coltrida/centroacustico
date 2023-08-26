@@ -51,15 +51,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($filiali as $filiale)
-                            <tr>
-                                <td>{{$filiale->nome}}</td>
-                                <td>{{$filiale->indirizzo}}</td>
-                                <td>{{$filiale->citta}}</td>
-                                <td>{{$filiale->provincia}}</td>
-                                <td>{{$filiale->telefono}}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($filiali as $filiale)
+                        <tr>
+                            <td>{{$filiale->nome}}</td>
+                            <td>{{$filiale->indirizzo}}</td>
+                            <td>{{$filiale->citta}}</td>
+                            <td>{{$filiale->provincia}}</td>
+                            <td>{{$filiale->telefono}}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

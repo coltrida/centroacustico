@@ -57,23 +57,24 @@
                     </thead>
                     <tbody>
 
-                        @foreach($recapiti as $recapito)
-                            <tr id="tr{{$recapito->id}}">
-                                <td>{{$recapito->nome}}</td>
-                                <td>{{$recapito->indirizzo}}</td>
-                                <td>{{$recapito->citta}}</td>
-                                <td>{{$recapito->provincia}}</td>
-                                <td>{{$recapito->filiale->nome}}</td>
-                                <td>
-                                    <a id="{{$recapito}}" title="elimina" class="btn btn-danger eliminaBtn" href="#" data-toggle="modal" data-target="#confermaElimina">
-                                        <i class="fas fa-fw fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn-success" href="#" title="modifica">
-                                        <i class="fas fa-fw fa-pencil-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($recapiti as $recapito)
+                        <tr id="tr{{$recapito->id}}">
+                            <td>{{$recapito->nome}}</td>
+                            <td>{{$recapito->indirizzo}}</td>
+                            <td>{{$recapito->citta}}</td>
+                            <td>{{$recapito->provincia}}</td>
+                            <td>{{$recapito->filiale->nome}}</td>
+                            <td>
+                                <a id="{{$recapito}}" title="elimina" class="btn btn-danger eliminaBtn" href="#"
+                                   data-toggle="modal" data-target="#confermaElimina">
+                                    <i class="fas fa-fw fa-trash"></i>
+                                </a>
+                                <a class="btn btn-success" href="#" title="modifica">
+                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -85,7 +86,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Conferma eliminazione <span id="userEliminaConferma"></span> ?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Conferma eliminazione <span
+                            id="userEliminaConferma"></span> ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -122,7 +124,7 @@
                 evt.preventDefault();
                 let userId = $('#UserDaEliminare').val()
                 let form = $('#formElimina');
-                let urlForm = form.attr('action')+'/'+userId;
+                let urlForm = form.attr('action') + '/' + userId;
                 let tr = $('#tr' + userId);
                 $.ajax(urlForm,
                     {

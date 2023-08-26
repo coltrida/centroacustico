@@ -56,20 +56,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($fornitori as $item)
-                            <tr>
-                                <td class="text-nowrap">{{$item->nome}}</td>
-                                <td class="text-nowrap">{{$item->indirizzo}}</td>
-                                <td class="text-nowrap">{{$item->citta}}</td>
-                                <td class="text-nowrap">{{$item->provincia}}</td>
-                                <td class="text-nowrap">{{$item->cap}}</td>
-                                <td class="text-nowrap">{{$item->telefono}}</td>
-                                <td class="text-nowrap">{{$item->email}}</td>
-                                <td class="text-nowrap">{{$item->pec}}</td>
-                                <td class="text-nowrap">{{$item->univoco}}</td>
-                                <td class="text-nowrap">{{$item->iban}}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($fornitori as $item)
+                        <tr>
+                            <td class="text-nowrap">{{$item->nome}}</td>
+                            <td class="text-nowrap">{{$item->indirizzo}}</td>
+                            <td class="text-nowrap">{{$item->citta}}</td>
+                            <td class="text-nowrap">{{$item->provincia}}</td>
+                            <td class="text-nowrap">{{$item->cap}}</td>
+                            <td class="text-nowrap">{{$item->telefono}}</td>
+                            <td class="text-nowrap">{{$item->email}}</td>
+                            <td class="text-nowrap">{{$item->pec}}</td>
+                            <td class="text-nowrap">{{$item->univoco}}</td>
+                            <td class="text-nowrap">{{$item->iban}}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

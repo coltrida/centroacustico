@@ -13,6 +13,9 @@ use App\Http\Controllers\TelefonataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/prova', function () {
+    return view('layouts.stile2');
+});
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -55,7 +58,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/associa', [AdminController::class, 'associa'])->name('admin.associa');
         Route::post('/associa', [AdminController::class, 'eseguiAssocia'])->name('admin.eseguiAssocia');
         Route::get('/eliminaAssociazione/{idAssociazione}', [AdminController::class, 'eliminaAssociazione'])->name('admin.eliminaAssociazione');
-
     });
 
 //------------------------ Clienti -------------------------------

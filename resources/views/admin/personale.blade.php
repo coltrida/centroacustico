@@ -50,21 +50,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($personale as $item)
-                            <tr id="tr{{$item->id}}">
-                                <td>{{$item->nome}}</td>
-                                <td>{{$item->email}}</td>
-                                <td>{{$item->ruolo->nome}}</td>
-                                <td class="text-center">
-                                        {{--<button type="submit" class="bnt btn-danger" title="elimina">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </button>--}}
-                                        <a id="{{$item}}" class="btn btn-danger eliminaBtn" href="#" data-toggle="modal" data-target="#confermaElimina">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($personale as $item)
+                        <tr id="tr{{$item->id}}">
+                            <td>{{$item->nome}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->ruolo->nome}}</td>
+                            <td class="text-center">
+                                {{--<button type="submit" class="bnt btn-danger" title="elimina">
+                                    <i class="fas fa-fw fa-trash"></i>
+                                </button>--}}
+                                <a id="{{$item}}" class="btn btn-danger eliminaBtn" href="#" data-toggle="modal"
+                                   data-target="#confermaElimina">
+                                    <i class="fas fa-fw fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -76,7 +77,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Conferma eliminazione <span id="userEliminaConferma"></span> ?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Conferma eliminazione <span
+                            id="userEliminaConferma"></span> ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -113,7 +115,7 @@
                 evt.preventDefault();
                 let userId = $('#UserDaEliminare').val()
                 let form = $('#formElimina');
-                let urlForm = form.attr('action')+'/'+userId;
+                let urlForm = form.attr('action') + '/' + userId;
                 let tr = $('#tr' + userId);
                 $.ajax(urlForm,
                     {
