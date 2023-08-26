@@ -13,6 +13,13 @@ class TipoService
 
     public function aggiungiTipo($request)
     {
-        Tipo::create($request->all());
+        return Tipo::create($request->all());
+    }
+
+    public function eliminaTipo($idTipologia)
+    {
+        $tipo = Tipo::find($idTipologia);
+        $tipo->delete();
+        return $tipo;
     }
 }

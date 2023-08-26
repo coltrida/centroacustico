@@ -65,7 +65,7 @@
                 <div id="collapseImpostazione" class="collapse" aria-labelledby="headingTwo"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Anagrafica Azienda</a>
+                        <a class="collapse-item" href="{{route('admin.infoAzienda')}}">Anagrafica Azienda</a>
                         <a class="collapse-item" href="{{route('admin.tipologie')}}">Tipologie pazienti</a>
                         <a class="collapse-item" href="{{route('admin.ruoli')}}">Ruoli Utenti</a>
                         <a class="collapse-item" href="{{route('admin.canali')}}">Canali Mkt</a>

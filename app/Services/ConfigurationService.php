@@ -29,4 +29,14 @@ class ConfigurationService
         }
     }
 
+    public function getConfigurazioni()
+    {
+        return Configuration::all()->first();
+    }
+
+    public function modificaConfigurazioni($request)
+    {
+        Configuration::all()->first()->update($request->all());
+    }
+
 }

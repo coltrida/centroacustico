@@ -13,6 +13,13 @@ class CanaleService
 
     public function aggiungiCanale($request)
     {
-        Canale::create($request->all());
+        return Canale::create($request->all());
+    }
+
+    public function eliminaCanale($idCanale)
+    {
+        $canale = Canale::find($idCanale);
+        $canale->delete();
+        return $canale;
     }
 }

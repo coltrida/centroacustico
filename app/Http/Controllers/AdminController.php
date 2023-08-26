@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CanaleService;
 use App\Services\CategoriaService;
+use App\Services\ConfigurationService;
 use App\Services\FilialeService;
 use App\Services\FornitoreService;
 use App\Services\ListinoService;
@@ -16,6 +17,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
+    public function infoAzienda(ConfigurationService $configurationService)
+    {
+        return view('admin.infoAzienda', [
+            'configurazione' => $configurationService->getConfigurazioni()
+        ]);
+    }
+
+    public function modificaInfoAzienda(Request $request, ConfigurationService $configurationService)
+    {
+        $configurationService->modificaConfigurazioni($request);
+        session()->flash('message', "Modifiche effettuate");
+        return Redirect::back();
+    }
+
     public function filiali()
     {
         return view('admin.filiali');
@@ -131,7 +146,15 @@ class AdminController extends Controller
 
     public function aggiungiCanale(Request $request, CanaleService $canaleService)
     {
-        $canaleService->aggiungiCanale($request);
+        $canale = $canaleService->aggiungiCanale($request);
+        session()->flash('message', "Canale Mkt $canale->nome Aggiunto");
+        return Redirect::back();
+    }
+
+    public function eliminaCanale($idCanale, CanaleService $canaleService)
+    {
+        $canale = $canaleService->eliminaCanale($idCanale);
+        session()->flash('message', "Canale Mkt $canale->nome Eliminato");
         return Redirect::back();
     }
 
@@ -157,7 +180,15 @@ class AdminController extends Controller
 
     public function aggiungiTipologia(Request $request, TipoService $tipoService)
     {
-        $tipoService->aggiungiTipo($request);
+        $tipo = $tipoService->aggiungiTipo($request);
+        session()->flash('message', "Tipologia $tipo->nome Aggiunta");
+        return Redirect::back();
+    }
+
+    public function eliminaTipologia($idTipologia, TipoService $tipoService)
+    {
+        $tipo = $tipoService->eliminaTipo($idTipologia);
+        session()->flash('message', "Tipologia $tipo->nome Eliminata");
         return Redirect::back();
     }
 }

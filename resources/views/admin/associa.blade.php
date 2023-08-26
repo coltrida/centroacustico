@@ -10,7 +10,7 @@
 
                 <div class="row">
                     <div class="col-2">
-                        <button type="submit" class="btn btn-primary"> Aggiungi</button>
+                        <button type="submit" class="btn btn-primary"> Associa</button>
                     </div>
                 </div>
             </div>

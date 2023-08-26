@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/eseguiSetCanali', [ConfigController::class, 'eseguiSetCanali'])->name('eseguiSetCanali');
 
         //----------------------- Admin ----------------------------
+        Route::get('/infoAzienda', [AdminController::class, 'infoAzienda'])->name('admin.infoAzienda');
+        Route::patch('/infoAzienda', [AdminController::class, 'modificaInfoAzienda'])->name('admin.modificaInfoAzienda');
         Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');
         Route::post('/aggiungiFiliale', [AdminController::class, 'aggiungiFiliale'])->name('admin.aggiungiFiliale');
         Route::get('/fornitori', [AdminController::class, 'fornitori'])->name('admin.fornitori');
@@ -39,10 +41,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/aggiungiCategoria', [AdminController::class, 'aggiungiCategoria'])->name('admin.aggiungiCategoria');
         Route::get('/canali', [AdminController::class, 'canali'])->name('admin.canali');
         Route::post('/aggiungiCanale', [AdminController::class, 'aggiungiCanale'])->name('admin.aggiungiCanale');
+        Route::get('/eliminaCanale/{idCanale}', [AdminController::class, 'eliminaCanale'])->name('admin.eliminaCanale');
         Route::get('/ruoli', [AdminController::class, 'ruoli'])->name('admin.ruoli');
         Route::post('/aggiungiRuolo', [AdminController::class, 'aggiungiRuolo'])->name('admin.aggiungiRuolo');
         Route::get('/tipologie', [AdminController::class, 'tipologie'])->name('admin.tipologie');
         Route::post('/aggiungiTipologia', [AdminController::class, 'aggiungiTipologia'])->name('admin.aggiungiTipologia');
+        Route::get('/eliminaTipologia/{idTipologia}', [AdminController::class, 'eliminaTipologia'])->name('admin.eliminaTipologia');
         Route::get('/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');
         Route::post('/aggiungiRecapito', [AdminController::class, 'aggiungiRecapito'])->name('admin.aggiungiRecapito');
         Route::get('/personale', [AdminController::class, 'personale'])->name('admin.personale');

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tipo_id');
-            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->string('nome');
             $table->string('cognome');
             $table->string('telefono1');
@@ -28,9 +27,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->dateTime('dataNascita')->nullable();
             $table->unsignedBigInteger('filiale_id');
-            $table->foreign('filiale_id')->references('id')->on('filiales');
             $table->unsignedBigInteger('canale_id');
-            $table->foreign('canale_id')->references('id')->on('canalis');
             $table->unsignedBigInteger('recapito_id')->nullable();
             $table->unsignedBigInteger('medico_id')->nullable();
             $table->string('codfisc')->unique()->nullable();

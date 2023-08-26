@@ -6,7 +6,6 @@
 
 @section('content')
 
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -109,7 +108,7 @@
                                         <i class="fas fa-fw fa-info-circle"></i>
                                     </a>
                                 </td>
-                                <td class="text-nowrap">{{$item->tipo->nome}}</td>
+                                <td class="text-nowrap">{{$item->tipo ? $item->tipo->nome : ''}}</td>
                                 <td class="text-nowrap">{{$item->cognome}}</td>
                                 <td class="text-nowrap">{{$item->nome}}</td>
                                 <td class="text-nowrap">{{$item->telefono1}}</td>
@@ -118,7 +117,7 @@
                                 <td class="text-nowrap">{{$item->citta}}</td>
                                 <td class="text-nowrap">{{$item->provincia}}</td>
                                 <td class="text-nowrap">{{$item->email}}</td>
-                                <td class="text-nowrap">{{$item->canale->nome}}</td>
+                                <td class="text-nowrap">{{$item->canale ? $item->canale->nome : ''}}</td>
                                 <td class="text-nowrap">{{$item->recapito_id ? $item->recapito->nome : ''}}</td>
                                 <td class="text-nowrap">{{$item->dataNascitaFormattata}}</td>
                                 <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>

@@ -22,7 +22,7 @@
     </div>
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 col-6">
 
         <div class="card-body">
             <div class="table-responsive">
@@ -30,21 +30,17 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Action</th>
+                        <th class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($categorie as $item)
                             <tr>
                                 <td class="text-nowrap">{{$item->nome}}</td>
-                                <td class="text-nowrap">
+                                <td class="text-nowrap text-center">
                                     <a class="btn btn-danger btn-sm mx-1" title="elimina"
                                        href="#">
                                         <i class="fas fa-fw fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn-primary btn-sm mx-1" title="modifica"
-                                       href="#">
-                                        <i class="fas fa-fw fa-pencil-alt"></i>
                                     </a>
                                 </td>
                             </tr>
