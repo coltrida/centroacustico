@@ -1,4 +1,4 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 
 @section('headSection')
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">

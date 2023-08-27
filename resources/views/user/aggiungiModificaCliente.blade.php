@@ -1,8 +1,6 @@
-@extends('layouts.stile')
-@section('headSection')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-@endsection
+@extends('layouts.stile2')
 @section('content')
-    <livewire:live-aggiungi-cliente :idFiliale="$idFiliale" :idClient="$idClient"/>
+    <div class="container pt-4">
+        <livewire:live-aggiungi-cliente :idFiliale="$idFiliale" :idClient="$idClient"/>
+    </div>
 @endsection

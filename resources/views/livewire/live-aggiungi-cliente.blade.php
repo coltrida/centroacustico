@@ -1,6 +1,7 @@
 <div>
-    <h3 class="mb-3">Inserimento nuovo paziente</h3>
 
+    <h3 class="mb-3">Inserimento nuovo paziente</h3>
+    <div class="card-body rounded p-3" style="background: dimgrey;">
     <form wire:submit.prevent="submit">
 
         {{--@if( Session::has('message'))
@@ -102,4 +103,5 @@
         <button class="btn btn-primary" type="submit">{{$idClient ? 'Modifica' : 'Aggiungi'}}</button>
         <a class="btn btn-warning" href="{{route('clienti', $idFiliale)}}">Annulla</a>
     </form>
+</div>
 </div>

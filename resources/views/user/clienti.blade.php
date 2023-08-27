@@ -30,7 +30,7 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-body">
+        <div class="card-body rounded" style="background: dimgrey;">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                     <form action="{{route('ricercaPaziente')}}" method="get">

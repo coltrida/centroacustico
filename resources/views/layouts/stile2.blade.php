@@ -203,12 +203,14 @@
                             @endif
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
+                    @if(Auth::user()->isAdmin())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.filiali')}}">Filiali</a>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.recapiti')}}">Recapiti</a>
+                            </li>
+                    @endif
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

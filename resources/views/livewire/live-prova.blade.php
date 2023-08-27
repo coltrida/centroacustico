@@ -1,11 +1,15 @@
 <div>
     @if( Session::has('message'))
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#exampleModal').modal();
-                setTimeout(function () {
-                    $('#exampleModal').modal('hide');
-                }, 3000);
+            $('document').ready(function () {
+                let mess = "{{Session::has('message')}}"
+                if (mess) {
+                    const myModal = new bootstrap.Modal('#exampleModal')
+                    myModal.show();
+                    setTimeout(function () {
+                        myModal.hide();
+                    }, 3000);
+                }
             });
         </script>
     @endif
@@ -14,7 +18,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info</h4>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                 </div>
                 <div class="modal-body">
                     {{ session('message') }}
@@ -27,7 +31,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info Prova</h4>
+                    <h4 class="modal-title fs-5">Info Prova</h4>
                     <div>
                         Canale: {{$provaDettagli ? $provaDettagli->canale->nome: ''}}
                     </div>
@@ -53,7 +57,7 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="$('#infoProva').modal('hide');">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -63,7 +67,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info Fattura</h4>
+                    <h4 class="modal-title fs-5">Info Fattura</h4>
                     <div>
                         Canale: {{$provaFattura ? $provaFattura->canale->nome: ''}}
                     </div>
@@ -83,19 +87,20 @@
                         Tot Fattura: {{$provaFattura ? $provaFattura->tot: ''}}
                     </div>
                     <div>
-                        <button type="button" class="btn btn-secondary" onclick="$('#infoFattura').modal('hide');">Close</button>
-                        <button type="button" wire:click="creaProforma" class="btn btn-success" onclick="$('#infoFattura').modal('hide');">Crea Proforma</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" wire:click="creaProforma" class="btn btn-success" data-bs-dismiss="modal">Crea Proforma</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="d-sm-flex mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h4 class="mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h4>
 
-            <div class="col-2">
-                <select class="form-control" aria-label="Default select example"
+        <div class="row">
+            <div class="col">
+                <select style="min-width: 170px" class="form-control" aria-label="Default select example"
                         wire:model="fornitore_id"
                         wire:change="selezionaFornitore"
                 >
@@ -105,19 +110,19 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-1">
-                <select class="form-control" aria-label="Default select example"
+            <div class="col">
+                <select style="min-width: 80px" class="form-control" aria-label="Default select example"
                         wire:model="categoria_id"
                         wire:change="selezionaCategoria"
                 >
-                    <option selected>cat...</option>
+                    <option selected>categ...</option>
                     @foreach($categorie as $categoria)
                         <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-2">
-                <select class="form-control" aria-label="Default select example"
+            <div class="col">
+                <select style="min-width: 150px" style="min-width: 50px" class="form-control" aria-label="Default select example"
                         wire:model="listino_id"
                         wire:change="selezionaListino"
                 >
@@ -127,30 +132,31 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-2">
-                <select class="form-control" aria-label="Default select example" wire:model="product_id">
+            <div class="col">
+                <select style="min-width: 150px" class="form-control" aria-label="Default select example" wire:model="product_id">
                     <option selected>matricola...</option>
                     @foreach($matricole as $item)
                         <option value="{{$item->id}}">{{$item->matricola}}</option>
                     @endforeach
                 </select>
             </div>
-            <div>
+            <div class="col">
                 <button type="submit" class="btn btn-primary" wire:click="inserisciInProva"> Inserisci</button>
             </div>
-        <div class="ml-1">
-            <a type="submit" class="btn btn-warning" href="{{ route('clienti', $idFiliale) }}"> Indietro</a>
+            <div class="col">
+                <a type="submit" class="btn btn-warning" href="{{ route('clienti', $idFiliale) }}"> Indietro</a>
+            </div>
         </div>
     </div>
 
     <div class="row mb-4">
         <div class="col">
             <div class="card shadow mb-4">
-                <div class="card-body">
-                    <div class="d-flex mb-4 flex-row align-items-center justify-content-between">
+                <div class="card-body rounded p-3" style="background: dimgrey;">
+                    <div class="d-flex mb-2 flex-row align-items-center justify-content-between">
                         <h3>Nuova Prova</h3>
                         <div class="d-flex align-items-center">
-                            <div class="mr-2">Canale: </div>
+                            <div class="mx-2">Canale: </div>
                             <select class="form-control" aria-label="Default select example"
                                     wire:model="canale_id"
                             >
@@ -165,13 +171,13 @@
 
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
-                            <thead>
+                            <thead class="table-light">
                             <tr>
                                 <th>Matricola</th>
                                 <th>Nome</th>
                                 <th>Cat</th>
                                 <th>Prezzo</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -181,10 +187,10 @@
                                     <td class="text-nowrap">{{$item->listino->nome}}</td>
                                     <td class="text-nowrap">{{$item->listino->categoria->nome}}</td>
                                     <td class="text-nowrap">{{$item->listino->prezzolistino}}</td>
-                                    <td class="text-nowrap">
+                                    <td class="text-nowrap text-center">
                                         <a class="btn btn-danger btn-sm mx-1" title="elimina"
                                            href="#" wire:click="eliminaDaProva({{$item->id}})">
-                                            <i class="fas fa-fw fa-trash"></i>
+                                            <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -210,16 +216,16 @@
         </div>
         <div class="col">
             <div class="card shadow mb-4">
-                <div class="card-body">
-                    <h3>Prove Passate</h3>
+                <div class="card-body rounded p-3" style="background: dimgrey;">
+                    <h3 >Prove Passate</h3>
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
-                            <thead>
+                        <table class="table table-sm mt-2 table-bordered table-striped nowrap" width="100%" cellspacing="0">
+                            <thead class="table-light">
                             <tr>
                                 <th>Stato</th>
                                 <th>Data</th>
                                 <th>Tot</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -236,19 +242,27 @@
                                     </td>
                                     <td class="text-nowrap">{{$item->created_at->format('d-m-Y')}}</td>
                                     <td class="text-nowrap">{{$item->tot}}</td>
-                                    <td class="text-nowrap">
-                                        <a wire:click="vediDettagliProva({{$item->id}})" class="btn btn-primary btn-sm mx-1" title="vedi"
-                                           href="#" onclick="$('#infoProva').modal();">
-                                            <i class="fas fa-fw fa-eye"></i>
-                                        </a>
+                                    <td class="text-nowrap text-center">
+                                        <button title="Informazioni"
+                                                wire:click="vediDettagliProva({{$item->id}})"
+                                                type="button"
+                                                class="btn btn-primary btn-sm mx-1"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#infoProva">
+                                            <i class="bi bi-info-circle"></i>
+                                        </button>
                                         @if($item->stato_id != 6 && $item->stato_id != 7)
-                                        <a class="btn btn-success btn-sm mx-1" title="Proforma"
-                                           href="#" wire:click="infoFattura({{$item}})" onclick="$('#infoFattura').modal();">
-                                            <i class="fas fa-fw fa-dollar-sign"></i>
-                                        </a>
+                                        <button title="Proforma"
+                                                wire:click="infoFattura({{$item}})"
+                                                type="button"
+                                                class="btn btn-success btn-sm mx-1"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#infoFattura">
+                                            <i class="bi bi-currency-dollar"></i>
+                                        </button>
                                         <a class="btn btn-danger btn-sm mx-1" title="reso"
                                            href="#" wire:click="resoProva({{$item}})">
-                                            <i class="fas fa-fw fa-trash"></i>
+                                            <i class="bi bi-hand-thumbs-down"></i>
                                         </a>
                                         @endif
                                     </td>
