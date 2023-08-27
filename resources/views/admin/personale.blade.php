@@ -1,10 +1,11 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 
 @section('headSection')
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
+    <div class="container pt-4">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Personale</h1>
         <form action="{{route('admin.aggiungiPersonale')}}" method="post">
@@ -19,8 +20,8 @@
                            name="email">
                 </div>
                 <div class="col">
-                    <select class="form-control" aria-label="Default select example" name="ruolo_id">
-                        <option selected></option>
+                    <select class="form-select" aria-label="Default select example" name="ruolo_id">
+                        <option selected>ruolo...</option>
                         @foreach($ruoli as $item)
                             <option value="{{$item->id}}">{{$item->nome}}</option>
                         @endforeach
@@ -37,10 +38,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
-        <div class="card-body">
+        <div class="card-body rounded" style="background: dimgrey;">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="table-light">
                     <tr>
                         <th>Nome</th>
                         <th>email</th>
@@ -61,7 +62,7 @@
                                 </button>--}}
                                 <a id="{{$item}}" class="btn btn-danger eliminaBtn" href="#" data-toggle="modal"
                                    data-target="#confermaElimina">
-                                    <i class="fas fa-fw fa-trash"></i>
+                                    <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -92,6 +93,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

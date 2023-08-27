@@ -1,7 +1,7 @@
 <div>
-    <div class="d-flex">
+    <div class="row">
         <div class="col">
-            <select class="form-control" aria-label="Default select example"
+            <select class="form-select" aria-label="Default select example"
                     wire:model="fornitore_id"
                     wire:change="selezionaFornitore"
             >
@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="col">
-            <select class="form-control" aria-label="Default select example"
+            <select class="form-select" aria-label="Default select example"
                     wire:model="categoria_id"
                     wire:change="selezionaCategoria"
             >
@@ -23,7 +23,7 @@
             </select>
         </div>
         <div class="col">
-            <select class="form-control" aria-label="Default select example" wire:model="listino_id">
+            <select class="form-select" aria-label="Default select example" wire:model="listino_id">
                 <option selected>listino...</option>
                 @foreach($listino as $item)
                     <option value="{{$item->id}}">{{$item->nome}}</option>

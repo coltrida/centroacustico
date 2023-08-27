@@ -100,7 +100,7 @@
 
         <div class="row">
             <div class="col">
-                <select style="min-width: 170px" class="form-control" aria-label="Default select example"
+                <select style="min-width: 170px" class="form-select" aria-label="Default select example"
                         wire:model="fornitore_id"
                         wire:change="selezionaFornitore"
                 >
@@ -111,7 +111,7 @@
                 </select>
             </div>
             <div class="col">
-                <select style="min-width: 80px" class="form-control" aria-label="Default select example"
+                <select style="min-width: 80px" class="form-select" aria-label="Default select example"
                         wire:model="categoria_id"
                         wire:change="selezionaCategoria"
                 >
@@ -122,7 +122,7 @@
                 </select>
             </div>
             <div class="col">
-                <select style="min-width: 150px" style="min-width: 50px" class="form-control" aria-label="Default select example"
+                <select style="min-width: 150px" style="min-width: 50px" class="form-select" aria-label="Default select example"
                         wire:model="listino_id"
                         wire:change="selezionaListino"
                 >
@@ -133,7 +133,7 @@
                 </select>
             </div>
             <div class="col">
-                <select style="min-width: 150px" class="form-control" aria-label="Default select example" wire:model="product_id">
+                <select style="min-width: 150px" class="form-select" aria-label="Default select example" wire:model="product_id">
                     <option selected>matricola...</option>
                     @foreach($matricole as $item)
                         <option value="{{$item->id}}">{{$item->matricola}}</option>

@@ -1,7 +1,6 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 @section('content')
-    <div class="container-fluid">
-
+    <div class="container py-4">
         <form action="{{route('admin.eseguiAssocia')}}" method="post">
             @csrf
 
@@ -79,7 +78,7 @@
                                         <div class="p-3">{{$user->nome}} ({{$user->ruolo->nome}})</div>
                                         <div>
                                             <a href="{{route('admin.eliminaAssociazione', $user->pivot->id)}}">
-                                                <i style="color: red" class="fas fa-fw fa-trash"></i>
+                                                <i style="color: red" class="bi bi-trash"></i>
                                             </a>
                                         </div>
                                     </div>

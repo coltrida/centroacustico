@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    <div class="container pt-4">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Recapiti</h1>
         <form action="{{route('admin.aggiungiRecapito')}}" method="post">
@@ -25,7 +26,7 @@
                     <input type="text" class="form-control" placeholder="PR" aria-label="Last name" name="provincia">
                 </div>
                 <div class="col-2">
-                    <select class="form-control" name="filiale_id" aria-label="Default select example" name="ruolo_id">
+                    <select class="form-select" name="filiale_id" aria-label="Default select example" name="ruolo_id">
                         <option selected>filiale...</option>
                         @foreach($filiali as $filiale)
                             <option value="{{$filiale->id}}">{{$filiale->nome}}</option>
@@ -42,10 +43,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
-        <div class="card-body">
+        <div class="card-body rounded" style="background: dimgrey;">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                <table class="table table-bordered py-4" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="table-light">
                     <tr>
                         <th>Nome</th>
                         <th>Indirizzo</th>
@@ -65,12 +66,19 @@
                             <td>{{$recapito->provincia}}</td>
                             <td>{{$recapito->filiale->nome}}</td>
                             <td>
-                                <a id="{{$recapito}}" title="elimina" class="btn btn-danger eliminaBtn" href="#"
+                                {{--<a id="{{$recapito}}" title="elimina" class="btn btn-danger eliminaBtn" href="#"
                                    data-toggle="modal" data-target="#confermaElimina">
-                                    <i class="fas fa-fw fa-trash"></i>
-                                </a>
-                                <a class="btn btn-success" href="#" title="modifica">
-                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                    <i class="bi bi-trash"></i>
+                                </a>--}}
+                                <button id="{{$recapito}}" type="button"
+                                        title="elimina"
+                                        class="btn btn-danger eliminaBtn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confermaElimina">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                <a class="btn btn-primary" href="#" title="modifica">
+                                    <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                         </tr>
@@ -87,20 +95,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Conferma eliminazione <span
-                            id="userEliminaConferma"></span> ?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                            id="recapitoEliminaConferma"></span> ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <input type="hidden" id="UserDaEliminare">
+
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form id="formElimina" action="{{route('admin.deletePersonale')}}" method="post">
-                        <a class="btn btn-danger confermaElimina" href="#" data-dismiss="modal">Conferma</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form id="formElimina" action="{{route('admin.eliminaRecapito')}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" id="recapitoDaEliminare" name="recapitoDaEliminare">
+                        <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">Conferma</button>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection
@@ -115,12 +125,12 @@
 
             $('tbody').on('click', '.eliminaBtn', function (evt) {
                 evt.preventDefault();
-                let UserElimina = JSON.parse(evt.currentTarget.id);
-                $('#UserDaEliminare').val(UserElimina.id);
-                $('#userEliminaConferma').html(UserElimina.nome);
+                let recapitoElimina = JSON.parse(evt.currentTarget.id);
+                $('#recapitoDaEliminare').val(recapitoElimina.id);
+                $('#recapitoEliminaConferma').html(recapitoElimina.nome);
             });
 
-            $('.confermaElimina').on('click', function (evt) {
+            /*$('.confermaElimina').on('click', function (evt) {
                 evt.preventDefault();
                 let userId = $('#UserDaEliminare').val()
                 let form = $('#formElimina');
@@ -134,7 +144,7 @@
                         }
                     }
                 )
-            });
+            });*/
         });
     </script>
 @endsection

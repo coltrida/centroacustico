@@ -55,6 +55,12 @@ class AdminController extends Controller
         return Redirect::back();
     }
 
+    public function eliminaRecapito(Request $request, RecapitoService $recapitoService)
+    {
+        $recapitoService->eliminaRecapito($request->recapitoDaEliminare);
+        return Redirect::back();
+    }
+
     public function aggiungiPersonale(Request $request, PersonaleService $personaleService)
     {
         $personaleService->aggiungiPersonale($request);

@@ -105,6 +105,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('/css/carousel.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/personale.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     @yield('headSection')
     @livewireStyles
@@ -199,7 +200,7 @@
                                 <li><a class="dropdown-item" href="{{route('clienti', $item->id)}}">{{$item->nome}}</a></li>
                             @endforeach
                             @if(Auth::user()->isAdmin())
-                                <li><a class="dropdown-item" href="{{route('clienti')}}">TUTTI</a>
+                                <li><a class="dropdown-item" href="{{route('clienti')}}">TUTTI</a></li>
                             @endif
                         </ul>
                     </li>
@@ -207,15 +208,72 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.filiali')}}">Filiali</a>
                         </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('admin.recapiti')}}">Recapiti</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.recapiti')}}">Recapiti</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Fornitori</a>
+                            <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{route('admin.fornitori')}}">Elenco</a></li>
+                                    <li><a class="dropdown-item" href="{{route('admin.listino')}}">listino</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Magazzini</a>
+                        <ul class="dropdown-menu">
+                            @foreach($filiali as $item)
+                                <li><a class="dropdown-item" href="{{route('magazzino', $item->id)}}">{{$item->nome}}</a></li>
+                            @endforeach
+                            @if(Auth::user()->isAdmin())
+                                <li><a class="dropdown-item" href="{{route('magazzino')}}">TUTTI</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @if(Auth::user()->isAdmin())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Personale</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{route('admin.personale')}}">Elenco</a></li>
+                                <li><a class="dropdown-item" href="{{route('admin.associa')}}">Associa</a></li>
+                            </ul>
+                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Statistiche</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">....</a></li>
+                                    <li><a class="dropdown-item" href="#">......</a></li>
+                                </ul>
                             </li>
                     @endif
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <li class="nav-item dropdown" style="list-style-type: none; transform: translate(-20px)">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()?->nome }}</span>
+                        <img class="img-profile rounded-circle"
+                             src="{{asset('img/undraw_profile.svg')}}">
+                    </a>
+                    <ul class="dropdown-menu" >
+{{--                        <li><a class="dropdown-item" href="#">Logout</a></li>--}}
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="#" style="text-decoration: none; color: white; margin-left: 10px"
+                                                 onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- Dropdown - User Information -->
+                </li>
+                {{--<form class="d-flex" role="search">
+                    --}}{{--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>--}}{{--
+
+                </form>--}}
             </div>
         </div>
     </nav>

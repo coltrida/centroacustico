@@ -17,6 +17,11 @@ class RecapitoService
         Recapito::create($request->all());
     }
 
+    public function eliminaRecapito($idRecapito)
+    {
+        Recapito::find($idRecapito)->delete();
+    }
+
     public function listaRecapitiByIdFiliale($idFiliale)
     {
         return Filiale::with('recapiti')->find($idFiliale)->recapiti;

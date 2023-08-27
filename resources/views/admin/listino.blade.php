@@ -1,10 +1,11 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 
 @section('headSection')
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
+    <div class="container pt-4">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Listino</h1>
         <form action="{{route('admin.aggiungiListino')}}" method="post">
@@ -15,7 +16,7 @@
                            name="nome">
                 </div>
                 <div class="col">
-                    <select class="form-control" aria-label="Default select example" name="fornitore_id">
+                    <select class="form-select" aria-label="Default select example" name="fornitore_id">
                         <option selected>fornitore...</option>
                         @foreach($fornitori as $item)
                             <option value="{{$item->id}}">{{$item->nome}}</option>
@@ -23,7 +24,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-control" aria-label="Default select example" name="categoria_id">
+                    <select class="form-select" aria-label="Default select example" name="categoria_id">
                         <option selected>categoria...</option>
                         @foreach($categorie as $item)
                             <option value="{{$item->id}}">{{$item->nome}}</option>
@@ -48,10 +49,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
-        <div class="card-body">
+        <div class="card-body rounded" style="background: dimgrey;">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped nowrap" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="table-light">
                     <tr>
                         <th>Nome</th>
                         <th>Fornitore</th>
@@ -72,11 +73,11 @@
                             <td class="text-nowrap text-center">
                                 <a class="btn btn-danger btn-sm mx-1" title="elimina"
                                    href="#">
-                                    <i class="fas fa-fw fa-trash"></i>
+                                    <i class="bi bi-trash"></i>
                                 </a>
                                 <a class="btn btn-primary btn-sm mx-1" title="modifica"
                                    href="#">
-                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                    <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                         </tr>
@@ -85,6 +86,7 @@
                 </table>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

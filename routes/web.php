@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/eliminaTipologia/{idTipologia}', [AdminController::class, 'eliminaTipologia'])->name('admin.eliminaTipologia');
         Route::get('/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');
         Route::post('/aggiungiRecapito', [AdminController::class, 'aggiungiRecapito'])->name('admin.aggiungiRecapito');
+        Route::delete('/eliminaRecapito', [AdminController::class, 'eliminaRecapito'])->name('admin.eliminaRecapito');
         Route::get('/personale', [AdminController::class, 'personale'])->name('admin.personale');
         Route::post('/aggiungiPersonale', [AdminController::class, 'aggiungiPersonale'])->name('admin.aggiungiPersonale');
         Route::get('/deletePersonale/{idUser?}', [AdminController::class, 'deletePersonale'])->name('admin.deletePersonale');
