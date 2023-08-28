@@ -52,6 +52,9 @@
                                     <input type="text" name="provinciaAzienda" class="form-control" placeholder="provincia Azienda" aria-label="First name">
                                 </div>
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    <input type="text" name="capAzienda" class="form-control" placeholder="cap Azienda" aria-label="First name">
+                                </div>
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     <input type="text" name="pivaAzienda" class="form-control" placeholder="piva Azienda" aria-label="First name">
                                 </div>
                             </div>

@@ -1,5 +1,7 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 @section('content')
-    <livewire:live-appuntamento :idClient="$idClient"/>
+    <div class="container pt-4 pb-5">
+        <livewire:live-appuntamento :idClient="$idClient"/>
+    </div>
 @endsection
 

@@ -3,13 +3,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="exampleModalLabel">Info</h4>
+                    <h4 class="modal-title fs-5">Info</h4>
                 </div>
                 <div class="modal-body">
                     {{ session('message') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="$('#info').modal('hide');">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="exampleModalLabel">
+                    <h5 class="modal-title fs-5" >
                         Appuntamento per il {{$dataSelezionata}} ore {{$orarioSelezionato}}:00
                     </h5>
 
@@ -60,8 +60,8 @@
                 </div>
                 <div class="modal-footer">
                     @if(!$appuntamentoPrenotato)
-                    <button type="button" wire:click="inserisciAppuntamento" class="btn btn-success" data-dismiss="modal">Inserisci</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" wire:click="inserisciAppuntamento" class="btn btn-success" data-bs-dismiss="modal">Inserisci</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     @else
                         @if($intervenuto !== null)
                             @if($intervenuto === 1)
@@ -70,10 +70,10 @@
                                 <h3><span class="badge bg-danger text-white">Non Intervenuto</span></h3>
                             @endif
                         @else
-                            <button type="button" wire:click="esita(1)" class="btn btn-success" data-dismiss="modal">Positivo</button>
-                            <a href="#" wire:click="esita(0)" class="btn btn-danger" data-dismiss="modal">Negativo</a>
-                            <a href="#" wire:click="eliminaAppuntamento" class="btn btn-danger" data-dismiss="modal" title="Elimina">
-                                <i class="fas fa-fw fa-trash"></i>
+                            <button type="button" wire:click="esita(1)" class="btn btn-success" data-bs-dismiss="modal">Positivo</button>
+                            <a href="#" wire:click="esita(0)" class="btn btn-danger" data-bs-dismiss="modal">Negativo</a>
+                            <a href="#" wire:click="eliminaAppuntamento" class="btn btn-danger" data-bs-dismiss="modal" title="Elimina">
+                                <i class="bi bi-trash"></i>
                             </a>
                         @endif
 
@@ -106,12 +106,12 @@
         </div>
 
     <div class="card shadow mb-4">
-        <div class="card-body">
+        <div class="card-body rounded" style="background: dimgrey;">
             <div class="d-flex flex-row-reverse">
                 <div class="btn-group" role="group" aria-label="Default button group">
-                    <a href="#" wire:click="indietro"
+                    <a href="#" wire:click="indietro" style="color: white; border: 1px solid white"
                        class="btn btn-outline-primary">Indietro</a>
-                    <a href="#" wire:click="avanti"
+                    <a href="#" wire:click="avanti" style="color: white; border: 1px solid white"
                        class="btn btn-outline-primary">Avanti</a>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                         @for($ora=9; $ora < 19; $ora++)
 
                             <button wire:click="DataOraSelezionata('{{$dateSettimana[$giorno]}}', '{{$ora}}', '{{$userConAppuntamenti->appuntamenti->where('orario', $ora)->where('giornoFormattato', $dateSettimana[$giorno])->first()}}')"
-                                    data-toggle="modal" data-target="#appuntamentoModal"
+                                    data-bs-toggle="modal" data-bs-target="#appuntamentoModal"
                                class="list-group-item list-group-item-action text-center list-group-item-secondary"
                                style="font-size: 14px; padding: 0.4rem 0.2rem;
                                @if($appunta = $userConAppuntamenti->appuntamenti

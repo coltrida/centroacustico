@@ -13,9 +13,7 @@ use App\Http\Controllers\TelefonataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/prova', function () {
-    return view('layouts.stile2');
-});
+//Route::get('/prova', [FrontController::class, 'prova'])->name('prova');
 
 Route::group(['middleware' => ['auth']], function () {
 

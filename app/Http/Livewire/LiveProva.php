@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Configuration;
 use App\Models\Prova;
 use App\Services\CanaleService;
 use App\Services\CategoriaService;
+use App\Services\ConfigurationService;
 use App\Services\FatturaService;
 use App\Services\FornitoreService;
 use App\Services\InformazioneService;
@@ -148,7 +150,10 @@ class LiveProva extends Component
         $this->provaFattura = $prova;
     }
 
-    public function creaProforma(FatturaService $fatturaService, StatoApaService $statoApaService, ProvaService $provaService)
+    public function creaProforma(FatturaService $fatturaService,
+                                 StatoApaService $statoApaService,
+                                 ProvaService $provaService,
+                                 ConfigurationService $configurationService)
     {
         $request = new Request();
         $request->replace([
@@ -162,10 +167,13 @@ class LiveProva extends Component
             'al_saldo' => (int) $this->provaFattura->tot - (int) $this->acconto,
             'saldata' => (int) $this->provaFattura->tot == $this->acconto ? 1 : 0,
         ]);
-        $fatturaService->creaProforma($request);
+
+        $fattura = $fatturaService->creaProforma($request);
 
         $idStatoFattura = $statoApaService->idStatoFromNome('FATTURATO');
         $provaService->proformaProva($this->provaFattura->id, $idStatoFattura);
+
+        $fatturaService->creadProformaPdf($fattura, $configurationService->getConfigurazioni());
     }
 
     public function render(FornitoreService $fornitoreService,

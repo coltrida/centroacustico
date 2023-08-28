@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('indirizzoAzienda')->nullable();
             $table->string('cittaAzienda')->nullable();
             $table->string('provinciaAzienda')->nullable();
+            $table->string('capAzienda')->nullable();
             $table->string('pivaAzienda')->nullable();
             $table->string('emailAzienda')->nullable();
             $table->string('pecAzienda')->nullable();

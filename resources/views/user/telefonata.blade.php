@@ -1,5 +1,6 @@
-@extends('layouts.stile')
+@extends('layouts.stile2')
 @section('content')
+    <div class="container pt-4">
     <div class="modal fade" id="info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -38,7 +39,7 @@
             <div class="col">
                 <label for="exampleFormControlTextarea1" class="form-label">&nbsp;</label> <br>
                 <button type="submit" class="btn btn-primary"> Inserisci</button>
-                <a type="submit" class="btn btn-warning" href="{{ URL::previous() }}"> Indietro</a>
+                <a type="submit" class="btn btn-warning" href="{{ route('clienti', $userConTelefonate->filiale_id) }}"> Indietro</a>
             </div>
         </div>
     </form>
@@ -70,20 +71,19 @@
             </div>
         </div>
     </div>
+    </div>
 @endsection
 
 @section('footerSection')
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
     <script>
         $('document').ready(function () {
             let mess = "{{Session::has('message')}}"
             if (mess) {
-                $('#info').modal();
+                const myModal = new bootstrap.Modal('#info')
+                myModal.show();
                 setTimeout(function () {
-                    $('#info').modal('hide');
-                }, 2000);
+                    myModal.hide();
+                }, 3000);
             }
         });
     </script>

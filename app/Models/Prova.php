@@ -11,6 +11,11 @@ class Prova extends Model
     protected $guarded = [];
     protected $table = 'provas';
 
+    public function getTotFormattatoAttribute()
+    {
+        return $this->tot ? '€ '.number_format( (float) $this->tot, '0', ',', '.') : null;
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');

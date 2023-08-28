@@ -20,6 +20,7 @@ class ConfigurationSeeder extends Seeder
             'indirizzoAzienda' => 'via Tupini 23',
             'cittaAzienda' => 'Roma',
             'provinciaAzienda' => 'RM',
+            'capAzienda' => '06012',
             'pivaAzienda' => '345363243453',
             'emailAzienda' => 'info@askoltaora.it',
             'pecAzienda' => 'askoltaora@pec.it',

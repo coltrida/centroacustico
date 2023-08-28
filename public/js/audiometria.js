@@ -82,9 +82,12 @@ var myLineChart = new Chart(ctx, {
         time: {
           unit: 'date'
         },
-        gridLines: {
-          drawBorder: false
-        },
+          gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              borderDash: [2],
+              zeroLineBorderDash: [2],
+          },
         ticks: {
           maxTicksLimit: 8,
         }
@@ -101,7 +104,7 @@ var myLineChart = new Chart(ctx, {
           color: "rgb(234, 236, 244)",
           zeroLineColor: "rgb(234, 236, 244)",
           borderDash: [2],
-          zeroLineBorderDash: [2]
+          zeroLineBorderDash: [2],
         }
       }],
     },

@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AssociaFilialeUserSeeder::class);
         $this->call(AudiometriaSeeder::class);
 
+        Storage::disk('public')->deleteDirectory('/documenti/');
+        Storage::disk('public')->deleteDirectory('/fatture/');
         Storage::disk('public')->deleteDirectory('/logo/');
         Storage::disk('public')->makeDirectory('/logo');
 
