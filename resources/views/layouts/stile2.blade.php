@@ -243,7 +243,7 @@
 @yield('content')
 
     <footer class="d-flex flex-wrap justify-content-center align-items-center text-center fixed-bottom" style="background: #28303d">
-        <div class="py-2">&copy; 2023 ColtriCat </div>
+        <div class="py-2">&copy; 2023 ColMa </div>
     </footer>
 </main>
 

@@ -40,4 +40,9 @@ class Prova extends Model
     {
         return $this->hasMany(Prodotto::class, 'prova_id', 'id');
     }
+
+    public function fattura()
+    {
+        return $this->hasOne(Fattura::class, 'prova_id', 'id');
+    }
 }

@@ -1,4 +1,4 @@
-<div>
+<div class="pt-5">
     @if( Session::has('message'))
         <script type="text/javascript">
             $('document').ready(function () {
@@ -251,7 +251,7 @@
                                                 data-bs-target="#infoProva">
                                             <i class="bi bi-info-circle"></i>
                                         </button>
-                                        @if($item->stato_id != 6 && $item->stato_id != 7)
+                                        @if($item->stato_id != $idProvaFatturata && $item->stato_id != $idProvaReso)
                                         <button title="Proforma"
                                                 wire:click="infoFattura({{$item}})"
                                                 type="button"
@@ -264,6 +264,13 @@
                                            href="#" wire:click="resoProva({{$item}})">
                                             <i class="bi bi-hand-thumbs-down"></i>
                                         </a>
+                                        @endif
+
+                                        @if($item->stato_id == $idProvaFatturata)
+                                            <a class="btn btn-success btn-sm mx-1" title="fattura" target="_blank"
+                                               href="{{asset("storage/documenti/$clientConProvePassate->id/Fattura".$item->fattura->id.".pdf")}}">
+                                                <i class="bi bi-receipt"></i>
+                                            </a>
                                         @endif
                                     </td>
                                 </tr>

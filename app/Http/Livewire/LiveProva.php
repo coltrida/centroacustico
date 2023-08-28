@@ -8,6 +8,7 @@ use App\Services\CanaleService;
 use App\Services\CategoriaService;
 use App\Services\ConfigurationService;
 use App\Services\FatturaService;
+use App\Services\FatturatiService;
 use App\Services\FornitoreService;
 use App\Services\InformazioneService;
 use App\Services\ListinoService;
@@ -16,6 +17,7 @@ use App\Services\ProvaService;
 use App\Services\StatoApaService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LiveProva extends Component
@@ -36,13 +38,19 @@ class LiveProva extends Component
     public $provaFattura;
     public $acconto;
     public $rate;
+    public $idProvaFatturata;
+    public $idProvaReso;
 
-    public function mount(ProvaService $provaService, ProdottiService $prodottiService, StatoApaService $statoApaService)
+    public function mount(ProvaService $provaService,
+                          ProdottiService $prodottiService,
+                          StatoApaService $statoApaService)
     {
         $cliente = $provaService->clientConProvePassate($this->idClient);
         $this->idFiliale = $cliente->filiale_id;
         $this->calcoloTotaleProdottiInCorsoDiProva($prodottiService, $statoApaService);
         $this->canale_id = $cliente->canale_id;
+        $this->idProvaFatturata= $statoApaService->idStatoFromNome('FATTURATO');
+        $this->idProvaReso= $statoApaService->idStatoFromNome('RESO');
     }
 
     public function selezionaFornitore(ListinoService $listinoService)
@@ -153,8 +161,11 @@ class LiveProva extends Component
     public function creaProforma(FatturaService $fatturaService,
                                  StatoApaService $statoApaService,
                                  ProvaService $provaService,
-                                 ConfigurationService $configurationService)
+                                 ConfigurationService $configurationService,
+                                 FatturatiService $fatturatiService)
     {
+        $ultimoProgressivoFattura = $fatturaService->getUltimoProgressivoFattura();
+
         $request = new Request();
         $request->replace([
             'prova_id' => $this->provaFattura->id,
@@ -164,6 +175,7 @@ class LiveProva extends Component
             'tot_fattura' => $this->provaFattura->tot,
             'mese_fattura' => Carbon::now()->month,
             'anno_fattura' => Carbon::now()->year,
+            'progressivo' => (int) $ultimoProgressivoFattura + 1,
             'al_saldo' => (int) $this->provaFattura->tot - (int) $this->acconto,
             'saldata' => (int) $this->provaFattura->tot == $this->acconto ? 1 : 0,
         ]);
@@ -172,6 +184,8 @@ class LiveProva extends Component
 
         $idStatoFattura = $statoApaService->idStatoFromNome('FATTURATO');
         $provaService->proformaProva($this->provaFattura->id, $idStatoFattura);
+
+        $fatturatiService->incrementaFatturato(Auth::id(), $request->anno_fattura, $request->mese_fattura, $request->tot_fattura);
 
         $fatturaService->creadProformaPdf($fattura, $configurationService->getConfigurazioni());
     }

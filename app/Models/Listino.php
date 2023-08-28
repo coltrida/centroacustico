@@ -11,6 +11,11 @@ class Listino extends Model
     protected $guarded = [];
     protected $table = 'listinos';
 
+    public function getPrezzoFormattatoAttribute()
+    {
+        return $this->prezzolistino ? '€ '.number_format( (float) $this->prezzolistino, '0', ',', '.') : null;
+    }
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);

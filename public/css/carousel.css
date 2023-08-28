@@ -3,7 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-    padding-top: 3rem;
+
 
     color: rgb(var(--bs-tertiary-color-rgb));
 }
@@ -24,7 +24,7 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-    height: 37rem;
+    height: 40rem;
 }
 
 

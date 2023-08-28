@@ -34,7 +34,7 @@
             <tr>
                 <td style="border-bottom: 1px solid black;width: 30%; padding: 5px">{{$product->matricola}}</td>
                 <td style="border-bottom: 1px solid black;width: 50%; padding: 5px">{{$product->listino->nome}}</td>
-                <td style="border-bottom: 1px solid black;width: 20%; padding: 5px">{{$product->listino->prezzolistino}}</td>
+                <td style="border-bottom: 1px solid black;width: 20%; padding: 5px">{{$product->listino->prezzo_formattato}}</td>
             </tr>
         @endforeach
     </table>

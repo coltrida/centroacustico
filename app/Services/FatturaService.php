@@ -6,10 +6,18 @@ use App\Models\Configuration;
 use App\Models\Documento;
 use App\Models\Fattura;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class FatturaService
 {
+    public function getUltimoProgressivoFattura()
+    {
+        $anno = Carbon::now()->year;
+        return Fattura::where('anno_fattura', $anno)->orderBy('progressivo', 'DESC')->first() ?
+            Fattura::where('anno_fattura', $anno)->orderBy('progressivo', 'DESC')->first()->progressivo : 0;
+    }
+
     public function creaProforma($request)
     {
         return Fattura::create($request->all());

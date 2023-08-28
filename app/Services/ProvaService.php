@@ -7,6 +7,7 @@ use App\Models\Prodotto;
 use App\Models\Prova;
 use App\Models\Statoapa;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProvaService
 {
@@ -43,7 +44,7 @@ class ProvaService
     {
         $idStatoProvaInCorso = Statoapa::where('nome', 'PROVA IN CORSO')->first()->id;
         $prova = Prova::create([
-           'user_id' => 1,
+           'user_id' => Auth::id(),
            'client_id' => $request->client_id,
            'filiale_id' => $request->filiale_id,
            'stato_id' => $idStatoProvaInCorso,
@@ -68,6 +69,9 @@ class ProvaService
         $prova = Prova::find($idProva);
         $prova->stato_id = $idStatoFattura;
         $prova->fine_prova = Carbon::now();
+        $prova->mese_fine = Carbon::now()->month;
+        $prova->anno_fine = Carbon::now()->year;
+        $prova->giorni_prova = Carbon::now()->diff($prova->fine_prova)->days;
         $prova->save();
     }
 
