@@ -56,6 +56,12 @@ class ClienteService
             ->paginate(50);
     }
 
+    public function ricercaPazienteById($idClient)
+    {
+        return Client::with('tipo', 'canale', 'recapito')
+            ->where('id', $idClient)->paginate(50);
+    }
+
     public function clientById($idClient)
     {
         return Client::with('tipo', 'canale')->find($idClient);

@@ -19,7 +19,7 @@ class AppuntamentoController extends Controller
             if ($booking->tipo == 'Prima Visita'){
                 $color = '#924ACE';
             }elseif ($booking->tipo == 'Consegna Apa'){
-                $color = '#68B01A';
+                $color = '#0b5205';
             }elseif ($booking->tipo == 'Controllo'){
                 $color = '#3F399AFF';
             }
@@ -28,10 +28,13 @@ class AppuntamentoController extends Controller
                 'id' => $booking->id,
                 'tipo' => $booking->tipo,
                 'title' => $booking->client->fullName,
+                'clientId' => $booking->client->id,
+                'nota' => $booking->nota,
                 'start' => $booking->start_date,
                 'end' => $booking->end_date,
                 'color' => $color,
             ];
+
         }
         return view('user.appuntamento', compact('events', 'client'));
     }
@@ -44,7 +47,7 @@ class AppuntamentoController extends Controller
         if ($booking->tipo == 'Prima Visita'){
             $color = '#924ACE';
         }elseif ($booking->tipo == 'Consegna Apa'){
-            $color = '#68B01A';
+            $color = '#0b5205';
         }elseif ($booking->tipo == 'Controllo'){
             $color = '#3F399AFF';
         }
@@ -55,6 +58,8 @@ class AppuntamentoController extends Controller
             'start' => $booking->start_date,
             'end' => $booking->end_date,
             'title' => $booking->client->fullName,
+            'clientId' => $booking->client->id,
+            'nota' => $booking->nota,
             'color' => $color ?: '',
         ]);
     }

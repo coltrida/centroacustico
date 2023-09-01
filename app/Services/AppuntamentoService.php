@@ -33,6 +33,7 @@ class AppuntamentoService
         return Appuntamento::create([
             'tipo' => $request->tipo,
             'user_id' => $request->user_id,
+            'nota' => $request->nota,
             'client_id' => $request->idClient,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,

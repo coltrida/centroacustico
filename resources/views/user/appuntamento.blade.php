@@ -14,11 +14,16 @@
         }
 
         #calendar .fc-content-col {
-            background: #199f0c; /* bootstrap default styles make it black. undo */
+            background: #0b5205; /* bootstrap default styles make it black. undo */
         }
 
         #calendar  td, th {
             height: 40px;
+        }
+
+        .fc-indietroBtn-button{
+            background: #ab9e10 !important;
+            color: #000000 !important;
         }
 
     </style>
@@ -30,23 +35,60 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Booking title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Inserisci Appuntamento per
+                            <span class="badge bg-secondary p-2">{{$client->fullName}}</span> </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" class="form-control" name="" id="idClient" value="{{$client->id}}">
-                    <input type="time" class="form-control" name="" id="orario">
-                    <select class="form-select" aria-label="Default select example" id="tipoAppuntamento">
-                        <option selected>Tipo Appuntamento</option>
+                    <select class="form-select mb-4" aria-label="Default select example" id="tipoAppuntamento">
                         <option>Prima Visita</option>
                         <option>Consegna Apa</option>
                         <option>Controllo</option>
                         <option>Assistenza</option>
                     </select>
+
+                    <input type="time" class="form-control mb-4" name="" id="orario">
+
+                    <input type="text" class="form-control mb-4" placeholder="note" name="" id="nota">
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="saveBtn" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="infoModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Informazioni</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center align-items-center">
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item active" aria-current="true" id="nomeClient"></li>
+                                <li class="list-group-item" id="orarioAppuntamento"></li>
+                                <li class="list-group-item" id="appunta"></li>
+                                <li class="list-group-item" id="noteAppuntamento"></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <a class="nav-link" href="#"  role="button" id="linkClient">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="clientNome"></span>
+                                <img class="img-profile rounded-circle"
+                                     src="{{asset('img/undraw_profile.svg')}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -79,8 +121,16 @@
 
                     var booking = @json($events);
                     $('#calendar').fullCalendar({
+                        customButtons: {
+                            indietroBtn: {
+                                text: 'Indietro',
+                                click: function() {
+                                    window.location.href = "{{route('clienti', $client->filiale_id)}}"
+                                },
+                            }
+                        },
                         header:{
-                            left : 'prev, next, today',
+                            left : 'prev, next, today, indietroBtn',
                             center: 'title',
                             right: 'month, agendaWeek, agendaDay, listWeek'
                         },
@@ -114,12 +164,15 @@
                         },*/
 
                         select: function (start, end) {
+                            $('#nota').val('');
+                            $('#tipoAppuntamento').val('');
                             $('#orario').val(moment(start).format('HH:mm:00'));
                             $('#bookingModel').modal('toggle');
 
                             $('#saveBtn').click(function (){
                                 var idClient = $('#idClient').val();
                                 var tipo = $('#tipoAppuntamento').val();
+                                var nota = $('#nota').val();
                                 var user_id = {{\Illuminate\Support\Facades\Auth::id()}};
                                 var start_date = moment(start).format('YYYY-MM-DD HH:mm:00');
                                 var end_date = moment(end).format('YYYY-MM-DD HH:mm:00');
@@ -128,7 +181,7 @@
                                     url:"{{route('appuntamenti.aggiungi')}}",
                                     type: "POST",
                                     datatype: 'json',
-                                    data: {start_date, end_date, idClient, user_id, tipo},
+                                    data: {start_date, end_date, idClient, user_id, tipo, nota},
                                     success: function (response)
                                     {
                                         $('#title').val('');
@@ -136,11 +189,14 @@
                                         $('#calendar').fullCalendar('renderEvent', {
                                             id: response.id,
                                             title: response.title,
+                                            clientId: response.clientId,
+                                            tipo: response.tipo,
+                                            nota: response.nota,
                                             start: response.start,
                                             end: response.end,
                                             color: response.color,
                                         });
-                                        swal("Good job!", "Evento inserito", "success");
+                                        swal("Ottimo!", "Evento inserito", "success");
                                     },
                                     error: function (error)
                                     {
@@ -166,7 +222,7 @@
                                 data: {start_date, end_date},
                                 success: function (response)
                                 {
-                                    swal("Good job!", "Evento aggiornato", "success");
+                                    swal("Ottimo!", "Evento aggiornato", "success");
                                 },
                                 error: function (error)
                                 {
@@ -177,8 +233,17 @@
 
                         eventClick: function (event){
                             var id = event.id;
-
-                            if(confirm('Sei sicuro?')){
+                            $('#infoModel').modal('toggle');
+                            $('#linkClient').attr('href', '{{route('ricercaPazienteById', '')}}' + '/' + event.clientId);
+                            $('#nomeClient').html(event.title);
+                            $('#clientNome').html(event.title);
+                            $('#appunta').text(event.tipo);
+                            $('#orarioAppuntamento').text(moment(event.start).format('HH:mm') + ' - ' + moment(event.end).format('HH:mm'));
+                            if(!event.nota){
+                                $('#noteAppuntamento').css('display', 'none');
+                            }
+                            $('#noteAppuntamento').html(event.nota);
+                            /*if(confirm('Sei sicuro?')){
                                 $.ajax({
                                     url:"{{route('appuntamenti.elimina', '')}}" + '/' + id,
                                     type: "DELETE",
@@ -186,14 +251,14 @@
                                     success: function (id)
                                     {
                                         $('#calendar').fullCalendar('removeEvents', id)
-                                        swal("Good job!", "Evento eliminato", "success");
+                                        swal("Ottimo!", "Evento eliminato", "success");
                                     },
                                     error: function (error)
                                     {
                                         console.log(error)
                                     },
                                 });
-                            }
+                            }*/
                         },
 
                         eventResize: function (event){
@@ -208,7 +273,7 @@
                                 data: {start_date, end_date},
                                 success: function (response)
                                 {
-                                    swal("Good job!", "Evento aggiornato", "success");
+                                    swal("Ottimo!", "Evento aggiornato", "success");
                                 },
                                 error: function (error)
                                 {

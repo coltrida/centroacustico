@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clienti/{idFiliale?}', [UserController::class, 'clienti'])->name('clienti');
     Route::get('/aggiungiModificaCliente/{idFiliale?}/{idClient?}', [UserController::class, 'aggiungiModificaCliente'])->name('aggiungiModificaCliente');
     Route::get('/ricercaPaziente', [UserController::class, 'ricercaPaziente'])->name('ricercaPaziente');
+    Route::get('/ricercaPazienteById/{idClient}', [UserController::class, 'ricercaPazienteById'])->name('ricercaPazienteById');
 
 //------------------------ Magazzino -------------------------------
     Route::get('/prodottiInMagazzino/{idFiliale?}', [ProdottiController::class, 'prodottiInMagazzino'])->name('magazzino');

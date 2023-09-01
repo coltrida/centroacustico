@@ -31,6 +31,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function ricercaPazienteById($idClient, ClienteService $clienteService, FilialeService $filialeService)
+    {
+        $pazienti = $clienteService->ricercaPazienteById($idClient);
+        $filialeSelezionata = $filialeService->filialeById($pazienti->first()->filiale_id);
+
+        return view('user.clienti', [
+            'pazienti' => $pazienti,
+            'filialeSelezionata' => $filialeSelezionata,
+        ]);
+    }
+
     public function aggiungiModificaCliente($idFiliale=null, $idClient=null)
     {
         return view('user.aggiungiModificaCliente', [
