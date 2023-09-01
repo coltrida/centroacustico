@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    /*public function up()
     {
         Schema::create('appuntamentos', function (Blueprint $table) {
             $table->id();
@@ -20,6 +20,27 @@ return new class extends Migration
             $table->integer('orario');
             $table->string('nota')->nullable();
             $table->string('tipo');
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('filiale_id')->nullable();
+            $table->unsignedBigInteger('recapito_id')->nullable();
+            $table->boolean('intervenuto')->nullable();
+            $table->timestamps();
+            $table->integer('mese')->nullable();
+            $table->integer('anno')->nullable();
+            $table->integer('settimana')->nullable();
+        });
+    }*/
+
+    public function up()
+    {
+        Schema::create('appuntamentos', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->string('giornoFormattato')->nullable();
+            $table->string('nota')->nullable();
+            $table->string('tipo')->nullable();
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('filiale_id')->nullable();

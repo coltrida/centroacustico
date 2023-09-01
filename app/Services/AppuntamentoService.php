@@ -18,9 +18,25 @@ class AppuntamentoService
         }])->find($idUser);
     }
 
+    public function appuntamentiByIdUser($idUser)
+    {
+          /*dd(User::with(['appuntamenti' => function($a){
+                   $a->with('client');
+                }])->find($idUser)->appuntamenti);*/
+        return User::with(['appuntamenti' => function($a){
+            $a->with('client');
+        }])->find($idUser)->appuntamenti;
+    }
+
     public function aggiungiAppuntamento($request)
     {
-        Appuntamento::create($request->all());
+        return Appuntamento::create([
+            'tipo' => $request->tipo,
+            'user_id' => $request->user_id,
+            'client_id' => $request->idClient,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
     }
 
     public function aggiornaEsitoAppuntamento($idAppuntamento, $valoreEsito)
@@ -33,5 +49,14 @@ class AppuntamentoService
     public function eliminaAppuntamento($idAppuntamento)
     {
         Appuntamento::find($idAppuntamento)->delete();
+    }
+
+    public function AggiornaOrario($id, $request)
+    {
+        $booking = Appuntamento::find($id);
+        $booking->update([
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
     }
 }

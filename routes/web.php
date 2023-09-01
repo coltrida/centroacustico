@@ -80,6 +80,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 //------------------------ Appuntamento -------------------------------
     Route::get('/appuntamenti/{idClient}', [AppuntamentoController::class, 'appuntamenti'])->name('appuntamenti');
+    Route::post('/appuntamenti/aggiungi', [AppuntamentoController::class, 'aggiungi'])->name('appuntamenti.aggiungi');
+    Route::patch('/appuntamenti/modifica/{id}', [AppuntamentoController::class, 'modifica'])->name('appuntamenti.modifica');
+    Route::delete('/appuntamenti/elimina/{id}', [AppuntamentoController::class, 'elimina'])->name('appuntamenti.elimina');
 
 //------------------------ Audiometrie -------------------------------
     Route::get('/audiometrie/{idClient}/{idAudiometria?}', [AudiometriaController::class, 'audiometrie'])->name('audiometrie');
