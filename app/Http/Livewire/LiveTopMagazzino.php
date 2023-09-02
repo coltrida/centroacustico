@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\RichiestaApaEvent;
 use App\Services\CategoriaService;
 use App\Services\FornitoreService;
 use App\Services\ListinoService;
@@ -56,6 +57,8 @@ class LiveTopMagazzino extends Component
         $this->quantita = '';
 
         session()->flash('message', "Richiesta Prodotti Effettuata");
+
+        broadcast(new RichiestaApaEvent())->toOthers();
 
         return Redirect::route('prodottiRichiesti', $this->idFiliale);
     }

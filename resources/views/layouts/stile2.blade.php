@@ -109,6 +109,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     @yield('headSection')
     @livewireStyles
+    @vite(['resources/js/app.js'])
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

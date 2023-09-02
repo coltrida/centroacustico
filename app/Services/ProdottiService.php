@@ -44,6 +44,14 @@ class ProdottiService
         ])->latest()->paginate(5, ['*'], 'richiesti');
     }
 
+    public function listaProdottiRichiesti($idStatoProdottiRichiesti)
+    {
+        return Prodotto::with('listino', 'filiale')
+            ->where('stato_id', $idStatoProdottiRichiesti)
+            ->latest()
+            ->paginate(5, ['*'], 'richiesti');
+    }
+
     public function listaProdottiInArrivoByidFiliale($idFiliale, $idStatoProdottiInArrivo)
     {
         return Prodotto::where([

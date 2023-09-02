@@ -21,6 +21,11 @@ class Prodotto extends Model
         return $this->belongsTo(Listino::class);
     }
 
+    public function filiale()
+    {
+        return $this->belongsTo(Filiale::class);
+    }
+
     public function prova()
     {
         return $this->belongsTo(Prova::class, 'prova_id', 'id');

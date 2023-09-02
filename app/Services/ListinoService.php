@@ -8,6 +8,11 @@ use App\Models\Listino;
 
 class ListinoService
 {
+    public function prodottoFromIdListino($idListino)
+    {
+        return Listino::with('fornitore', 'categoria')->find($idListino);
+    }
+
     public function elencoListino()
     {
         return Listino::with('categoria', 'fornitore')
