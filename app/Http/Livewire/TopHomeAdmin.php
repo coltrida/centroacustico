@@ -3,34 +3,27 @@
 namespace App\Http\Livewire;
 
 use App\Services\ProdottiService;
+use App\Services\ProvaService;
 use App\Services\StatoApaService;
 use Livewire\Component;
 
 class TopHomeAdmin extends Component
 {
 
-  //  public $prodottiOrdinati;
-
 
     // Special Syntax: ['echo:{channel},{event}' => '{method}']
-    protected $listeners = ['echo:richiestaApaChannel,RichiestaApaEvent' => 'render'];
+    protected $listeners = [
+            'echo:nuovaProvaInCorsoChannel,NuovaProvaInCorsoEvent' => 'render',
+            'echo:nuovaProvaFatturataChannel,NuovaProvaFatturataEvent' => 'render',
+        ];
 
-    /*public function mount(ProdottiService $prodottiService, StatoApaService $statoApaService)
+    public function render(ProvaService $provaService, StatoApaService $statoApaService)
     {
-        $this->notifyNewOrder($prodottiService, $statoApaService);
-    }
-
-    public function notifyNewOrder(ProdottiService $prodottiService, StatoApaService $statoApaService)
-    {
-        $idStatoProdottiRichiesti = $statoApaService->idStatoFromNome('RICHIESTO');
-        $this->prodottiOrdinati = $prodottiService->listaProdottiRichiesti($idStatoProdottiRichiesti)->toArray();
-    }*/
-
-    public function render(ProdottiService $prodottiService, StatoApaService $statoApaService)
-    {
-        $idStatoProdottiRichiesti = $statoApaService->idStatoFromNome('RICHIESTO');
+        $idStatoProvaInCorso = $statoApaService->idStatoFromNome('PROVA IN CORSO');
+        $idStatoFatturato = $statoApaService->idStatoFromNome('FATTURATO');
         return view('livewire.top-home-admin', [
-            'prodottiOrdinati' => $prodottiService->listaProdottiRichiesti($idStatoProdottiRichiesti)
+            'proveInCorso' => $provaService->proveInCorso($idStatoProvaInCorso),
+            'proveFatturate' => $provaService->proveFatturate($idStatoFatturato),
         ]);
     }
 }

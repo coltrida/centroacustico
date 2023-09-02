@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
+    public function homeMagazzino()
+    {
+        return view('admin.homeMagazzino');
+    }
+
+    public function homeTelefonate()
+    {
+        return view('admin.homeTelefonate');
+    }
+
     public function infoAzienda(ConfigurationService $configurationService)
     {
         return view('admin.infoAzienda', [

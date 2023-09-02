@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RichiestaApaEvent implements ShouldBroadcast
+class NuovaProvaFatturataEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,7 +21,7 @@ class RichiestaApaEvent implements ShouldBroadcast
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
@@ -31,6 +31,6 @@ class RichiestaApaEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('richiestaApaChannel');
+        return new Channel('nuovaProvaFatturataChannel');
     }
 }

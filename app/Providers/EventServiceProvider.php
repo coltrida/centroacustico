@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\RichiestaApaEvent' => [
             'App\Listeners\RichiestaApaListener',
         ],
+        'App\Events\nuovaProvaInCorsoEvent' => [
+            'App\Listeners\nuovaProvaInCorsoListener',
+        ],
     ];
 
     /**

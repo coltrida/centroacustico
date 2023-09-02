@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/eseguiSetCanali', [ConfigController::class, 'eseguiSetCanali'])->name('eseguiSetCanali');
 
         //----------------------- Admin ----------------------------
+        Route::get('/homeMagazzino', [AdminController::class, 'homeMagazzino'])->name('admin.homeMagazzino');
+        Route::get('/homeTelefonate', [AdminController::class, 'homeTelefonate'])->name('admin.homeTelefonate');
         Route::get('/infoAzienda', [AdminController::class, 'infoAzienda'])->name('admin.infoAzienda');
         Route::patch('/infoAzienda', [AdminController::class, 'modificaInfoAzienda'])->name('admin.modificaInfoAzienda');
         Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');

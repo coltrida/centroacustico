@@ -9,3 +9,11 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('richiestaApaChannel', function () {
     return true;
 });
+
+Broadcast::channel('nuovaProvaInCorsoChannel', function () {
+    return true;
+});
+
+Broadcast::channel('nuovaProvaFatturataChannel', function () {
+    return true;
+});

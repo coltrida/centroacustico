@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Events\NuovaProvaFatturataEvent;
+use App\Events\NuovaProvaInCorsoEvent;
 use App\Models\Client;
 use App\Models\Prodotto;
 use App\Models\Prova;
@@ -53,6 +55,7 @@ class ProvaService
            'canale_id' => $request->canale_id,
            'inizio_prova' => Carbon::now(),
         ]);
+        broadcast(new NuovaProvaInCorsoEvent())->toOthers();
         return $prova->id;
     }
 
@@ -73,6 +76,8 @@ class ProvaService
         $prova->anno_fine = Carbon::now()->year;
         $prova->giorni_prova = Carbon::now()->diff($prova->fine_prova)->days;
         $prova->save();
+
+        broadcast(new NuovaProvaFatturataEvent())->toOthers();
     }
 
     public function dettagliProva($idProva)
@@ -80,5 +85,23 @@ class ProvaService
         return Prova::with(['canale', 'prodotti' => function($p){
             $p->with('listino');
         }])->find($idProva);
+    }
+
+    public function proveInCorso($idProveInCorso)
+    {
+        return Prova::with('user', 'client')
+            ->where('stato_id', $idProveInCorso)
+            ->paginate(5);
+    }
+
+    public function proveFatturate($idProveFatturate)
+    {
+        /*dd(Prova::with('user', 'client')
+            ->where('stato_id', $idProveFatturate)
+            ->get()->groupBy('user_id'));*/
+
+        return Prova::with('user', 'client')
+            ->where('stato_id', $idProveFatturate)
+            ->get()->groupBy('user_id');
     }
 }
