@@ -1,6 +1,6 @@
 @extends('layouts.stile2')
 @section('content')
-    <div class="container pt-4">
+    <div class="container" style="padding-top: 70px">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
