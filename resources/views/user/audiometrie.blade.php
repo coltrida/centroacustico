@@ -1,9 +1,9 @@
 @extends('layouts.stile2')
 @section('content')
-    <div class="container pt-4 pb-5">
+    <div class="container pt-4 pb-5" style="margin-top: 70px">
     <div class="d-flex justify-content-between mb-4">
-        <h4 class="mb-0 text-gray-800">Audiometria di {{$clientConAudiometrieByIdClient->fullName}}
-            del {{$audiometria->created_at->format('d-m-Y')}}</h4>
+        <h4 class="mb-0 text-gray-800 text-white">Audiometria di {{$clientConAudiometrieByIdClient->fullName}}
+            del {{$audiometria ? $audiometria->created_at->format('d-m-Y') : null}}</h4>
         <div>
             <a class="btn btn-warning" href="{{ route('clienti', $clientConAudiometrieByIdClient->filiale_id) }}">
                 Indietro</a>
@@ -17,7 +17,7 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                      <h6 class="m-0 font-weight-bold text-primary">Audiometria di {{$clientConAudiometrieByIdClient->fullName}} del {{$audiometria->created_at->format('d-m-Y')}}</h6>
+                                      <h6 class="m-0 font-weight-bold text-primary">Audiometria di {{$clientConAudiometrieByIdClient->fullName}} del {{$audiometria ? $audiometria->created_at->format('d-m-Y') : null}}</h6>
                 </div>
 
                 <div id="audiom" style="display: none">{{$audiometria}}</div>

@@ -19,6 +19,11 @@
 
         #calendar td, th {
             height: 40px;
+            color: white;
+        }
+
+        #calendar .fc-center {
+            color: #ffffff; /* bootstrap default styles make it black. undo */
         }
 
         .fc-indietroBtn-button {

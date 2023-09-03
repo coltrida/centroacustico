@@ -32,7 +32,7 @@
     <div class="card shadow mb-4">
         <div class="card-body rounded" style="background: dimgrey;">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
+                <table class="table table-dark table-striped table-bordered nowrap" width="100%" cellspacing="0">
                     <form action="{{route('ricercaPaziente')}}" method="get">
                         <input type="hidden" name="idFiliale"
                                value="{{isset($filialeSelezionata->id) ? $filialeSelezionata->id : null}}">

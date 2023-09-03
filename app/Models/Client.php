@@ -13,7 +13,7 @@ class Client extends Model
 
     public function getDataNascitaFormattataAttribute()
     {
-        return Carbon::make($this->dataNascita)->format('d-m-Y');
+        return $this->dataNascita ? Carbon::make($this->dataNascita)->format('d-m-Y') : null;
     }
 
     public function tipo()

@@ -64,7 +64,8 @@ class LiveAggiungiCliente extends Component
             $this->citta = $clienteDaModificare->citta;
             $this->provincia = $clienteDaModificare->provincia;
             $this->cap = $clienteDaModificare->cap;
-            $this->dataNascita = Carbon::make($clienteDaModificare->dataNascita)->format('Y-m-g');
+            $this->dataNascita = $clienteDaModificare->dataNascita ?
+                Carbon::make($clienteDaModificare->dataNascita)->format('Y-m-g') : null;
         }
     }
 
@@ -90,6 +91,8 @@ class LiveAggiungiCliente extends Component
             'provincia' => $this->provincia,
             'cap' => $this->cap,
             'dataNascita' => $this->dataNascita,
+            'fullName' => $this->nome.' '.$this->cognome,
+            'fullNameReverse' => $this->cognome.' '.$this->nome,
         ]);
 
         if (!$this->idClient){

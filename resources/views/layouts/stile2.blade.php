@@ -209,8 +209,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Statistiche</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">....</a></li>
-                                    <li><a class="dropdown-item" href="#">......</a></li>
+                                    <li><a class="dropdown-item" href="#">Fatturati Audio</a></li>
+                                    <li><a class="dropdown-item" href="#">Fatturati Canali</a></li>
+                                    <li><a class="dropdown-item" href="#">Fatturati Recapiti</a></li>
                                 </ul>
                             </li>
                     @endif

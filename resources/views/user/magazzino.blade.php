@@ -40,7 +40,7 @@
             </ul>
 
             <div class="table-responsive">
-                <table class="table table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
+                <table class="table table-dark table-sm table-bordered table-striped nowrap" width="100%" cellspacing="0">
                     <thead class="table-light">
                     <tr>
                         @if(count($prodotti) > 0 && $prodotti[0]->stato->nome != 'RICHIESTO')
