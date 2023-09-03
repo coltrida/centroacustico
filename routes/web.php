@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         //----------------------- Admin ----------------------------
         Route::get('/homeMagazzino', [AdminController::class, 'homeMagazzino'])->name('admin.homeMagazzino');
         Route::get('/homeTelefonate', [AdminController::class, 'homeTelefonate'])->name('admin.homeTelefonate');
+        Route::get('/riepilogoClienti', [AdminController::class, 'riepilogoClienti'])->name('admin.riepilogoClienti');
         Route::get('/infoAzienda', [AdminController::class, 'infoAzienda'])->name('admin.infoAzienda');
         Route::patch('/infoAzienda', [AdminController::class, 'modificaInfoAzienda'])->name('admin.modificaInfoAzienda');
         Route::get('/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');

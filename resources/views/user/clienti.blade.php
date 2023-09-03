@@ -1,7 +1,7 @@
 @extends('layouts.stile2')
 @section('content')
 
-    <div class="container pt-4">
+    <div class="container" style="padding-top: 100px">
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pazienti
+        <h1 class="h3 mb-0 text-gray-800 text-white">Pazienti
             di {{isset($filialeSelezionata->nome) ? $filialeSelezionata->nome : $filialeSelezionata}}</h1>
 
         <div class="row">

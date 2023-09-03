@@ -15,7 +15,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Magazzino {{$filiale->nome}}</h1>
+        <h1 class="h3 mb-0 text-gray-800 text-white">Magazzino {{$filiale->nome}}</h1>
         <div class="row ml-4">
             <livewire:live-top-magazzino :idFiliale="$idFiliale"/>
         </div>

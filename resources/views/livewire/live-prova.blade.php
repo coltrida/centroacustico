@@ -96,7 +96,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h4 class="mb-0 text-gray-800">Prova per {{$clientConProvePassate->fullName}}</h4>
+        <h4 class="mb-0 text-gray-800 text-white">Prova per {{$clientConProvePassate->fullName}}</h4>
 
         <div class="row">
             <div class="col">
@@ -154,9 +154,9 @@
             <div class="card shadow mb-4">
                 <div class="card-body rounded p-3" style="background: dimgrey;">
                     <div class="d-flex mb-2 flex-row align-items-center justify-content-between">
-                        <h3>Nuova Prova</h3>
+                        <h3 class="text-white">Nuova Prova</h3>
                         <div class="d-flex align-items-center">
-                            <div class="mx-2">Canale: </div>
+                            <div class="mx-2 text-white">Canale: </div>
                             <select class="form-control" aria-label="Default select example"
                                     wire:model="canale_id"
                             >
@@ -199,12 +199,12 @@
                         </table>
 
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Nota</label>
+                            <label for="exampleFormControlTextarea1" class="form-label text-white">Nota</label>
                             <textarea wire:model="nota" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
                         </div>
 
                         <div class="d-sm-flex align-items-center justify-content-between">
-                            <div>
+                            <div class="text-white">
                                 Tot. Prova: € {{$totProva}}
                             </div>
                             <button type="submit" class="btn btn-primary" wire:click="creaProva"> Crea Prova</button>
@@ -217,7 +217,7 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-body rounded p-3" style="background: dimgrey;">
-                    <h3 >Prove Passate</h3>
+                    <h3 class="text-white">Prove Passate</h3>
                     <div class="table-responsive">
                         <table class="table table-sm mt-2 table-bordered table-striped nowrap" width="100%" cellspacing="0">
                             <thead class="table-light">

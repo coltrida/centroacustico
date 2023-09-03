@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CanaleService;
 use App\Services\CategoriaService;
+use App\Services\ClienteService;
 use App\Services\ConfigurationService;
 use App\Services\FilialeService;
 use App\Services\FornitoreService;
@@ -25,6 +26,13 @@ class AdminController extends Controller
     public function homeTelefonate()
     {
         return view('admin.homeTelefonate');
+    }
+
+    public function riepilogoClienti(ClienteService $clienteService)
+    {
+        return view('admin.riepilogoClienti', [
+            'filialiConRiepilogo' => $clienteService->filialiConRiepilogo()
+        ]);
     }
 
     public function infoAzienda(ConfigurationService $configurationService)

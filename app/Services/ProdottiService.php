@@ -52,6 +52,14 @@ class ProdottiService
             ->paginate(5, ['*'], 'richiesti');
     }
 
+    public function listaProdottiCaricatiPerSpedizione($idStatoProdottiInCarico)
+    {
+        return Prodotto::with('listino', 'filiale')
+            ->where('stato_id', $idStatoProdottiInCarico)
+            ->latest()
+            ->get();
+    }
+
     public function listaProdottiInArrivoByidFiliale($idFiliale, $idStatoProdottiInArrivo)
     {
         return Prodotto::where([
@@ -99,6 +107,13 @@ class ProdottiService
         }
     }
 
+    public function cambioStatoProdotto($idProdotto, $idStato)
+    {
+        $prodotto = Prodotto::find($idProdotto);
+        $prodotto->stato_id = $idStato;
+        $prodotto->save();
+    }
+
     public function assegnaIdProvaAlProdotto($prodotti, $idProva)
     {
         foreach ($prodotti as $prodotto){
@@ -120,5 +135,12 @@ class ProdottiService
             'stato_id' => $idApaInMagazzino,
             'datacarico' => Carbon::now(),
         ]);
+    }
+
+    public function assegnaMatricola($idProdotto, $matricola)
+    {
+        $prodotto = Prodotto::find($idProdotto);
+        $prodotto->matricola = $matricola;
+        $prodotto->save();
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.stile2')
 @section('content')
     <div class="container" style="padding-top: 70px">
-        <div class="row text-center mt-5">
+        <div class="row text-center mt-5 text-white">
             <div class="col">
                 <h3>Fatturato del Mese</h3>
                 {{$userConProveFatturateNelMese->prove->count() > 0 ?
@@ -17,7 +17,7 @@
             <div class="col-12 col-sm-5">
                 <div class="card shadow mb-4">
                     <div class="card-body rounded" style="background: dimgrey;">
-                <h3 class="mt-4">Prove in Corso</h3>
+                <h3 class="mt-4 text-white">Prove in Corso</h3>
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                     <thead class="table-light">
                     <tr>
@@ -58,7 +58,7 @@
             <div class="col-12 col-sm-5">
                 <div class="card shadow mb-4">
                     <div class="card-body rounded" style="background: dimgrey;">
-                <h3 class="mt-4">Fatturato del Mese</h3>
+                <h3 class="mt-4 text-white">Fatturato del Mese</h3>
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                     <thead class="table-light">
                     <tr>
@@ -88,7 +88,7 @@
             <div class="col-12 col-sm-2">
                 <div class="card shadow mb-4">
                     <div class="card-body rounded" style="background: dimgrey;">
-                <h3 class="mt-4">Tel. di oggi</h3>
+                <h3 class="mt-4 text-white">Tel. di oggi</h3>
                 <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                     <thead class="table-light">
                     <tr>

@@ -20,6 +20,7 @@
                     <table class="table table-dark table-striped table-bordered nowrap" width="100%" cellspacing="0">
                         <thead class="table-light">
                         <tr>
+                            <td>Data Richiesta</td>
                             <td>Filiale</td>
                             <th>Prodotto</th>
                             <th>Action</th>
@@ -27,16 +28,19 @@
                         </thead>
                         <tbody>
                         @foreach($prodottiOrdinati as $item)
-                            <tr>
+                            <tr class="align-middle">
+                                <td>{{$item->created_at->format('d-m-Y')}}</td>
                                 <td>{{$item->filiale->nome}}</td>
                                 <td>{{$item->listino->nome}}</td>
                                 <td>
-
+                                    <a href="#" wire:click = "caricaProdottoPerSpedizione({{$item->id}})" class="btn btn-success" title="spedisci">
+                                        <i class="bi bi-truck"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3">{{$prodottiOrdinati->links()}}</td>
+                            <td colspan="4">{{$prodottiOrdinati->links()}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -47,27 +51,39 @@
         <div class="col-6">
             <div class="card shadow mb-4">
                 <div class="card-body rounded" style="background: dimgrey;">
-                    <h3 class="mt-4"></h3>
+                    <h3 class="mt-4 text-white">Da Spedire</h3>
                     <table class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                         <thead class="table-light">
                         <tr>
-                            <td>Paziente</td>
-                            <th>Data</th>
-                            <th>Tot</th>
+                            <td>Filiale</td>
+                            <th>Prodotto</th>
+                            <th>Matricola</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                        <tr>
-                            <td>
-
+                        @foreach($prodottiCaricatiPerSpedizione as $item)
+                        <tr class="align-middle">
+                            <td >{{$item->filiale->nome}}</td>
+                            <td >{{$item->listino->nome}}</td>
+                            <td class="d-flex justify-content-center">
+                                @if(!$item->matricola)
+                                <input type="text" wire:model.defer="matricola" class="form-control" style="margin-right: 10px" placeholder="matricola">
+                                <a href="#" class="btn btn-success" wire:click = assegnaMatricola({{$item->id}})>
+                                    <i class="bi bi-check-circle"></i>
+                                </a>
+                                @else
+                                   {{$item->matricola}}
+                                @endif
                             </td>
-                            <td class="text-nowrap"></td>
-                            <td class="text-nowrap"></td>
                         </tr>
-
+                        @endforeach
                         </tbody>
                     </table>
+                    @if($prodottiCaricatiPerSpedizione->count() > 0)
+                    <a href="#" class="btn btn-primary" wire:click = daSpedire>
+                        DA SPEDIRE
+                    </a>
+                    @endif
                 </div>
             </div>
         </div>

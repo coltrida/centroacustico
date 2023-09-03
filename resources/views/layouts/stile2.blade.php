@@ -148,7 +148,10 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     @if(Auth::user()->isAdmin())
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Impostazioni</a>
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear-wide"></i>
+                            Impostazioni
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{route('admin.infoAzienda')}}">Anagrafica Azienda</a></li>
                             <li><a class="dropdown-item" href="{{route('admin.tipologie')}}">Tipologie pazienti</a>
@@ -165,7 +168,7 @@
                                 <li><a class="dropdown-item" href="{{route('clienti', $item->id)}}">{{$item->nome}}</a></li>
                             @endforeach
                             @if(Auth::user()->isAdmin())
-                                <li><a class="dropdown-item" href="{{route('clienti')}}">TUTTI</a></li>
+                                <li><a class="dropdown-item" href="{{route('admin.riepilogoClienti')}}">RIEPILOGO</a></li>
                             @endif
                         </ul>
                     </li>
@@ -215,11 +218,11 @@
                 <li class="nav-item dropdown" style="list-style-type: none; transform: translate(-20px)">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()?->nome }}</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small text-white">{{ Auth::user()?->nome }}</span>
                         <img class="img-profile rounded-circle"
                              src="{{asset('img/undraw_profile.svg')}}">
                     </a>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu text-white" >
 {{--                        <li><a class="dropdown-item" href="#">Logout</a></li>--}}
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
@@ -244,7 +247,7 @@
 @yield('content')
 
     <footer class="d-flex flex-wrap justify-content-center align-items-center text-center fixed-bottom" style="background: #28303d">
-        <div class="py-2">&copy; 2023 ColMa </div>
+        <div class="py-2 text-white">&copy; 2023 ColMa </div>
     </footer>
 </main>
 

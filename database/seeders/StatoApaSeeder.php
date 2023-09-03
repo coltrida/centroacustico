@@ -37,6 +37,9 @@ class StatoApaSeeder extends Seeder
             [
                 'nome' => 'RESO'
             ],
+            [
+                'nome' => 'IN CARICO'
+            ],
         ]);
     }
 }
